@@ -1,0 +1,26 @@
+# Settings with secrets: never committed. The repository tracks one EMPTY .env as a placeholder
+# (force-added once); a filled-in .env is never added. Fill it from .env.example, or use the
+# .env you were given.
+.env
+.env.*
+!.env.example
+backups/
+deploy/live-config/
+*.log
+
+# Installed packages and build output
+node_modules/
+web/dist/
+
+# Local data from running the services outside Docker, and test output
+api/data/
+mailsvc/data/
+web/e2e/test-results/
+web/e2e/screenshots/
+
+# Editors
+.idea/
+.vscode/
+
+# Deployment to one particular server (kept locally, not published)
+deploy/

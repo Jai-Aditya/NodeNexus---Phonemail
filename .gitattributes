@@ -1,0 +1,8 @@
+# Text files keep Unix line endings on every machine. Shell scripts, Dockerfiles and config files
+# run inside Linux containers: a Windows checkout with CRLF endings would break them.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
