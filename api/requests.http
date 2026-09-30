@@ -1,0 +1,73 @@
+### PhoneMail API: try it from GoLand / VS Code (REST Client). Cookies are kept between requests.
+@base = http://localhost:3000
+
+### What login screen to show
+GET {{base}}/api/auth/config
+
+### 1a. OTP mode: ask for a code (AUTH_MODE=console prints it in `docker compose logs api`)
+POST {{base}}/api/auth/otp/start
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"phone": "9876500001"}
+
+### 1b. ...then log in with it
+POST {{base}}/api/auth/otp/verify
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"phone": "9876500001", "code": "053962", "client": "web"}
+
+### 1c. Password mode instead: register, then log in
+POST {{base}}/api/auth/register
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"phone": "9876500001", "password": "change me please"}
+
+###
+POST {{base}}/api/auth/login
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"phone": "9876500001", "password": "change me please"}
+
+### Who am I?
+GET {{base}}/api/me
+
+### Change name and language
+PATCH {{base}}/api/me
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"display_name": "Kavya", "language": "en"}
+
+### Add an alias
+POST {{base}}/api/me/aliases
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"alias": "kavya.rao"}
+
+### Home (goes to the mail service's GET /conversations)
+GET {{base}}/api/mail/conversations?filter=all
+
+### Send a mail
+POST {{base}}/api/mail/messages
+Content-Type: application/json
+X-Requested-With: fetch
+
+{"to": {"address": "9876500002"}, "subject": "Hello", "body_text": "Sent through the Node API"}
+
+### Live events (leave it open; send a mail from another account)
+GET {{base}}/api/events
+
+### Health
+GET {{base}}/api/health
+
+### Log out
+POST {{base}}/api/auth/logout
+Content-Type: application/json
+X-Requested-With: fetch
+
+{}

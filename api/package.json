@@ -1,0 +1,19 @@
+{
+  "name": "phonemail-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PhoneMail API service: accounts, login (Twilio OTP or password), profiles, aliases, push/SMS alerts, and a gateway to the Go mail service.",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch --env-file-if-exists=.env src/server.js",
+    "test": "node --test --test-concurrency=1 \"test/*.test.js\""
+  },
+  "dependencies": {
+    "postgres": "^3.4.5"
+  }
+}
