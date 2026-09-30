@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="15" fill="#4B3FB0"/>
+  <g transform="translate(32 32) scale(1.08) translate(-32.8 -32.4)">
+  <!-- Pip in silhouette: a carrier pigeon, facing right -->
+  <path fill="#FFFFFF" d="
+    M40.5 13.5
+    C46.5 13.2 50.6 17.4 50.9 22.6
+    L56.8 25.2
+    L50.6 27.3
+    C51.4 34.8 47 41.8 38.6 44.4
+    C32 46.4 24.8 45.6 19.4 42.6
+    L8.6 47.6
+    L12.4 40.8
+    L6.8 36.4
+    L18.6 35.6
+    C21.6 29.6 27.4 26.4 31.4 25.4
+    C31.2 18.8 34.6 13.8 40.5 13.5 Z"/>
+  <!-- wing -->
+  <path fill="#C9C3F7" d="M20.8 36.2 C26.6 30.2 36.4 29.6 43.2 33.2 C38.2 39.8 29 41.6 20.8 36.2 Z"/>
+  <!-- eye -->
+  <circle cx="44.2" cy="20.4" r="2" fill="#4B3FB0"/>
+  <!-- legs -->
+  <path d="M31.5 45.2 L30.4 51.2 M37.8 44.9 L38.4 51.2" stroke="#F2A33A" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- the letter, in its beak -->
+  <g transform="rotate(-8 52 34)">
+    <rect x="45.6" y="28.8" width="13.4" height="9.6" rx="1.6" fill="#F2A33A"/>
+    <path d="M46.4 29.8 L52.3 34.2 L58.2 29.8" fill="none" stroke="#4B3FB0" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  </g>
+</svg>
