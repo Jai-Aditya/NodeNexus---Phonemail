@@ -1,0 +1,107 @@
+### PhoneMail mail service: try it from GoLand (click the green ▶ next to each request).
+### Load test users first:  docker compose exec -T db psql -U phonemail -d phonemail < mailsvc/scripts/seed.sql
+### Users: 1 Kavya (9876500001, alias kavya), 2 Asha (9876500002), 3 Ravi (9876500003), 4 Meena (9876500004)
+
+@base = http://localhost:8081
+@token = change-me-dev-token
+
+### Health
+GET {{base}}/health
+
+### Kavya -> Asha, Cc Ravi (each lands in its own direct chat)
+POST {{base}}/messages
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"to": {"address": "9876500002@phonemail.com"}, "cc": [{"address": "9876500003"}],
+ "subject": "Hello", "body_text": "First mail!"}
+
+### Asha's Home (filter: all | unread | attachments | favorites)
+GET {{base}}/conversations?filter=all
+X-Internal-Token: {{token}}
+X-User-ID: 2
+
+### Open a chat (marks it read). Use a conversation_id from Home.
+GET {{base}}/conversations/1/messages
+X-Internal-Token: {{token}}
+X-User-ID: 2
+
+### Asha replies to message 1 in chat 1 (only once!)
+POST {{base}}/messages/1/reply
+X-Internal-Token: {{token}}
+X-User-ID: 2
+Content-Type: application/json
+
+{"conversation_id": 1, "body_text": "Hi Kavya!"}
+
+### Create a group (compose with Gcc): Kavya becomes admin
+POST {{base}}/groups
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"name": "Buildathon", "members": [{"address": "9876500002"}, {"address": "9876500003"}]}
+
+### Send to the group (use its conversation_id)
+POST {{base}}/messages
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"to": {"group_id": 3}, "subject": "Standup", "body_text": "Who's doing the Go service?"}
+
+### Two or more people in To start a new group; "group_name" is required
+POST {{base}}/messages
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"to": [{"address": "9876500002"}, {"address": "9876500004"}], "group_name": "Lunch club", "subject": "Lunch?", "body_text": "Friday?"}
+
+### Send into an existing group by its name (To, Cc or Bcc)
+POST {{base}}/messages
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"to": {"group": "lunch club"}, "body_text": "Same time next week?"}
+
+### Admin adds Meena: she won't see threads started before now
+POST {{base}}/groups/3/members
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"members": [{"address": "9876500004"}]}
+
+### A whole thread in order (rootId = the first message of the thread)
+GET {{base}}/threads/3?conversation_id=3
+X-Internal-Token: {{token}}
+X-User-ID: 1
+
+### Favourite a message (or {"folder": "trash"}, {"is_read": false})
+PATCH {{base}}/mailbox/1
+X-Internal-Token: {{token}}
+X-User-ID: 2
+Content-Type: application/json
+
+{"conversation_id": 1, "is_favourite": true}
+
+### Search messages, a person by number, groups by name
+GET {{base}}/search?q=standup
+X-Internal-Token: {{token}}
+X-User-ID: 1
+
+### Save a draft
+POST {{base}}/drafts
+X-Internal-Token: {{token}}
+X-User-ID: 1
+Content-Type: application/json
+
+{"recipients": {"to": {"address": "9876500004"}}, "subject": "Later", "body_text": "Draft text"}
+
+### Send it
+POST {{base}}/drafts/1/send
+X-Internal-Token: {{token}}
+X-User-ID: 1
