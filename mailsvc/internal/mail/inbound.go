@@ -261,9 +261,23 @@ func (s *Service) DeliverInbound(ctx context.Context, envFrom string, rcpts []in
 		var msgID int64
 		var sentAt time.Time
 		if header != "" {
-			err := tx.QueryRow(ctx, `SELECT id, sent_at FROM messages WHERE message_id_header = $1`, header).Scan(&msgID, &sentAt)
+			// The same email arriving again (a resend, or one copy per recipient) is delivered once. Only an email
+			// from THIS sender counts: another sender reusing a Message-ID (a forgery, or a clash) must never put
+			// someone else's email into the recipient's chat. Such an email is stored under the ID plus the sender,
+			// which is still unique and still lets that sender's own resend be recognised.
+			var existingSender int64
+			err := tx.QueryRow(ctx, `SELECT id, sent_at, sender_id FROM messages WHERE message_id_header = $1`, header).
+				Scan(&msgID, &sentAt, &existingSender)
 			if err != nil && !errors.Is(err, pgx.ErrNoRows) {
 				return err
+			}
+			if msgID != 0 && existingSender != sender {
+				msgID = 0
+				header = header + "#from-" + strconv.FormatInt(sender, 10)
+				err := tx.QueryRow(ctx, `SELECT id, sent_at FROM messages WHERE message_id_header = $1`, header).Scan(&msgID, &sentAt)
+				if err != nil && !errors.Is(err, pgx.ErrNoRows) {
+					return err
+				}
 			}
 		}
 		if msgID == 0 {

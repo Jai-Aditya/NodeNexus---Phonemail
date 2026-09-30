@@ -72,6 +72,8 @@ export function loadConfig(env = process.env) {
     sendPerMinute: int('SEND_PER_MINUTE', 30),
     sendPerDay: int('SEND_PER_DAY', 500),
     smsAlertMinutes: int('SMS_ALERT_MINUTES', 10),
+    // At most this many alert texts per person a day: outside mail can come from endless new addresses.
+    smsAlertsPerDay: int('SMS_ALERTS_PER_DAY', 10),
     // How fast alert texts leave our number. A US long-code number takes about 1 per
     // second; toll-free and short codes take more (raise this if Twilio says so).
     smsPerSecond: Math.max(1, int('SMS_PER_SECOND', 1)),

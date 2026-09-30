@@ -30,11 +30,11 @@ export function sessionStore(sql, cfg, hooks = {}) {
      * Creates a session. Returns the Set-Cookie header value (browsers) and the raw token,
      * which only native apps are given, to send as `Authorization: Bearer <token>`.
      */
-    async create(userId, userAgent = '') {
+    async create(userId, userAgent = '', { app = false } = {}) {
       const token = randomBytes(32).toString('base64url');
       await sql`
-        INSERT INTO sessions (token_hash, user_id, expires_at, user_agent)
-        VALUES (${sha256(token)}, ${userId}, now() + ${maxAge + ' seconds'}::interval, ${userAgent.slice(0, 300)})`;
+        INSERT INTO sessions (token_hash, user_id, expires_at, user_agent, app)
+        VALUES (${sha256(token)}, ${userId}, now() + ${maxAge + ' seconds'}::interval, ${userAgent.slice(0, 300)}, ${app})`;
       return { cookie: serializeCookie(COOKIE, token, { maxAge, secure: cfg.cookieSecure }), token, maxAge };
     },
 

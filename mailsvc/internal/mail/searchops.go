@@ -28,6 +28,10 @@ var searchOpRe = regexp.MustCompile(`(?i)(?:^|\s)(from|to|has|before|after|in|is
 // India Standard Time has no daylight saving, so a fixed zone is exact.
 var searchZone = time.FixedZone("IST", 5*3600+1800)
 
+// visibleRcpt limits a recipient row r to what the searcher ($1) may see of the message m: To and Cc always,
+// Bcc only when the searcher sent it (mb.is_mine) or is the Bcc'd person.
+const visibleRcpt = "(r.kind <> 'bcc' OR mb.is_mine OR r.user_id = $1)"
+
 func (s *Service) parseSearch(ctx context.Context, userID int64, q string) (searchFilter, error) {
 	var f searchFilter
 	arg := func(v any) string {
@@ -56,17 +60,18 @@ func (s *Service) parseSearch(ctx context.Context, userID int64, q string) (sear
 					arg(likeEscape.Replace(val))+" || '%')")
 			}
 		case "to":
+			// Bcc stays private: a Bcc'd person matches only for the sender and for that person themselves.
 			if lv == "me" {
 				f.conds = append(f.conds, "EXISTS (SELECT 1 FROM message_recipients r WHERE r.message_id = m.id AND r.user_id = $1)")
 			} else if strings.Contains(lv, "@") && !s.ourDomain(lv) {
-				f.conds = append(f.conds, "EXISTS (SELECT 1 FROM message_recipients r JOIN users u ON u.id = r.user_id WHERE r.message_id = m.id AND u.external_address = "+arg(lv)+")")
+				f.conds = append(f.conds, "EXISTS (SELECT 1 FROM message_recipients r JOIN users u ON u.id = r.user_id WHERE r.message_id = m.id AND "+visibleRcpt+" AND u.external_address = "+arg(lv)+")")
 			} else if id, err := s.resolveAddress(ctx, s.DB, val); err == nil {
-				f.conds = append(f.conds, "EXISTS (SELECT 1 FROM message_recipients r WHERE r.message_id = m.id AND r.user_id = "+arg(id)+")")
+				f.conds = append(f.conds, "EXISTS (SELECT 1 FROM message_recipients r WHERE r.message_id = m.id AND "+visibleRcpt+" AND r.user_id = "+arg(id)+")")
 			} else {
 				p := arg(likeEscape.Replace(val))
 				f.conds = append(f.conds, `EXISTS (SELECT 1 FROM message_recipients r
 					LEFT JOIN users u ON u.id = r.user_id LEFT JOIN conversations g ON g.id = r.group_id
-					WHERE r.message_id = m.id AND (u.display_name ILIKE '%' || `+p+` || '%' OR g.name ILIKE '%' || `+p+` || '%'))`)
+					WHERE r.message_id = m.id AND `+visibleRcpt+` AND (u.display_name ILIKE '%' || `+p+` || '%' OR g.name ILIKE '%' || `+p+` || '%'))`)
 			}
 		case "has":
 			if !strings.HasPrefix(lv, "attachment") && lv != "file" && lv != "files" {

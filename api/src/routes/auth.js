@@ -25,7 +25,7 @@ export function authRoutes(router, { cfg, sql, otp, twilio, sessions, accounts, 
       const { address } = await accounts.profile(userId);
       return sendJson(res, created ? 201 : 200, { created, address });
     }
-    const session = await sessions.create(userId, req.headers['user-agent'] || '');
+    const session = await sessions.create(userId, req.headers['user-agent'] || '', { app: client === 'mobile' });
     const body = { created, user: await accounts.profile(userId) };
     if (client === 'mobile') {
       // Native apps keep the token and send it as `Authorization: Bearer <token>`.

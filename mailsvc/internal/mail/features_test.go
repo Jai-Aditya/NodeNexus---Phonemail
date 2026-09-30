@@ -287,4 +287,29 @@ func TestSearchOperators(t *testing.T) {
 	}
 }
 
+// to: never reveals who was Bcc'd, except to the sender and to that person.
+func TestSearchKeepsBccPrivate(t *testing.T) {
+	s, ctx := setup(t)
+	a, _ := user(t, s, ctx, 1)
+	b, bAddr := user(t, s, ctx, 2)
+	c, cAddr := user(t, s, ctx, 3)
+	must(s.Send(ctx, a, SendRequest{Recipients: Recipients{To: to(bAddr), Bcc: []Recipient{{Address: cAddr}}}, Subject: "Plans", BodyText: "hi"}))
+	count := func(u int64, q string) int { return len(must(s.Search(ctx, u, q)).Messages) }
+	if n := count(b, "to:"+cAddr); n != 0 {
+		t.Fatalf("B found the email by its Bcc recipient (%d hits)", n)
+	}
+	if n := count(b, `to:"User 3"`); n != 0 {
+		t.Fatalf("B found the email by the Bcc recipient's name (%d hits)", n)
+	}
+	if n := count(a, "to:"+cAddr); n != 1 {
+		t.Fatalf("the sender should find it by the Bcc recipient, got %d", n)
+	}
+	if n := count(c, "to:"+cAddr); n != 1 {
+		t.Fatalf("the Bcc recipient should find it, got %d", n)
+	}
+	if n := count(b, "to:"+bAddr); n != 1 {
+		t.Fatalf("To recipients still match, got %d", n)
+	}
+}
+
 func ptr[T any](v T) *T { return &v }

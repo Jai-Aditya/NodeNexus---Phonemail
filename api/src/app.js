@@ -15,6 +15,8 @@ const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
 const REQUEST_ID = /^[A-Za-z0-9._-]{8,64}$/;
 // Calls that send an email: new message, reply, sending a draft.
 const SEND_PATHS = [/^\/api\/mail\/messages$/, /^\/api\/mail\/messages\/\d+\/reply$/, /^\/api\/mail\/drafts\/\d+\/send$/];
+// Mail-service endpoints only the API itself may call (see /api/me): never passed through /api/mail/*.
+const INTERNAL_ONLY = /^\/api\/mail\/+(account|export)\/*$/i;
 
 /**
  * deps: { cfg, sql, sessions, accounts, otp, twilio, push, hub, limiter, log }
@@ -38,6 +40,10 @@ export function createApp(deps) {
   const proxy = mailProxy(cfg);
   router.any('/api/mail/*', auth(async (req, res) => {
     const uid = req.user.id;
+    // Erasing the account and exporting the whole mailbox are only reached through /api/me (DELETE /api/me asks
+    // for the password or a fresh code; /api/me/export is rate limited). Passed through here, a stolen session
+    // could skip those checks.
+    if (INTERNAL_ONLY.test(req.path)) throw new ApiError(404, 'not_found', 'No such endpoint.');
     if (req.method === 'POST' && SEND_PATHS.some((re) => re.test(req.path))) {
       deps.limiter.hit(`send:minute:${uid}`, cfg.sendPerMinute, 60, "You're sending too fast. Wait a minute and try again.");
       deps.limiter.hit(`send:day:${uid}`, cfg.sendPerDay, 86400, "You've reached today's sending limit.");

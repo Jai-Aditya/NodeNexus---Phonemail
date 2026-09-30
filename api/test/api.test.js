@@ -303,6 +303,18 @@ describe('account deletion and export', () => {
     assert.equal(mail.requests[0].url, '/export');
     assert.equal((await c.get('/api/me/export')).status, 429);
   });
+
+  test('the mail service erase and export endpoints are not reachable through /api/mail', async () => {
+    const { c } = await login('9876500901');
+    mail.requests.length = 0;
+    for (const path of ['/api/mail/account', '/api/mail/account/', '/api/mail//account', '/api/mail/ACCOUNT']) {
+      assert.equal((await c.del(path, {})).status, 404, `DELETE ${path}`);
+    }
+    for (const path of ['/api/mail/export', '/api/mail/export/']) {
+      assert.equal((await c.get(path)).status, 404, `GET ${path}`);
+    }
+    assert.equal(mail.requests.length, 0, 'nothing reached the mail service');
+  });
 });
 
 describe('mail service gateway', () => {
@@ -596,6 +608,28 @@ describe('live updates and alerts', () => {
     assert.match(app.twilio.sms[0].body, /Subject: One\.$/);
     assert.match(app.twilio.sms[1].body, /Subject: x{39}…\.$/);
     assert.deepEqual((await statusOf(501)).map((r) => r.status), ['sms', 'skipped']);
+  });
+
+  test('people signed in to a phone app get no SMS alerts; web-only people still do', async () => {
+    const { user: sender } = await login('9876500902');
+    const { user: appUser } = await login('9876500903', 'mobile');
+    const { user: webUser } = await login('9876500904');
+    app.twilio.sms.length = 0;
+    await alert(appUser.id, 521, sender.id, 'To the app user');
+    await alert(webUser.id, 522, sender.id, 'To the web user');
+    assert.equal(app.twilio.sms.length, 1, 'only the web-only person is texted');
+    const [row] = await statusOf(521);
+    assert.deepEqual([row.status, row.last_error], ['skipped', 'uses the PhoneMail app']);
+  });
+
+  test('SMS alerts stop at the daily limit per person (outside mail can come from endless addresses)', async () => {
+    const { user: rcpt } = await login('9876500905');
+    const { user: sender } = await login('9876500906');
+    app.twilio.sms.length = 0;
+    for (let i = 0; i < app.cfg.smsAlertsPerDay + 2; i++) await alert(rcpt.id, 530 + i, sender.id, `Mail ${i}`); // a new chat each time
+    assert.equal(app.twilio.sms.length, app.cfg.smsAlertsPerDay);
+    const [last] = await statusOf(530 + app.cfg.smsAlertsPerDay + 1);
+    assert.deepEqual([last.status, last.last_error], ['skipped', 'daily SMS limit reached']);
   });
 
   test('a failed text is retried later; a hopeless one is not', async () => {

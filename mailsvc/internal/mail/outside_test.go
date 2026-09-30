@@ -222,6 +222,50 @@ func TestInboundRules(t *testing.T) {
 	}
 }
 
+// A Message-ID only de-duplicates mail from the same sender: another outsider reusing it (a forgery or a
+// clash) gets their own email, and never someone else's email in their chat.
+func TestInboundMessageIDClash(t *testing.T) {
+	s, ctx := setup(t)
+	a, aAddr := user(t, s, ctx, 1)
+	b, bAddr := user(t, s, ctx, 2)
+	id := "Message-ID: <same-id@example.org>\r\n"
+	last := func(u int64, peer string) MessageView {
+		for _, c := range must(s.Home(ctx, u, "all", Cursor{})) {
+			if c.Peer != nil && c.Peer.Address == peer {
+				return must(s.Message(ctx, u, *c.LastMessageID, &c.ConversationID))
+			}
+		}
+		t.Fatalf("user %d has no chat with %s", u, peer)
+		return MessageView{}
+	}
+
+	must(0, s.DeliverInbound(ctx, "real@example.org", []int64{a}, inbound("real@example.org", aAddr, "Real", id, "the real email")))
+	must(0, s.DeliverInbound(ctx, "forger@example.net", []int64{b}, inbound("forger@example.net", bAddr, "Forged", id, "forger's own text")))
+
+	if m := last(b, "forger@example.net"); strings.TrimSpace(m.BodyText) != "forger's own text" || m.Sender.Address != "forger@example.net" {
+		t.Fatalf("B must get the forger's own email, not A's: %+v", m)
+	}
+	am := last(a, "real@example.org")
+	if strings.TrimSpace(am.BodyText) != "the real email" {
+		t.Fatalf("A's email must be untouched: %+v", am)
+	}
+	for _, r := range am.Recipients {
+		if r.Person != nil && r.Person.UserID == b {
+			t.Fatal("B must not appear as a recipient of A's email")
+		}
+	}
+
+	// The same sender sending the same email again is still delivered once.
+	must(0, s.DeliverInbound(ctx, "forger@example.net", []int64{b}, inbound("forger@example.net", bAddr, "Forged", id, "forger's own text")))
+	var copies int
+	if err := s.DB.QueryRow(ctx, `SELECT count(*) FROM messages WHERE message_id_header LIKE '<same-id@example.org>%'`).Scan(&copies); err != nil {
+		t.Fatal(err)
+	}
+	if copies != 2 {
+		t.Fatalf("want one stored email per sender (2), got %d: a resend must not be a second email", copies)
+	}
+}
+
 // The SMTP conversation Postfix has with us: unknown addresses are refused at RCPT.
 func TestSMTPSession(t *testing.T) {
 	s, ctx := setup(t)

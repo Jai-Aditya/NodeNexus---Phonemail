@@ -104,6 +104,13 @@ export class AlertSender {
         // No working subscription any more: fall back to SMS, like a user without the app.
       }
       if (!cfg.smsAlerts) return this.finish(a, 'skipped', 'SMS_ALERTS is off');
+      // Signed in to a phone app: it shows new mail live, and the brief texts only people without the app.
+      const [app] = await sql`SELECT 1 FROM sessions WHERE user_id = ${a.user_id} AND app AND expires_at > now() LIMIT 1`;
+      if (app) return this.finish(a, 'skipped', 'uses the PhoneMail app');
+      // A daily cap per person: outside mail from ever-new addresses must not turn into unlimited paid texts.
+      const [{ today }] = await sql`SELECT count(*)::int AS today FROM alert_queue
+        WHERE user_id = ${a.user_id} AND status = 'sms' AND done_at > now() - interval '1 day'`;
+      if (today >= cfg.smsAlertsPerDay) return this.finish(a, 'skipped', 'daily SMS limit reached');
       const [recent] = await sql`
         SELECT 1 FROM alert_queue
         WHERE user_id = ${a.user_id} AND conversation_id = ${a.conversation_id} AND status = 'sms'

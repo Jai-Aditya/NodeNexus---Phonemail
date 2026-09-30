@@ -97,6 +97,9 @@ func queueOutside(ctx context.Context, tx pgx.Tx, msgID int64) error {
 
 const maxOutboxAttempts = 8
 
+// maxRelayMessageBytes is the largest email the relay accepts (Postfix message_size_limit, postfix/entrypoint.sh).
+const maxRelayMessageBytes = 26 << 20
+
 // RunOutbound hands waiting outside email to Postfix until ctx ends. Without a relay the
 // outbox stays as it is (nothing is queued then anyway: outside addresses are refused).
 func (s *Service) RunOutbound(ctx context.Context, every time.Duration) {
@@ -137,14 +140,42 @@ func (s *Service) sendOneOutside(ctx context.Context) bool {
 		log.Printf("outbound: %v", err)
 		return false
 	}
-	email, err := s.renderEmail(ctx, tx, msgID)
-	if err == nil && len(email.outside) == 0 {
+	// Count this try, with its back-off, before building the email: building holds every attachment in memory,
+	// and if that ever brings the service down, an uncounted try would be picked again at once, forever.
+	attempts++
+	if _, err := tx.Exec(ctx, `UPDATE outbox SET attempts = $2, next_attempt_at = now() + $3 WHERE id = $1`,
+		id, attempts, time.Minute<<(attempts-1)); err != nil {
+		log.Printf("outbound: %v", err)
+		return false
+	}
+	if err := tx.Commit(ctx); err != nil {
+		log.Printf("outbound: %v", err)
+		return false
+	}
+	if tx, err = s.DB.Begin(ctx); err != nil {
+		log.Printf("outbound: %v", err)
+		return false
+	}
+	defer func() { tx.Rollback(ctx) }()
+
+	// Postfix takes at most maxRelayMessageBytes, and base64 makes files a third bigger: a message whose
+	// files can't fit fails for good here, with a clear reason, instead of being built and refused.
+	var fileBytes int64
+	err = tx.QueryRow(ctx, `SELECT COALESCE(sum(size_bytes), 0) FROM attachments WHERE message_id = $1`, msgID).Scan(&fileBytes)
+	var em *email
+	if err == nil && fileBytes*4/3 > maxRelayMessageBytes-(1<<20) {
+		err = &textproto.Error{Code: 552, Msg: fmt.Sprintf("attachments too large for email to other providers (%d MB; about %d MB fit)",
+			fileBytes>>20, (maxRelayMessageBytes-(1<<20))*3/4>>20)}
+	}
+	if err == nil {
+		em, err = s.renderEmail(ctx, tx, msgID)
+	}
+	if err == nil && len(em.outside) == 0 {
 		err = &textproto.Error{Code: 550, Msg: "no outside recipients"}
 	}
 	if err == nil {
-		err = s.relay(email)
+		err = s.relay(em)
 	}
-	attempts++
 	switch {
 	case err == nil:
 		_, err = tx.Exec(ctx, `UPDATE outbox SET status = 'sent', attempts = $2, sent_at = now(), last_error = NULL WHERE id = $1`, id, attempts)
