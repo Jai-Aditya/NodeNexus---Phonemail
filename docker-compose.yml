@@ -1,0 +1,155 @@
+# PhoneMail: start everything with  docker compose up -d
+# Settings and secrets come from .env (copy .env.example first). Nothing in this file is secret.
+
+# Container logs: at most 3 files of 10 MB per service, so logs can't fill the disk.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: phonemail
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env (e.g. openssl rand -hex 24)}
+      POSTGRES_DB: phonemail
+      # ICU collation: text sorts the same whatever system the database runs on,
+      # so its files can move between images or machines without rebuilding indexes.
+      POSTGRES_INITDB_ARGS: "--locale-provider=icu --icu-locale=und"
+    ports:
+      # This computer only (tests, database tools), never the network. Docker's published
+      # ports bypass the host firewall, so "5432:5432" would expose the database to the LAN.
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata-icu:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U phonemail -d phonemail"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    mem_limit: 1g
+    stop_grace_period: 30s # let PostgreSQL finish writing before it is stopped
+    logging: *logging
+
+  mailsvc:
+    build: ./mailsvc
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://phonemail:${POSTGRES_PASSWORD}@db:5432/phonemail
+      DB_MAX_CONNS: ${MAILSVC_DB_CONNS:-10}
+      MAIL_DOMAIN: ${MAIL_DOMAIN:-phonemail.com}
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?Set INTERNAL_TOKEN in .env (e.g. openssl rand -hex 32)}
+      # Mail to and from other providers, through Postfix (the postfix service below, or the host's own).
+      SMTP_LISTEN: ":2525"
+      SMTP_RELAY: ${SMTP_RELAY:-}
+      SMTP_HOSTNAME: ${SMTP_HOSTNAME:-}
+      MAIL_LEGACY_DOMAINS: ${MAIL_LEGACY_DOMAINS:-}
+      OTHER_MAILBOXES: ${OTHER_MAILBOXES:-}
+      MAX_USER_STORAGE_MB: ${MAX_USER_STORAGE_MB:-1024}
+    ports:
+      - "127.0.0.1:${MAILSVC_PORT:-8081}:8081" # this computer only (GoLand's requests.http); browsers go through the API
+      # Incoming mail from other providers: the host's Postfix hands it over here (this computer only).
+      - "127.0.0.1:${SMTP_PORT:-2525}:2525"
+    volumes:
+      - attachments:/data/attachments
+    mem_limit: 256m
+    stop_grace_period: 20s # it finishes requests in progress for up to 15 s
+    logging: *logging
+
+  api:
+    build: ./api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      mailsvc:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://phonemail:${POSTGRES_PASSWORD}@db:5432/phonemail
+      MAIL_SERVICE_URL: http://mailsvc:8081
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:?Set INTERNAL_TOKEN in .env (e.g. openssl rand -hex 32)}
+      MAIL_DOMAIN: ${MAIL_DOMAIN:-phonemail.com}
+      AUTH_MODE: ${AUTH_MODE:-auto}
+      TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-}
+      TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-}
+      TWILIO_VERIFY_SID: ${TWILIO_VERIFY_SID:-}
+      TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      # The web container (nginx) in front of the api hands it one X-Forwarded-For address: the visitor's.
+      TRUST_PROXY: ${TRUST_PROXY:-true}
+      DEFAULT_COUNTRY_CODE: ${DEFAULT_COUNTRY_CODE:-91}
+      SMS_COUNTRY_CODES: ${SMS_COUNTRY_CODES:-91}
+      SMS_ALERTS: ${SMS_ALERTS:-true}
+      SMS_ALERT_MINUTES: ${SMS_ALERT_MINUTES:-10}
+      RESERVED_ALIASES: ${RESERVED_ALIASES:-}
+      TEST_PHONE_PREFIX: ${TEST_PHONE_PREFIX:-}
+      SMS_PER_SECOND: ${SMS_PER_SECOND:-1}
+      SEND_PER_MINUTE: ${SEND_PER_MINUTE:-30}
+      SEND_PER_DAY: ${SEND_PER_DAY:-500}
+      AVATAR_DIR: /data/avatars
+    ports:
+      # 127.0.0.1 = this computer only; nginx on the same machine forwards the public traffic.
+      # For testing from a phone on the same Wi-Fi, set API_BIND=0.0.0.0 in .env.
+      - "${API_BIND:-127.0.0.1}:${API_PORT:-3000}:3000"
+    volumes:
+      - avatars:/data/avatars
+    mem_limit: 256m
+    stop_grace_period: 20s # it finishes requests in progress for up to 10 s
+    logging: *logging
+
+  # Postfix, the SMTP server in front of PhoneMail on machines without one of their own
+  # ("SMTP local"): mail for our domains in on port 25 -> mailsvc:2525; outside mail out.
+  # Off unless the "postfix" profile is on (COMPOSE_PROFILES=postfix in .env, as on a laptop).
+  # A server with its own Postfix leaves this off.
+  postfix:
+    build: ./postfix
+    profiles: ["postfix"]
+    restart: unless-stopped
+    depends_on:
+      mailsvc:
+        condition: service_healthy
+    environment:
+      MAIL_DOMAIN: ${MAIL_DOMAIN:-phonemail.com}
+      MAIL_LEGACY_DOMAINS: ${MAIL_LEGACY_DOMAINS:-}
+      DOCKER_SUBNET: ${DOCKER_SUBNET:-}
+      POSTFIX_HOSTNAME: ${SMTP_HOSTNAME:-}
+      POSTFIX_RELAYHOST: ${POSTFIX_RELAYHOST:-}
+      POSTFIX_RELAY_USER: ${POSTFIX_RELAY_USER:-}
+      POSTFIX_RELAY_PASSWORD: ${POSTFIX_RELAY_PASSWORD:-}
+    ports:
+      - "${POSTFIX_BIND:-127.0.0.1}:${POSTFIX_PORT:-25}:25"
+    volumes:
+      - postfix-queue:/var/spool/postfix
+    mem_limit: 128m
+    logging: *logging
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      # The web client, and the only door to the api from outside. In production the host's nginx
+      # (https, the public name) forwards to it; locally, open http://localhost:8080.
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8080}:80"
+    mem_limit: 64m
+    logging: *logging
+
+volumes:
+  # "pgdata-icu", not "pgdata": the Alpine image with ICU collation starts from a fresh
+  # database. The old "pgdata" volume (Debian image) is left untouched; move data across
+  # with scripts/backup.sh and scripts/restore.sh.
+  pgdata-icu:
+    name: ${COMPOSE_PROJECT_NAME:-phonemail}_pgdata_icu
+  attachments:
+  avatars:
+  postfix-queue:
