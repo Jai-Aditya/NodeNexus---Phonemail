@@ -9,12 +9,19 @@ WhatsApp on your phone and like Gmail on a big screen, and it works with every o
 
 The AlphaStack 7-day Buildathon submission of **Team Node Nexus**. Live at **https://mail.phonemail.net**.
 
+## Demo video
+
+[![Watch the PhoneMail demo on YouTube](https://img.youtube.com/vi/CQClL0JOdA0/maxresdefault.jpg)](https://youtu.be/CQClL0JOdA0)
+
+An 8-minute walkthrough of PhoneMail: **https://youtu.be/CQClL0JOdA0**
+
 <p align="center">
   <img src="docs/screenshots/12-phone-chat.png" alt="A conversation on a phone" height="420">
   &nbsp;
   <img src="docs/screenshots/17-threads-desktop.png" alt="The mailbox on a computer" height="420">
 </p>
 
+- [Demo video](#demo-video)
 - [Set it up and run it](#set-it-up-and-run-it) (start here)
 - [Tech stack](#tech-stack)
 - [Architecture](#architecture)
