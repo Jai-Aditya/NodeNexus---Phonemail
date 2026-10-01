@@ -5,7 +5,7 @@ import { avatarColor, initials } from '../lib/format';
 //   an uploaded photo (avatar_url, e.g. /api/avatars/12-abc.jpg) -> the photo, round
 //   no photo, a PhoneMail number -> the "number bloom" drawn from its 10 digits
 //   anyone else (a deleted account, an outside address) -> initials on a stable colour
-const ourNumber = () => new RegExp(`^(\\d{10})@(${[brand.domain, ...brand.legacyDomains].map((d) => d.replace(/[.]/g, '\\.')).join('|')})$`, 'i');
+const ourNumber = () => new RegExp(`^(\\d{10})@(${[brand.domain, ...brand.legacyDomains].map((d) => d.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})$`, 'i');
 
 type Props = {
   address?: string;
