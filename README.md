@@ -9,6 +9,9 @@ WhatsApp on your phone and like Gmail on a big screen, and it works with every o
 
 The AlphaStack 7-day Buildathon submission of **Team Node Nexus**. Live at **https://mail.phonemail.net**.
 
+**Website:** [phonemail.net](https://phonemail.net) · **Open the app:** [mail.phonemail.net](https://mail.phonemail.net) ·
+**User guide:** [phonemail.net/docs](https://phonemail.net/docs/)
+
 ## Demo video
 
 [![Watch the PhoneMail demo on YouTube](https://img.youtube.com/vi/CQClL0JOdA0/maxresdefault.jpg)](https://youtu.be/CQClL0JOdA0)
