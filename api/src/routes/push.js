@@ -25,7 +25,7 @@ export function pushRoutes(router, { sessions, push }) {
 
   // The phone apps: {"platform": "ios" | "android", "token": "...", "sandbox": true for iOS development builds}.
   router.post('/api/push/devices', auth(async (req, res) => {
-    await push.registerDevice(req.user.id, await readJson(req));
+    await push.registerDevice(req.user.id, await readJson(req), req.user.session_hash);
     sendJson(res, 201, { ok: true });
   }));
 

@@ -116,6 +116,20 @@ describe('phone push', () => {
     assert.equal(await hasPush(second.user.id), false);
   });
 
+  test('a phone stops getting pushes when the session that registered it ends', async () => {
+    const { c, user } = await login('9876501006');
+    const token = '12'.repeat(32);
+    await c.post('/api/push/devices', { platform: 'ios', token });
+    assert.equal((await c.post('/api/auth/logout', {})).status, 200);
+    assert.equal((await sql`SELECT count(*)::int AS n FROM mobile_push_tokens WHERE token = ${token}`)[0].n, 0,
+      'the token goes with its session');
+    sent.apns.length = 0;
+    const a = await alert(user.id);
+    assert.equal(sent.apns.length, 0);
+    assert.notEqual(a.status, 'push');
+    assert.equal(await hasPush(user.id), false, 'has_push is corrected on the next alert');
+  });
+
   test('the APNs payload and provider token are what Apple expects', () => {
     const p = apnsPayload({ title: 'Ravi', body: 'Bill', conversation_id: 7, message_id: 8 });
     assert.deepEqual(p.aps.alert, { title: 'Ravi', body: 'Bill' });

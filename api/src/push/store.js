@@ -96,8 +96,11 @@ export function pushStore(sql, cfg, senders = mobileSenders(cfg)) {
       await refreshHasPush(userId);
     },
 
-    /** A phone app's device token: {platform: "ios" | "android", token, sandbox?}. */
-    async registerDevice(userId, body) {
+    /**
+     * A phone app's device token: {platform: "ios" | "android", token, sandbox?}, tied to the session
+     * that registered it (the token is removed when that session ends).
+     */
+    async registerDevice(userId, body, sessionHash = null) {
       const platform = body?.platform;
       const token = typeof body?.token === 'string' ? body.token.trim() : '';
       if (!TOKEN_FORMAT[platform]) throw badRequest('platform must be ios or android.');
@@ -110,10 +113,10 @@ export function pushStore(sql, cfg, senders = mobileSenders(cfg)) {
       // The same phone signed in as someone else before: the token moves to this person.
       const [before] = await sql`SELECT user_id FROM mobile_push_tokens WHERE token = ${token}`;
       await sql`
-        INSERT INTO mobile_push_tokens (user_id, platform, token, sandbox)
-        VALUES (${userId}, ${platform}, ${token}, ${body.sandbox === true})
+        INSERT INTO mobile_push_tokens (user_id, platform, token, sandbox, session_hash)
+        VALUES (${userId}, ${platform}, ${token}, ${body.sandbox === true}, ${sessionHash})
         ON CONFLICT (token) DO UPDATE SET user_id = EXCLUDED.user_id, platform = EXCLUDED.platform,
-          sandbox = EXCLUDED.sandbox, last_seen_at = now()`;
+          sandbox = EXCLUDED.sandbox, session_hash = EXCLUDED.session_hash, last_seen_at = now()`;
       await refreshHasPush(userId);
       if (before && before.user_id !== userId) await refreshHasPush(before.user_id);
     },
@@ -164,7 +167,8 @@ export function pushStore(sql, cfg, senders = mobileSenders(cfg)) {
           console.error(`${p.platform} push to user ${userId} failed: ${err.message}`);
         }
       }
-      if (dropped || delivered < subs.length + phones.length) await refreshHasPush(userId);
+      // Also when nothing got through: tokens may have left with their sessions since has_push was set.
+      if (dropped || delivered === 0 || delivered < subs.length + phones.length) await refreshHasPush(userId);
       return delivered;
     },
   };
