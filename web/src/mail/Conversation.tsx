@@ -11,6 +11,7 @@ import { useSession } from '../lib/session';
 import { useShortcuts } from '../lib/shortcuts';
 import { usePhone } from '../lib/useMedia';
 import type { ComposeRequest } from './Compose';
+import { FolderMenu, foldersChanged } from './Folders';
 import { RichEditor, textToHtml, type EditorValue } from './Editor';
 import { RecipientInput } from './RecipientInput';
 import { GmailThread, RedditThread, type FlagChange } from './Threads';
@@ -39,7 +40,7 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
   const [draft, setDraft] = useState<Draft | null | undefined>(undefined);
   const [writerKey, setWriterKey] = useState(0);
   const [showInfo, setShowInfo] = useState(false);
-  const [menu, setMenu] = useState<'' | 'snooze' | 'more'>('');
+  const [menu, setMenu] = useState<'' | 'snooze' | 'more' | 'folder'>('');
   const [blocked, setBlocked] = useState<boolean | null>(null);
   const [error, setError] = useState('');
   const bottom = useRef<HTMLDivElement>(null);
@@ -149,14 +150,15 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
     load();
   };
 
-  // Whole-conversation actions. Leaving ones (archive, delete, snooze, unread) go back to the list.
-  const chatAct = async (action: ChatAction, until?: Date) => {
+  // Whole-conversation actions. Leaving ones (archive, delete, snooze, unread, move) go back to the list.
+  const chatAct = async (action: ChatAction, until?: Date, into?: number) => {
     setMenu('');
     try {
-      await mail.chatAction([id], action, until?.toISOString());
+      await mail.chatAction([id], action, until?.toISOString(), into);
     } catch (e) {
       return flash(e instanceof Error ? e.message : t('Something went wrong'));
     }
+    if (action === 'move' || action === 'unfile') foldersChanged();
     const undo = (back: ChatAction) => ({ label: t('Undo'), run: () => { mail.chatAction([id], back).then(() => navigate(`/c/${id}`), () => {}); } });
     switch (action) {
       case 'archive': flash(t('Conversation archived'), undo('unarchive')); break;
@@ -167,8 +169,10 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
       case 'unread': flash(t('Marked as unread')); break;
       case 'mute': flash(t('Muted: no alerts for this conversation')); break;
       case 'unmute': flash(t('Alerts are back on')); break;
+      case 'move': flash(t('Moved to the folder'), undo('unfile')); break;
+      case 'unfile': flash(t('Removed from the folder')); break;
     }
-    if (['archive', 'trash', 'snooze', 'unread'].includes(action)) navigate('/');
+    if (['archive', 'trash', 'snooze', 'unread', 'move'].includes(action)) navigate('/');
     else load();
   };
 
@@ -247,6 +251,8 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
                   <Icon name={info?.muted ? 'bell' : 'mute'} size={18} />{info?.muted ? t('Unmute') : t('Mute (no alerts)')}
                 </button>
                 {snoozed ? <button role="menuitem" className="when-item" onClick={() => chatAct('unsnooze')}><Icon name="clock" size={18} />{t('Unsnooze')}</button> : null}
+                <button role="menuitem" className="when-item" onClick={() => setMenu('folder')}><Icon name="folder" size={18} />{t('Move to folder…')}</button>
+                {info?.folder_id ? <button role="menuitem" className="when-item" onClick={() => chatAct('unfile')}><Icon name="inbox" size={18} />{t('Remove from folder')}</button> : null}
                 {peer ? (
                   <button role="menuitem" className="when-item danger" onClick={toggleBlock} disabled={blocked === null}>
                     <Icon name="block" size={18} />{blocked ? t('Unblock {name}', { name: displayName(peer) }) : t('Block {name}', { name: displayName(peer) })}
@@ -255,6 +261,7 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
                 <button role="menuitem" className="when-item danger" onClick={() => chatAct('trash')}><Icon name="trash" size={18} />{t('Delete conversation')}</button>
               </MoreMenu>
             ) : null}
+            {menu === 'folder' ? <FolderMenu current={info?.folder_id} onClose={() => setMenu('')} onPick={(f) => chatAct('move', undefined, f)} /> : null}
           </span>
         </span>
       </div>

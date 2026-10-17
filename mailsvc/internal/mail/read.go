@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 	"unicode"
@@ -13,8 +14,9 @@ import (
 )
 
 // Home lists the user's chats, newest first (spec 6.3).
-// filter: all, unread, attachments, favorites (chats in Home), archived, snoozed, or
-// everything ("All mail": every chat with mail, archived and snoozed ones too).
+// filter: all, unread, attachments, favorites (chats in Home), archived (archived and in no
+// folder), snoozed, everything ("All mail": every chat with mail, archived and snoozed ones
+// too) or folder:<id> (the chats filed in one of the user's folders).
 func (s *Service) Home(ctx context.Context, userID int64, filter string, cur Cursor) ([]ChatSummary, error) {
 	return s.home(ctx, userID, filter, cur, nil)
 }
@@ -39,21 +41,30 @@ func (s *Service) home(ctx context.Context, userID int64, filter string, cur Cur
 		"attachments": inHome + "AND uc.has_attachments",
 		"favorites":   inHome + "AND uc.favourite_count > 0",
 		"favourites":  inHome + "AND uc.favourite_count > 0",
-		"archived":    "AND uc.hidden AND uc.last_message_id IS NOT NULL",
+		"archived":    "AND uc.hidden AND uc.folder_id IS NULL AND uc.last_message_id IS NOT NULL",
 		"snoozed":     "AND uc.snoozed_until > now()",
 		"everything":  "AND uc.last_message_id IS NOT NULL",
+		"folder":      "AND uc.last_message_id IS NOT NULL", // and uc.folder_id = $6, below
 	}
 	if only != nil {
 		cond["one"] = ""
 	}
+	var folderID *int64
+	if rest, ok := strings.CutPrefix(filter, "folder:"); ok {
+		id, err := strconv.ParseInt(rest, 10, 64)
+		if err != nil || id <= 0 {
+			return nil, errBadRequest("folder:<id> needs a folder number.")
+		}
+		folderID, filter = &id, "folder"
+	}
 	extra, ok := cond[filter]
-	if !ok {
-		return nil, errBadRequest("filter must be all, unread, attachments, favorites, archived, snoozed or everything.")
+	if !ok || (filter == "folder" && folderID == nil) {
+		return nil, errBadRequest("filter must be all, unread, attachments, favorites, archived, snoozed, everything or folder:<id>.")
 	}
 	rows, err := s.DB.Query(ctx, `
 		SELECT uc.conversation_id, c.kind, coalesce(c.name, ''), uc.last_message_at, uc.last_message_id,
 		       uc.snippet, uc.unread_count, uc.has_attachments, uc.favourite_count,
-		       uc.hidden, uc.muted, uc.snoozed_until,
+		       uc.hidden, uc.muted, uc.snoozed_until, uc.folder_id,
 		       peer.id, peer.addr_key, peer.display_name, peer.avatar_url,
 		       CASE WHEN c.kind = 'group' THEN (SELECT count(*) FROM conversation_participants p2
 		            WHERE p2.conversation_id = c.id AND p2.left_at IS NULL) ELSE 0 END
@@ -67,8 +78,9 @@ func (s *Service) home(ctx context.Context, userID int64, filter string, cur Cur
 		WHERE uc.user_id = $1 `+extra+`
 		  AND ($2::timestamptz IS NULL OR (uc.last_message_at, uc.conversation_id) < ($2, $3))
 		  AND ($5::bigint IS NULL OR uc.conversation_id = $5)
+		  AND ($6::bigint IS NULL OR uc.folder_id = $6)
 		ORDER BY uc.last_message_at DESC, uc.conversation_id DESC
-		LIMIT $4`, userID, cur.Before, cur.BeforeID, cur.limit(), only)
+		LIMIT $4`, userID, cur.Before, cur.BeforeID, cur.limit(), only, folderID)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +90,7 @@ func (s *Service) home(ctx context.Context, userID int64, filter string, cur Cur
 		var peerLocal, peerName, peerAvatar *string
 		err := r.Scan(&c.ConversationID, &c.Kind, &c.Name, &c.LastMessageAt, &c.LastMessageID,
 			&c.Snippet, &c.UnreadCount, &c.HasAttachments, &c.FavouriteCount,
-			&c.Archived, &c.Muted, &c.SnoozedUntil,
+			&c.Archived, &c.Muted, &c.SnoozedUntil, &c.FolderID,
 			&peerID, &peerLocal, &peerName, &peerAvatar, &c.MemberCount)
 		if peerID != nil {
 			c.Peer = &Person{UserID: *peerID, Address: s.AddressOf(*peerLocal), DisplayName: *peerName, AvatarURL: *peerAvatar}

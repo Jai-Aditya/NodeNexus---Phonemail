@@ -120,6 +120,7 @@ type ChatSummary struct {
 	Archived       bool       `json:"archived,omitempty"`
 	Muted          bool       `json:"muted,omitempty"`
 	SnoozedUntil   *time.Time `json:"snoozed_until,omitempty"`
+	FolderID       *int64     `json:"folder_id,omitempty"` // the user's own folder it is filed in
 }
 
 // RecipientView is a recipient as shown to a particular viewer.

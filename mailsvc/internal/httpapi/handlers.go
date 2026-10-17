@@ -215,6 +215,68 @@ func (s *Server) chatAction(w http.ResponseWriter, r *http.Request, user int64) 
 	writeJSON(w, 200, map[string]int{"changed": n})
 }
 
+// ---- the user's own folders ----
+
+func (s *Server) listFolders(w http.ResponseWriter, r *http.Request, user int64) {
+	list, err := s.Svc.Folders(r.Context(), user)
+	if err != nil {
+		writeErr(w, err)
+		return
+	}
+	writeJSON(w, 200, map[string]any{"items": list})
+}
+
+// createFolder: {"name": "Family"}.
+func (s *Server) createFolder(w http.ResponseWriter, r *http.Request, user int64) {
+	var body struct {
+		Name string `json:"name"`
+	}
+	if err := decode(r, &body); err != nil {
+		writeErr(w, err)
+		return
+	}
+	f, err := s.Svc.CreateFolder(r.Context(), user, body.Name)
+	if err != nil {
+		writeErr(w, err)
+		return
+	}
+	writeJSON(w, 201, f)
+}
+
+// renameFolder: {"name": "Family and friends"}.
+func (s *Server) renameFolder(w http.ResponseWriter, r *http.Request, user int64) {
+	id, err := pathID(r, "id")
+	if err != nil {
+		writeErr(w, err)
+		return
+	}
+	var body struct {
+		Name string `json:"name"`
+	}
+	if err := decode(r, &body); err != nil {
+		writeErr(w, err)
+		return
+	}
+	if err := s.Svc.RenameFolder(r.Context(), user, id, body.Name); err != nil {
+		writeErr(w, err)
+		return
+	}
+	writeJSON(w, 200, map[string]bool{"ok": true})
+}
+
+func (s *Server) deleteFolder(w http.ResponseWriter, r *http.Request, user int64) {
+	id, err := pathID(r, "id")
+	if err != nil {
+		writeErr(w, err)
+		return
+	}
+	if err := s.Svc.DeleteFolder(r.Context(), user, id); err != nil {
+		writeErr(w, err)
+		return
+	}
+	writeJSON(w, 200, map[string]bool{"ok": true})
+}
+
 // react: {"emoji": "👍"}. One reaction per person per email; a new one replaces the old.
 func (s *Server) react(w http.ResponseWriter, r *http.Request, user int64) {
 	id, err := pathID(r, "id")

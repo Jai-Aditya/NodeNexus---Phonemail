@@ -53,6 +53,11 @@ func (s *Server) Handler() http.Handler {
 	// Folders and search
 	h("GET /folders/{folder}", s.folder)
 	h("DELETE /trash", s.emptyTrash)
+	// The user's own folders for chats (their chats: GET /conversations?filter=folder:<id>)
+	h("GET /folders", s.listFolders)
+	h("POST /folders", s.createFolder)
+	h("PATCH /folders/{id}", s.renameFolder)
+	h("DELETE /folders/{id}", s.deleteFolder)
 	h("GET /search", s.search)
 	h("GET /suggest", s.suggest)
 	// Drafts and attachments

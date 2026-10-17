@@ -241,6 +241,17 @@ button:disabled { opacity: .5; cursor: default; }
 .nav-item:hover { background: var(--surface-2); text-decoration: none; }
 .nav-item.active { background: var(--brand-soft); color: var(--brand); font-weight: 650; }
 .nav-rule { border: 0; border-top: 1px solid var(--line); margin: 10px 16px 10px 8px; }
+/* The user's own folders, under the built-in places. */
+.nav-folders { display: flex; flex-direction: column; gap: 2px; }
+.nav-heading { margin: 4px 16px 2px; font-size: 13px; font-weight: 650; color: var(--muted); }
+button.nav-item { background: none; border: 0; font: inherit; text-align: left; cursor: pointer; width: 100%; }
+.nav-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-count { font-size: 12px; font-weight: 650; color: var(--brand); }
+.folder-name { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 4px 8px 4px 16px; }
+.folder-name input { flex: 1; min-width: 120px; font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); }
+.folder-name .form-error { flex-basis: 100%; margin: 2px 0 0; }
+.folder-tools { display: flex; gap: 8px; align-items: center; }
+.pad-x { margin: 4px 10px; }
 
 .content {
   grid-area: main; background: var(--surface); border-radius: 22px 0 0 0; overflow-y: auto;

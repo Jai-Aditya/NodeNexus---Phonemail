@@ -92,7 +92,11 @@ export type Chat = {
   archived?: boolean;
   muted?: boolean;
   snoozed_until?: string;
+  folder_id?: number; // the user's own folder it is filed in
 };
+
+/** One of the user's own folders for conversations. */
+export type Folder = { id: number; name: string; chat_count: number; unread_count: number; created_at: string };
 
 export type RecipientView = { kind: 'to' | 'cc' | 'bcc'; person?: Person; group_id?: number; group_name?: string };
 export type Attachment = { id: number; filename: string; content_type: string; size_bytes: number };
@@ -150,7 +154,7 @@ export type DraftContent = {
   recipients: Recipients; subject: string; body_text: string; body_html?: string;
   conversation_id?: number; parent_id?: number; forwarded_from_id?: number;
 };
-export type ChatAction = 'archive' | 'unarchive' | 'trash' | 'read' | 'unread' | 'mute' | 'unmute' | 'snooze' | 'unsnooze';
+export type ChatAction = 'archive' | 'unarchive' | 'trash' | 'read' | 'unread' | 'mute' | 'unmute' | 'snooze' | 'unsnooze' | 'move' | 'unfile';
 export type Blocked = Person & { blocked_at: string };
 
 export type Group = {
@@ -177,9 +181,13 @@ export const mail = {
   home: (filter = 'all', next?: Page<Chat>['next']) =>
     api<Page<Chat>>('GET', `/api/mail/conversations?${qs({ filter, limit: 50, before: next?.before, before_id: next?.before_id })}`),
   chatInfo: (id: number) => api<Chat>('GET', `/api/mail/conversations/${id}`),
-  /** Something done to whole conversations, one or many (bulk). */
-  chatAction: (ids: number[], action: ChatAction, until?: string) =>
-    api<{ changed: number }>('POST', '/api/mail/conversations/actions', { conversation_ids: ids, action, until }),
+  /** Something done to whole conversations, one or many (bulk). "move" files them in folderId (and archives them). */
+  chatAction: (ids: number[], action: ChatAction, until?: string, folderId?: number) =>
+    api<{ changed: number }>('POST', '/api/mail/conversations/actions', { conversation_ids: ids, action, until, folder_id: folderId }),
+  folders: () => api<{ items: Folder[] }>('GET', '/api/mail/folders').then((r) => r.items),
+  createFolder: (name: string) => api<Folder>('POST', '/api/mail/folders', { name }),
+  renameFolder: (id: number, name: string) => api('PATCH', `/api/mail/folders/${id}`, { name }),
+  deleteFolder: (id: number) => api('DELETE', `/api/mail/folders/${id}`),
   react: (id: number, emoji: string) => api('PUT', `/api/mail/messages/${id}/reaction`, { emoji }),
   unreact: (id: number) => api('DELETE', `/api/mail/messages/${id}/reaction`),
   blocks: () => api<{ items: Blocked[] }>('GET', '/api/mail/blocks').then((r) => r.items),

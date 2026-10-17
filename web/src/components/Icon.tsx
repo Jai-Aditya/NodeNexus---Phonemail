@@ -33,6 +33,8 @@ const PATHS: Record<string, string> = {
   link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
   clear: 'M7 5h11M13 5l-3 14M4 4l16 16',
   archive: 'M4 5h16v4H4ZM5 9v10h14V9M10 13h4',
+  folder: 'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z',
+  plus: 'M12 5v14M5 12h14',
   clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-13v4.5l3 2',
   mute: 'M6 17v-6a6 6 0 0 1 9.5-4.9M18 11v6l1.5 2H9M10 21h4M3 3l18 18',
   block: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM5.6 5.6l12.8 12.8',

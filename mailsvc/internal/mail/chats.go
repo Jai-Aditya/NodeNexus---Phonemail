@@ -13,9 +13,11 @@ const MaxChatActions = 100
 // ChatActionRequest is something done to whole chats from the Home list (one or many).
 type ChatActionRequest struct {
 	ConversationIDs []int64 `json:"conversation_ids"`
-	// Action: archive, unarchive, trash, read, unread, mute, unmute, snooze, unsnooze.
-	Action string     `json:"action"`
-	Until  *time.Time `json:"until,omitempty"` // for snooze
+	// Action: archive, unarchive, trash, read, unread, mute, unmute, snooze, unsnooze,
+	// move (into folder_id, which also archives) or unfile (out of its folder, back to Home).
+	Action   string     `json:"action"`
+	Until    *time.Time `json:"until,omitempty"`     // for snooze
+	FolderID *int64     `json:"folder_id,omitempty"` // for move
 }
 
 // ChatAction applies an action to the user's own view of some chats. Nobody else's
@@ -34,6 +36,19 @@ func (s *Service) ChatAction(ctx context.Context, userID int64, req ChatActionRe
 		}
 		if req.Until.After(time.Now().AddDate(1, 0, 0)) {
 			return 0, errBadRequest("Snooze for at most a year.")
+		}
+	}
+	if req.Action == "move" {
+		if req.FolderID == nil {
+			return 0, errBadRequest("Moving needs a folder (folder_id).")
+		}
+		var mine bool
+		if err := s.DB.QueryRow(ctx, `SELECT EXISTS (SELECT 1 FROM user_folders WHERE id = $1 AND user_id = $2)`,
+			*req.FolderID, userID).Scan(&mine); err != nil {
+			return 0, err
+		}
+		if !mine {
+			return 0, errNotFound("Folder not found.")
 		}
 	}
 	var n int
@@ -72,6 +87,13 @@ func (s *Service) ChatAction(ctx context.Context, userID int64, req ChatActionRe
 			return err
 		case "unsnooze":
 			return set(`snoozed_until = NULL`)
+		case "move":
+			// Filed and archived: out of Home until new mail comes, always listed in the folder.
+			_, err := tx.Exec(ctx, `UPDATE user_conversations SET folder_id = $3, hidden = true, snoozed_until = NULL
+				WHERE user_id = $1 AND conversation_id = ANY($2)`, userID, convs, *req.FolderID)
+			return err
+		case "unfile":
+			return set(`folder_id = NULL, hidden = false, snoozed_until = NULL`)
 		case "read":
 			if _, err := tx.Exec(ctx, `UPDATE mailbox SET is_read = true
 				WHERE user_id = $1 AND conversation_id = ANY($2) AND NOT is_read`, userID, convs); err != nil {
@@ -97,7 +119,7 @@ func (s *Service) ChatAction(ctx context.Context, userID int64, req ChatActionRe
 				return err
 			}
 		default:
-			return errBadRequest("action must be archive, unarchive, trash, read, unread, mute, unmute, snooze or unsnooze.")
+			return errBadRequest("action must be archive, unarchive, trash, read, unread, mute, unmute, snooze, unsnooze, move or unfile.")
 		}
 		for _, c := range convs {
 			if err := refreshChat(ctx, tx, userID, c); err != nil {

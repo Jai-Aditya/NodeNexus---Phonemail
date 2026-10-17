@@ -14,6 +14,7 @@ import { SHORTCUTS, useShortcuts } from '../lib/shortcuts';
 import { usePhone } from '../lib/useMedia';
 import { Compose, type ComposeRequest } from './Compose';
 import { ConversationView } from './Conversation';
+import { FolderNav } from './Folders';
 import { FILTERS, Inbox } from './Inbox';
 import { MessageBody } from './MessageBody';
 import { SearchFilters } from './SearchFilters';
@@ -183,6 +184,9 @@ export default function MailApp() {
           {FOLDERS.map((f) => (
             <Link key={f.to} to={f.to} className={path === f.to ? 'nav-item active' : 'nav-item'}><Icon name={f.icon} />{t(f.label)}</Link>
           ))}
+          <hr className="nav-rule" />
+          <FolderNav filter={filter} />
+          <hr className="nav-rule" />
           <Link to="/settings" className={path === '/settings' ? 'nav-item active' : 'nav-item'}><Icon name="settings" />{t('Settings')}</Link>
           {!phone ? <button className="nav-item nav-help" onClick={() => setHelp(true)}><Icon name="keyboard" />{t('Keyboard shortcuts')}</button> : null}
         </nav>

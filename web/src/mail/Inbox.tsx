@@ -8,6 +8,7 @@ import { useT } from '../lib/i18n';
 import { useOutbox } from '../lib/outbox';
 import { Link, navigate } from '../lib/router';
 import { useShortcuts } from '../lib/shortcuts';
+import { folderOf, FolderMenu, foldersChanged, FolderTools, useFolders } from './Folders';
 import { useReload } from './MailApp';
 import { snoozeChoices, WhenMenu, whenText } from './When';
 
@@ -18,10 +19,12 @@ export const FILTERS = [
   { key: 'favorites', label: 'Starred', chip: 'Favourites', icon: 'star' },
   { key: 'snoozed', label: 'Snoozed', chip: 'Snoozed', icon: 'clock' },
   { key: 'everything', label: 'All mail', chip: 'All mail', icon: 'allmail' },
+  { key: 'archived', label: 'Archived', chip: 'Archived', icon: 'archive' },
 ];
 
-// The conversation list (Home). Conversations can be picked with their tick boxes (on phones,
-// after "Select") and then archived, deleted, marked read or unread, or snoozed together.
+// The conversation list (Home, a filter, or one of the user's folders). Conversations can be
+// picked with their tick boxes (on phones, after "Select") and then archived, deleted, marked
+// read or unread, snoozed or moved to a folder together.
 // Keys: j/k move, o/Enter open, x picks, e archives, # deletes, Shift+I/U mark read/unread.
 export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
   const t = useT();
@@ -33,6 +36,10 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
   const [selecting, setSelecting] = useState(false); // phones: tick boxes shown
   const [cursor, setCursor] = useState(-1); // keyboard position
   const [snoozing, setSnoozing] = useState(false);
+  const [filing, setFiling] = useState(false);
+  const folders = useFolders();
+  const folderId = folderOf(filter);
+  const folder = folders.find((f) => f.id === folderId);
 
   const load = useCallback(() => {
     mail.home(filter).then((p) => { setPage(p); setError(''); }, (e: Error) => setError(e.message));
@@ -46,16 +53,17 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
   const chosen = rows.filter((c) => picked.has(c.conversation_id));
   const toggle = (id: number) => setPicked((s) => { const n = new Set(s); if (n.has(id)) n.delete(id); else n.add(id); return n; });
 
-  const act = async (action: ChatAction, ids: number[], until?: Date) => {
+  const act = async (action: ChatAction, ids: number[], until?: Date, into?: number) => {
     if (!ids.length) return;
     try {
-      await mail.chatAction(ids, action, until?.toISOString());
+      await mail.chatAction(ids, action, until?.toISOString(), into);
     } catch (e) {
       return flash(e instanceof Error ? e.message : t('Something went wrong'));
     }
     setPicked(new Set());
     setSelecting(false);
     load();
+    if (action === 'move' || action === 'unfile') foldersChanged();
     const n = ids.length;
     const undo = (back: ChatAction) => ({ label: t('Undo'), run: () => mail.chatAction(ids, back).then(load, () => {}) });
     if (action === 'archive') flash(n === 1 ? t('Conversation archived') : t('{n} conversations archived', { n }), undo('unarchive'));
@@ -64,6 +72,10 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
     else if (action === 'snooze') flash(t('Snoozed until {when}', { when: whenText(until!) }), undo('unsnooze'));
     else if (action === 'unsnooze') flash(t('Back in your Inbox'));
     else if (action === 'read' || action === 'unread') flash(action === 'read' ? t('Marked as read') : t('Marked as unread'));
+    else if (action === 'move') {
+      const name = folders.find((f) => f.id === into)?.name || t('the folder');
+      flash(n === 1 ? t('Moved to {folder}', { folder: name }) : t('{n} conversations moved to {folder}', { n, folder: name }));
+    } else if (action === 'unfile') flash(n === 1 ? t('Removed from the folder') : t('{n} conversations removed from the folder', { n }));
   };
 
   // Keyboard: acts on the picked conversations, or else the one under the cursor.
@@ -88,7 +100,8 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
     const p = await mail.home(filter, page.next);
     setPage({ items: [...page.items, ...p.items], next: p.next });
   };
-  const current = FILTERS.find((f) => f.key === filter) || FILTERS[0];
+  const current = FILTERS.find((f) => f.key === filter) || (folderId ? { key: filter, label: '', chip: '', icon: 'folder' } : FILTERS[0]);
+  const title = folderId ? folder?.name || t('Folder') : t(current.label);
   const showTicks = !phone || selecting;
   const allArchived = chosen.length > 0 && chosen.every((c) => c.archived);
   const ids = chosen.map((c) => c.conversation_id);
@@ -125,21 +138,31 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
                   onPick={(d) => { setSnoozing(false); act('snooze', ids, d); }} /> : null}
               </span>
             )}
+          <span className="menu-anchor">
+            <button className="icon-btn" aria-label={t('Move to folder')} title={t('Move to folder')} onClick={() => setFiling(!filing)}><Icon name="folder" /></button>
+            {filing ? <FolderMenu current={folderId} onClose={() => setFiling(false)}
+              onPick={(id) => { setFiling(false); act('move', ids, undefined, id); }} /> : null}
+          </span>
+          {folderId ? <button className="btn-link small" onClick={() => act('unfile', ids)}>{t('Remove from folder')}</button> : null}
           <button className="btn-link small bulk-cancel" onClick={() => { setPicked(new Set()); setSelecting(false); }}>{t('Cancel')}</button>
         </div>
       ) : (
         <div className="list-title-row">
-          {phone ? <span /> : <h1 className="list-title">{t(current.label)}</h1>}
+          {phone && !folderId ? <span /> : <h1 className="list-title">{title}</h1>}
+          {folder ? <FolderTools folder={folder} onToast={flash} onDeleted={() => navigate('/')} /> : null}
           {phone && rows.length ? <button className="btn-link small" onClick={() => setSelecting(!selecting)}>{selecting ? t('Cancel') : t('Select')}</button> : null}
         </div>
       )}
       {filter === 'snoozed' ? <p className="muted small pad">{t('Snoozed conversations come back to the top of your Inbox, unread, at the time you chose.')}</p> : null}
       {filter === 'everything' ? <p className="muted small pad">{t('Every conversation, including archived ones. Archived conversations come back to the Inbox when new mail arrives.')}</p> : null}
+      {filter === 'archived' ? <p className="muted small pad">{t('Archived conversations that are in no folder. New mail brings a conversation back to the Inbox.')}</p> : null}
+      {folderId ? <p className="muted small pad">{t('Conversations you filed here. New mail brings one back to the Inbox; it stays in this folder too.')}</p> : null}
       {error ? <p className="form-error pad">{error}</p> : null}
       {page && rows.length === 0 ? (
         <div className="empty">
           {filter === 'all' ? <Mascot size={116} className="mascot-hop" /> : <Icon name={current.icon} size={36} />}
-          <p>{filter === 'all' ? t('No mail yet. Press Compose to write your first email.') : filter === 'snoozed' ? t('Nothing snoozed.') : t('Nothing here.')}</p>
+          <p>{filter === 'all' ? t('No mail yet. Press Compose to write your first email.') : filter === 'snoozed' ? t('Nothing snoozed.')
+            : folderId ? t('Nothing in this folder yet. Select conversations and press Move to folder.') : t('Nothing here.')}</p>
         </div>
       ) : null}
       {!page && !error ? <ListSkeleton /> : null}
@@ -173,7 +196,8 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
                       <span className="chat-row-snippet"><span className="draft-tag">{t('Draft:')}</span>{draft.body_text || draft.subject || t('(attachment)')}</span>
                     ) : (
                       <span className="chat-row-snippet">
-                        {c.archived && filter === 'everything' ? <span className="label">{t('Archived')}</span> : null}
+                        {c.folder_id && c.folder_id !== folderId ? <span className="label">{folders.find((f) => f.id === c.folder_id)?.name || t('Folder')}</span>
+                          : c.archived && filter === 'everything' ? <span className="label">{t('Archived')}</span> : null}
                         {c.snoozed_until && new Date(c.snoozed_until) > new Date() ? <span className="label snooze-label">{t('Until {when}', { when: whenText(c.snoozed_until) })}</span> : null}
                         {c.favourite_count > 0 ? <Icon name="star" size={14} filled className="star-on" /> : null}
                         {c.has_attachments ? <Icon name="clip" size={14} /> : null}

@@ -122,6 +122,28 @@ func (s *Service) Export(ctx context.Context, userID int64, out io.Writer) error
 	if err != nil {
 		return err
 	}
+	// The user's folders, each with the chats filed in it.
+	type exportFolder struct {
+		Folder
+		ConversationIDs []int64 `json:"conversation_ids"`
+	}
+	list, err := s.Folders(ctx, userID)
+	if err != nil {
+		return err
+	}
+	folders := make([]exportFolder, 0, len(list))
+	for _, f := range list {
+		rows, err := s.DB.Query(ctx, `SELECT conversation_id FROM user_conversations
+			WHERE user_id = $1 AND folder_id = $2 ORDER BY conversation_id`, userID, f.ID)
+		if err != nil {
+			return err
+		}
+		ids, err := pgx.CollectRows(rows, pgx.RowTo[int64])
+		if err != nil {
+			return err
+		}
+		folders = append(folders, exportFolder{f, ids})
+	}
 
 	w := bufio.NewWriter(out)
 	enc := json.NewEncoder(w)
@@ -129,7 +151,7 @@ func (s *Service) Export(ctx context.Context, userID int64, out io.Writer) error
 	for _, f := range []struct {
 		name string
 		v    any
-	}{{"account", acct}, {"aliases", aliases}, {"groups", groups}, {"drafts", drafts}, {"blocked", blocked}} {
+	}{{"account", acct}, {"aliases", aliases}, {"groups", groups}, {"drafts", drafts}, {"blocked", blocked}, {"folders", folders}} {
 		w.WriteString(`"` + f.name + `":`)
 		if err := enc.Encode(f.v); err != nil {
 			return err
