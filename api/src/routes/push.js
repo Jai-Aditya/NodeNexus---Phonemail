@@ -22,4 +22,16 @@ export function pushRoutes(router, { sessions, push }) {
     await push.unsubscribe(req.user.id, body.endpoint);
     sendJson(res, 200, { ok: true });
   }));
+
+  // The phone apps: {"platform": "ios" | "android", "token": "...", "sandbox": true for iOS development builds}.
+  router.post('/api/push/devices', auth(async (req, res) => {
+    await push.registerDevice(req.user.id, await readJson(req));
+    sendJson(res, 201, { ok: true });
+  }));
+
+  router.delete('/api/push/devices', auth(async (req, res) => {
+    const body = await readJson(req);
+    await push.unregisterDevice(req.user.id, body.token);
+    sendJson(res, 200, { ok: true });
+  }));
 }

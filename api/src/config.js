@@ -59,6 +59,16 @@ export function loadConfig(env = process.env) {
     smsAlerts: bool('SMS_ALERTS', true),
     vapidSubject: env.VAPID_SUBJECT || `mailto:admin@${(env.MAIL_DOMAIN || 'phonemail.com').toLowerCase()}`,
     allowInsecurePush: bool('ALLOW_INSECURE_PUSH', false), // tests only: allow http push endpoints
+    // Phone app notifications. iPhone: the APNs key (.p8) from the Apple Developer account, its key id,
+    // the team id and the app's bundle id. Android: the Firebase project's service account (JSON).
+    // A platform that isn't set up simply gets no pushes (and SMS alerts apply as before).
+    apns: {
+      keyFile: env.APNS_KEY_FILE || '',
+      keyId: env.APNS_KEY_ID || '',
+      teamId: env.APNS_TEAM_ID || '',
+      topic: env.APNS_TOPIC || 'org.jaiaditya.phonemail',
+    },
+    fcm: { serviceAccountFile: env.FCM_SERVICE_ACCOUNT_FILE || '' },
     migrateOnStart: bool('MIGRATE_ON_START', true),
     // Country codes we text (OTP, alerts, sign-up replies). Stops "SMS pumping" fraud,
     // where bots request codes to expensive foreign numbers. Default: DEFAULT_COUNTRY_CODE.

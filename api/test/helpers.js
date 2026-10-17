@@ -108,7 +108,7 @@ export async function startApp(sql, env = {}, extra = {}) {
     }),
     accounts: accountsStore(sql, cfg),
     otp: otpSpy,
-    push: pushStore(sql, cfg),
+    push: pushStore(sql, cfg, extra.pushSenders || {}),
     hub,
     limiter: new RateLimiter(),
     log: false,
