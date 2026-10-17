@@ -72,10 +72,14 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
     else if (action === 'snooze') flash(t('Snoozed until {when}', { when: whenText(until!) }), undo('unsnooze'));
     else if (action === 'unsnooze') flash(t('Back in your Inbox'));
     else if (action === 'read' || action === 'unread') flash(action === 'read' ? t('Marked as read') : t('Marked as unread'));
-    else if (action === 'move') {
+    else if (action === 'move' || action === 'unfile') {
+      // Undo puts them back where they were: out of any folder, or back in the folder being viewed.
+      const back = { label: t('Undo'), run: () => (folderId ? mail.chatAction(ids, 'move', undefined, folderId) : mail.chatAction(ids, 'unfile'))
+        .then(() => { load(); foldersChanged(); }, () => {}) };
       const name = folders.find((f) => f.id === into)?.name || t('the folder');
-      flash(n === 1 ? t('Moved to {folder}', { folder: name }) : t('{n} conversations moved to {folder}', { n, folder: name }));
-    } else if (action === 'unfile') flash(n === 1 ? t('Removed from the folder') : t('{n} conversations removed from the folder', { n }));
+      if (action === 'move') flash(n === 1 ? t('Moved to {folder}', { folder: name }) : t('{n} conversations moved to {folder}', { n, folder: name }), back);
+      else flash(n === 1 ? t('Moved to Inbox') : t('{n} conversations moved to Inbox', { n }), back);
+    }
   };
 
   // Keyboard: acts on the picked conversations, or else the one under the cursor.
@@ -123,9 +127,12 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
               onChange={(e) => setPicked(e.target.checked ? new Set(rows.map((c) => c.conversation_id)) : new Set())} />
           </label>
           <span className="bulk-count">{t('{n} selected', { n: chosen.length })}</span>
-          {allArchived
-            ? <button className="icon-btn" aria-label={t('Move to Inbox')} title={t('Move to Inbox')} onClick={() => act('unarchive', ids)}><Icon name="inbox" /></button>
-            : <button className="icon-btn" aria-label={t('Archive')} title={t('Archive')} onClick={() => act('archive', ids)}><Icon name="archive" /></button>}
+          {folderId
+            // In a folder, "Move to Inbox" takes them out of the folder (unarchive would leave them filed).
+            ? <button className="icon-btn" aria-label={t('Move to Inbox')} title={t('Move to Inbox')} onClick={() => act('unfile', ids)}><Icon name="inbox" /></button>
+            : allArchived
+              ? <button className="icon-btn" aria-label={t('Move to Inbox')} title={t('Move to Inbox')} onClick={() => act('unarchive', ids)}><Icon name="inbox" /></button>
+              : <button className="icon-btn" aria-label={t('Archive')} title={t('Archive')} onClick={() => act('archive', ids)}><Icon name="archive" /></button>}
           <button className="icon-btn" aria-label={t('Delete')} title={t('Delete')} onClick={() => act('trash', ids)}><Icon name="trash" /></button>
           <button className="icon-btn" aria-label={t('Mark as read')} title={t('Mark as read')} onClick={() => act('read', ids)}><Icon name="read" /></button>
           <button className="icon-btn" aria-label={t('Mark as unread')} title={t('Mark as unread')} onClick={() => act('unread', ids)}><Icon name="unread" /></button>
@@ -143,7 +150,6 @@ export function Inbox({ filter, phone }: { filter: string; phone: boolean }) {
             {filing ? <FolderMenu current={folderId} onClose={() => setFiling(false)}
               onPick={(id) => { setFiling(false); act('move', ids, undefined, id); }} /> : null}
           </span>
-          {folderId ? <button className="btn-link small" onClick={() => act('unfile', ids)}>{t('Remove from folder')}</button> : null}
           <button className="btn-link small bulk-cancel" onClick={() => { setPicked(new Set()); setSelecting(false); }}>{t('Cancel')}</button>
         </div>
       ) : (

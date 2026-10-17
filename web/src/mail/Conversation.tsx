@@ -169,7 +169,14 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
       case 'unread': flash(t('Marked as unread')); break;
       case 'mute': flash(t('Muted: no alerts for this conversation')); break;
       case 'unmute': flash(t('Alerts are back on')); break;
-      case 'move': flash(t('Moved to the folder'), undo('unfile')); break;
+      case 'move': {
+        // Undo: back to the folder it was in before, or out of folders altogether.
+        const was = info?.folder_id;
+        flash(t('Moved to the folder'), { label: t('Undo'), run: () => {
+          (was ? mail.chatAction([id], 'move', undefined, was) : mail.chatAction([id], 'unfile')).then(() => { foldersChanged(); navigate(`/c/${id}`); }, () => {});
+        } });
+        break;
+      }
       case 'unfile': flash(t('Removed from the folder')); break;
     }
     if (['archive', 'trash', 'snooze', 'unread', 'move'].includes(action)) navigate('/');
@@ -236,7 +243,8 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
         <span className="thread-tools">
           {group ? <button className="icon-btn" aria-label={t('Group info')} title={t('Group info')} onClick={() => setShowInfo(true)}><Icon name="group" /></button> : null}
           {info?.archived
-            ? <button className="icon-btn" aria-label={t('Move to Inbox')} title={t('Move to Inbox')} onClick={() => chatAct('unarchive')}><Icon name="inbox" /></button>
+            // A filed chat goes back to the Inbox by leaving its folder (unarchive would leave it filed).
+            ? <button className="icon-btn" aria-label={t('Move to Inbox')} title={t('Move to Inbox')} onClick={() => chatAct(info.folder_id ? 'unfile' : 'unarchive')}><Icon name="inbox" /></button>
             : <button className="icon-btn" aria-label={t('Archive')} title={t('Archive (e)')} onClick={() => chatAct('archive')}><Icon name="archive" /></button>}
           <span className="menu-anchor">
             <button className="icon-btn" aria-label={t('Snooze')} title={t('Snooze')} aria-expanded={menu === 'snooze'} onClick={() => setMenu(menu === 'snooze' ? '' : 'snooze')}><Icon name="clock" /></button>
