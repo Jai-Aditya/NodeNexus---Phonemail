@@ -68,35 +68,63 @@ export function apnsSender({ keyFile, keyId, teamId, topic }) {
     return s;
   }
 
-  return (deviceToken, payload, sandbox = false) => new Promise((resolve, reject) => {
-    let req;
+  function forget(sandbox, s) {
+    const host = sandbox ? SANDBOX : PRODUCTION;
+    if (sessions.get(host) === s) sessions.delete(host);
+    s.destroy();
+  }
+
+  // A connection idle for a while may have been dropped by Apple without notice (read ECONNRESET):
+  // a request that fails before any answer is tried once more on a new connection.
+  return async (deviceToken, payload, sandbox = false) => {
     try {
-      req = session(sandbox).request({
-        ':method': 'POST',
-        ':path': `/3/device/${deviceToken}`,
-        authorization: authorization(),
-        'apns-topic': topic,
-        'apns-push-type': 'alert',
-        'apns-priority': '10',
-        'content-type': 'application/json',
-      });
+      return await sendOnce(deviceToken, payload, sandbox);
     } catch (err) {
-      return reject(err);
+      if (!err.beforeResponse) throw err;
+      return sendOnce(deviceToken, payload, sandbox);
     }
-    let status = 0;
-    let data = '';
-    req.setTimeout(15_000, () => { req.close(); reject(new Error('APNs did not answer in time')); });
-    req.on('response', (h) => { status = h[':status']; });
-    req.setEncoding('utf8');
-    req.on('data', (c) => { data += c; });
-    req.on('end', () => {
-      if (status === 200) return resolve('sent');
-      let reason = '';
-      try { reason = JSON.parse(data).reason || ''; } catch { /* no body */ }
-      if (status === 410 || ['BadDeviceToken', 'Unregistered', 'DeviceTokenNotForTopic'].includes(reason)) return resolve('gone');
-      reject(new Error(`APNs ${status} ${reason}`.trim()));
+  };
+
+  function sendOnce(deviceToken, payload, sandbox) {
+    return new Promise((resolve, reject) => {
+      let req;
+      const s = session(sandbox);
+      try {
+        req = s.request({
+          ':method': 'POST',
+          ':path': `/3/device/${deviceToken}`,
+          authorization: authorization(),
+          'apns-topic': topic,
+          'apns-push-type': 'alert',
+          'apns-priority': '10',
+          'content-type': 'application/json',
+        });
+      } catch (err) {
+        forget(sandbox, s);
+        err.beforeResponse = true;
+        return reject(err);
+      }
+      let status = 0;
+      let data = '';
+      req.setTimeout(15_000, () => { req.close(); reject(new Error('APNs did not answer in time')); });
+      req.on('response', (h) => { status = h[':status']; });
+      req.setEncoding('utf8');
+      req.on('data', (c) => { data += c; });
+      req.on('end', () => {
+        if (status === 200) return resolve('sent');
+        let reason = '';
+        try { reason = JSON.parse(data).reason || ''; } catch { /* no body */ }
+        if (status === 410 || ['BadDeviceToken', 'Unregistered', 'DeviceTokenNotForTopic'].includes(reason)) return resolve('gone');
+        reject(new Error(`APNs ${status} ${reason}`.trim()));
+      });
+      req.on('error', (err) => {
+        if (!status) {
+          forget(sandbox, s);
+          err.beforeResponse = true;
+        }
+        reject(err);
+      });
+      req.end(JSON.stringify(payload));
     });
-    req.on('error', reject);
-    req.end(JSON.stringify(payload));
-  });
+  }
 }
