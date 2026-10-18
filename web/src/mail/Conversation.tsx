@@ -210,8 +210,10 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
     }
   };
 
-  // The newest email someone else sent that you haven't answered: what "r" replies to.
+  // The newest email someone else sent: what "r" replies to.
   const newest = [...messages].sort((a, b) => b.sent_at.localeCompare(a.sent_at));
+  // The chat box replies by default (like a chat): to the newest email, when someone else sent it.
+  const autoReply = canWrite && newest[0] && !newest[0].is_mine ? newest[0] : null;
   useShortcuts({
     e: () => { chatAct(info?.archived ? 'unarchive' : 'archive'); },
     '#': () => { chatAct('trash'); },
@@ -290,8 +292,8 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
       </div>
       <div ref={bottom} />
 
-      <Writer key={writerKey} conversationId={id} replyTo={replyTo} draft={draft} phone={phone} canWrite={canWrite}
-        onCancelReply={() => setReplyTo(null)} onSent={() => { setReplyTo(null); setDraft(null); load(); }} />
+      <Writer key={writerKey} conversationId={id} replyTo={replyTo} autoReply={autoReply} draft={draft} phone={phone} canWrite={canWrite}
+        onReply={setReplyTo} onCancelReply={() => setReplyTo(null)} onSent={() => { setReplyTo(null); setDraft(null); load(); }} />
 
       {showInfo && group ? <GroupInfo group={group} onClose={() => setShowInfo(false)} onChanged={() => mail.group(id).then(setGroup, () => navigate('/'))} onToast={flash} /> : null}
     </div>
@@ -318,9 +320,11 @@ function MoreMenu({ children, onClose }: { children: ReactNode; onClose: () => v
 // when you return, still a reply to the same email. It stays out of the Drafts folder; the
 // chat list shows "Draft: …". Files attach onto that draft. ✕ discards it. Sending goes
 // through the draft too, so Undo and Schedule send work here as in Compose.
-function Writer({ conversationId, replyTo, draft, phone, canWrite, onCancelReply, onSent }: {
-  conversationId: number; replyTo: Message | null; draft: Draft | null; phone: boolean; canWrite: boolean;
-  onCancelReply: () => void; onSent: () => void;
+// Folded, it offers to reply to autoReply (the newest email, when someone else sent it), with a
+// separate button for a new email instead.
+function Writer({ conversationId, replyTo, autoReply, draft, phone, canWrite, onReply, onCancelReply, onSent }: {
+  conversationId: number; replyTo: Message | null; autoReply: Message | null; draft: Draft | null; phone: boolean; canWrite: boolean;
+  onReply: (m: Message) => void; onCancelReply: () => void; onSent: () => void;
 }) {
   const t = useT();
   const { user } = useSession();
@@ -446,10 +450,23 @@ function Writer({ conversationId, replyTo, draft, phone, canWrite, onCancelReply
   };
 
   if (!open && !replyTo) {
-    return phone ? (
-      <button className="write-bar" onClick={() => setOpen(true)}><Icon name="pen" size={18} />{t('Write an email…')}</button>
-    ) : (
-      <div className="writer-dock"><button className="btn-outline" onClick={() => setOpen(true)}><Icon name="pen" size={18} />{t('New email in this conversation')}</button></div>
+    const who = autoReply ? displayName(autoReply.sender, t('Deleted account')) : '';
+    const newEmail = t('New email in this conversation');
+    if (phone) {
+      return autoReply ? (
+        <>
+          <button className="write-bar with-new" onClick={() => onReply(autoReply)}><Icon name="reply" size={18} />{t('Reply to {who}…', { who })}</button>
+          <button className="write-new" aria-label={newEmail} title={newEmail} onClick={() => setOpen(true)}><Icon name="pen" size={18} /></button>
+        </>
+      ) : (
+        <button className="write-bar" onClick={() => setOpen(true)}><Icon name="pen" size={18} />{t('Write an email…')}</button>
+      );
+    }
+    return (
+      <div className="writer-dock">
+        {autoReply ? <button className="btn-outline" onClick={() => onReply(autoReply)}><Icon name="reply" size={18} />{t('Reply to {who}', { who })}</button> : null}
+        <button className="btn-outline" onClick={() => setOpen(true)}><Icon name="pen" size={18} />{newEmail}</button>
+      </div>
     );
   }
   return (
@@ -467,7 +484,7 @@ function Writer({ conversationId, replyTo, draft, phone, canWrite, onCancelReply
             <input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t('Subject')} aria-label={t('Subject')} maxLength={255} />
           )}
           <RichEditor key={editorKey} id="w-body" label={replyTo ? t('Reply') : t('Message')} autoFocus initialHtml={editorKey ? '' : initialHtml}
-            placeholder={replyTo ? t('Write your reply (one reply per email)') : t('Write your email')} rows={phone ? 3 : 4}
+            placeholder={replyTo ? t('Write your reply') : t('Write your email')} rows={phone ? 3 : 4}
             onChange={setBody} onSubmit={() => send()} />
           <UploadChips items={files.items} onRemove={files.remove} />
           {files.error ? <p className="form-error">{files.error}</p> : null}
