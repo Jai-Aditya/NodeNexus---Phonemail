@@ -246,7 +246,7 @@ Check "B's Home shows the chat as unread" ($chat -and $chat.unread_count -ge 1) 
 $r = Invoke-Api $B.Client POST "/api/mail/messages/$msgId/reply" @{ conversation_id = $chat.conversation_id; body_text = 'Hi A' }
 Check 'B replies (201)' ($r.Status -eq 201) $r.Text
 $r = Invoke-Api $B.Client POST "/api/mail/messages/$msgId/reply" @{ conversation_id = $chat.conversation_id; body_text = 'Again' }
-Check 'B cannot reply to the same message twice (409)' ($r.Status -eq 409 -and $r.Code -eq 'already_replied') $r.Text
+Check 'B can reply to the same message again (201)' ($r.Status -eq 201) $r.Text
 $r = Invoke-Api $C.Client POST '/api/mail/messages' @{ to = @{ address = "$alias@$(($A.User.address -split '@')[1])" }; subject = 'To your alias'; body_text = 'hi' }
 Check 'C mails A by alias (201)' ($r.Status -eq 201) $r.Text
 $r = Invoke-Api $A.Client GET '/api/mail/conversations'

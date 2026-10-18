@@ -30,7 +30,6 @@ func errConflict(code, format string, a ...any) error {
 }
 
 var (
-	ErrAlreadyReplied = &Error{409, "already_replied", "You've already replied to this message."}
 	ErrGroupClash     = &Error{409, "group_exists", "A group with this name and these members already exists."}
 	ErrExternalMail   = &Error{400, "external_disabled", "Sending to other email providers isn't enabled yet."}
 	ErrAccountDeleted = &Error{410, "account_deleted", "This person deleted their PhoneMail account."}

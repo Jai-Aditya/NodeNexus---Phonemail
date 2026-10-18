@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent, type
 import { AttachButton, DropZone, UploadChips, useUploads } from '../components/Attachments';
 import { Avatar } from '../components/Avatar';
 import { Icon } from '../components/Icon';
-import { ApiError, displayName, mail, splitRecipients, type Chat, type ChatAction, type ChatEvent, type ChatPage, type Draft, type Group, type Message, type Person } from '../lib/api';
+import { displayName, mail, splitRecipients, type Chat, type ChatAction, type ChatEvent, type ChatPage, type Draft, type Group, type Message, type Person } from '../lib/api';
 import { listDate } from '../lib/format';
 import { useT } from '../lib/i18n';
 import { deliver, DRAFT_BACK, useOutbox } from '../lib/outbox';
@@ -217,7 +217,7 @@ export function ConversationView({ id, onCompose }: { id: number; onCompose: (r:
     '#': () => { chatAct('trash'); },
     U: () => { chatAct('unread'); },
     u: () => navigate('/'),
-    r: () => { const m = newest.find((x) => !x.is_mine && !x.is_replied); if (m && canWrite) setReplyTo(m); },
+    r: () => { const m = newest.find((x) => !x.is_mine); if (m && canWrite) setReplyTo(m); },
     f: () => { if (newest[0]) onCompose({ forward: newest[0] }); },
   });
 
@@ -439,7 +439,7 @@ function Writer({ conversationId, replyTo, draft, phone, canWrite, onCancelReply
       setOpen(false);
       onSent();
     } catch (err) {
-      setError(err instanceof ApiError && err.code === 'already_replied' ? t("You've already replied to this email.") : err instanceof Error ? err.message : t('Could not send'));
+      setError(err instanceof Error ? err.message : t('Could not send'));
     } finally {
       setBusy(false);
     }

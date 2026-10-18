@@ -382,7 +382,7 @@ func TestCcAndBcc(t *testing.T) {
 	_ = d
 }
 
-// 6. Reply once per person; different group members can each reply.
+// 6. Anyone can reply to an email as often as they like (no more reply-once).
 // 7. Thread path: a reply to a reply gets the right root, path and depth.
 func TestRepliesAndThreads(t *testing.T) {
 	s, ctx := setup(t)
@@ -394,10 +394,7 @@ func TestRepliesAndThreads(t *testing.T) {
 
 	root := must(s.Send(ctx, a, SendRequest{Recipients: Recipients{To: toGroup(gid)}, Subject: "Trip plan", BodyText: "Goa?"}))
 	rb := must(s.Reply(ctx, b, root.MessageID, ReplyRequest{ConversationID: gid, BodyText: "Yes"}))
-	_, err := s.Reply(ctx, b, root.MessageID, ReplyRequest{ConversationID: gid, BodyText: "Again"})
-	if !errors.Is(err, ErrAlreadyReplied) {
-		t.Fatalf("second reply by the same person should fail, got %v", err)
-	}
+	rb2 := must(s.Reply(ctx, b, root.MessageID, ReplyRequest{ConversationID: gid, BodyText: "Again"}))
 	rc := must(s.Reply(ctx, c, root.MessageID, ReplyRequest{ConversationID: gid, BodyText: "Me too"}))
 	rab := must(s.Reply(ctx, a, rb.MessageID, ReplyRequest{ConversationID: gid, BodyText: "Great"}))
 
@@ -409,7 +406,7 @@ func TestRepliesAndThreads(t *testing.T) {
 			t.Fatal("wrong root")
 		}
 	}
-	want := []int64{root.MessageID, rb.MessageID, rab.MessageID, rc.MessageID}
+	want := []int64{root.MessageID, rb.MessageID, rab.MessageID, rb2.MessageID, rc.MessageID}
 	if fmt.Sprint(order) != fmt.Sprint(want) {
 		t.Fatalf("thread order %v, want %v", order, want)
 	}
@@ -596,7 +593,7 @@ func TestAliases(t *testing.T) {
 	}
 }
 
-// Racing first messages must still produce one direct chat; racing replies only one reply.
+// Racing first messages must still produce one direct chat; racing replies are all kept.
 func TestConcurrency(t *testing.T) {
 	s, ctx := setup(t)
 	a, aAddr := user(t, s, ctx, 1)
@@ -641,16 +638,15 @@ func TestConcurrency(t *testing.T) {
 			errs <- err
 		}()
 	}
-	ok := 0
 	for i := 0; i < 5; i++ {
-		if err := <-errs; err == nil {
-			ok++
-		} else if !errors.Is(err, ErrAlreadyReplied) {
+		if err := <-errs; err != nil {
 			t.Fatal(err)
 		}
 	}
-	if ok != 1 {
-		t.Fatalf("want exactly 1 successful reply, got %d", ok)
+	var replies int
+	s.DB.QueryRow(ctx, `SELECT count(*) FROM messages WHERE parent_id = $1 AND sender_id = $2`, first, b).Scan(&replies)
+	if replies != 5 {
+		t.Fatalf("want all 5 racing replies stored, got %d", replies)
 	}
 }
 

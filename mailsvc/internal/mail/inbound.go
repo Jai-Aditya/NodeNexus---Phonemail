@@ -191,8 +191,7 @@ var msgIDRe = regexp.MustCompile(`<[^<>\s]+>`)
 
 // DeliverInbound stores one email from outside for the given PhoneMail people: once as a
 // message, from an external user for the sender, in each recipient's one-to-one chat with them.
-// An answer to a PhoneMail email joins its thread; a second answer from the same person to the
-// same email threads under their first one (decided 30 Sep). The same email arriving twice
+// An answer to a PhoneMail email joins its thread, directly under that email. The same email arriving twice
 // (one copy per recipient) is stored once. Blocked senders and Postfix's spam verdict go to Spam.
 func (s *Service) DeliverInbound(ctx context.Context, envFrom string, rcpts []int64, raw []byte) error {
 	msg, err := mail.ReadMessage(bytes.NewReader(raw))
@@ -339,8 +338,8 @@ func (s *Service) DeliverInbound(ctx context.Context, envFrom string, rcpts []in
 }
 
 // inboundParent finds the PhoneMail email an outside answer replies to: one this outsider
-// received, in the recipient's chat with them. If they already answered it, the new answer
-// goes under their latest answer in that chain (reply once per email still holds).
+// received, in the recipient's chat with them. Every answer goes directly under it (there is no
+// reply-once rule any more, 18 Oct 2026).
 func (s *Service) inboundParent(ctx context.Context, tx pgx.Tx, parentHeader string, sender, rcpt int64, nm *newMessage) error {
 	var id, root int64
 	var path string
@@ -356,20 +355,6 @@ func (s *Service) inboundParent(ctx context.Context, tx pgx.Tx, parentHeader str
 	}
 	if err != nil {
 		return err
-	}
-	for i := 0; i < 1000; i++ {
-		var child int64
-		var cpath string
-		var cdepth int
-		err := tx.QueryRow(ctx, `SELECT id, path::text, depth FROM messages WHERE parent_id = $1 AND sender_id = $2`, id, sender).
-			Scan(&child, &cpath, &cdepth)
-		if errors.Is(err, pgx.ErrNoRows) {
-			break
-		}
-		if err != nil {
-			return err
-		}
-		id, path, depth = child, cpath, cdepth
 	}
 	pid := id
 	nm.ParentID, nm.RootID, nm.ParentPath, nm.ParentDepth = &pid, root, path, depth

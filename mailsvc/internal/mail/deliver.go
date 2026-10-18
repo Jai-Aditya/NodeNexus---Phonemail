@@ -243,9 +243,6 @@ func (s *Service) Reply(ctx context.Context, senderID, parentID int64, req Reply
 			ParentID: &pid, RootID: rootID, ParentPath: path, ParentDepth: int(depth),
 			HasAttachments: attCount > 0,
 		})
-		if uniqueViolation(err, "messages_reply_once") {
-			return ErrAlreadyReplied
-		}
 		if err != nil {
 			return err
 		}

@@ -130,11 +130,10 @@ test.describe.serial('PhoneMail web client', () => {
     await B.page.getByLabel('Reply').fill('Yes! 1 pm works for me.');
     await B.page.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(B.page.getByText('Yes! 1 pm works for me.')).toBeVisible();
-    // Reply once per email: the button is now "Replied" and disabled.
-    // The email replied to stays open (what you opened stays open), now showing "Replied".
+    // The email replied to stays open (what you opened stays open), and can be answered again.
     const original = B.page.locator('.gthread', { hasText: 'Lunch on Friday?' }).locator('.mail-card').first();
     await expect(original).toHaveClass(/open/);
-    await expect(original.getByRole('button', { name: 'Replied' })).toBeDisabled();
+    await expect(original.getByRole('button', { name: 'Reply', exact: true })).toBeEnabled();
     await shot(B.page, '06-conversation');
   });
 

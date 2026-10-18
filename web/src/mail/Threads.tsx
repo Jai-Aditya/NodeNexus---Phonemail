@@ -107,8 +107,8 @@ function MessageActions({ m, canReply, onReply, onFlag, onForward, buttons }: { 
   return (
     <div className={buttons ? 'mail-actions' : 'rnode-actions'}>
       {canReply ? (
-        <button className={cls} disabled={m.is_replied} title={m.is_replied ? t("You've already replied to this email") : undefined} onClick={() => onReply(m)}>
-          <Icon name={m.is_replied ? 'check' : 'reply'} size={buttons ? 18 : 16} />{m.is_replied ? t('Replied') : t('Reply')}
+        <button className={cls} onClick={() => onReply(m)}>
+          <Icon name="reply" size={buttons ? 18 : 16} />{t('Reply')}
         </button>
       ) : null}
       {!buttons ? (
@@ -168,7 +168,7 @@ export function RedditThread({ msgs, ...actions }: { msgs: Message[] } & Actions
     const hidden = countAll(n);
     return (
       <div key={n.m.id} className={depth === 0 ? 'rnode rnode-root' : 'rnode'} data-id={n.m.id} data-depth={depth}>
-        <SwipeToReply enabled={actions.canReply && !n.m.is_replied} onReply={() => actions.onReply(n.m)}>
+        <SwipeToReply enabled={actions.canReply} onReply={() => actions.onReply(n.m)}>
         <div className="rnode-head">
           <Avatar address={n.m.sender.address} name={n.m.sender.display_name || who(n.m, t)} avatarUrl={n.m.sender.avatar_url} size="tiny" />
           <strong className={n.m.is_mine ? 'rnode-who mine' : 'rnode-who'}>{who(n.m, t)}</strong>

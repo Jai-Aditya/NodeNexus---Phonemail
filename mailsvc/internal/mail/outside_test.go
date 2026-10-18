@@ -92,7 +92,7 @@ func inbound(from, to, subject, extra, body string) []byte {
 }
 
 // Email to a Gmail address goes out through Postfix; the outsider's answers come back into
-// the same chat and thread; a second answer to the same email threads under the first.
+// the same chat and thread; a second answer to the same email goes under that email too.
 func TestOutsideMail(t *testing.T) {
 	s, ctx := setup(t)
 	a, aAddr := user(t, s, ctx, 1)
@@ -145,12 +145,12 @@ func TestOutsideMail(t *testing.T) {
 	if alerts != 1 {
 		t.Fatalf("A should be alerted once, got %d", alerts)
 	}
-	// A second answer to the same email goes under their first answer.
+	// A second answer to the same email also goes directly under that email.
 	must(0, s.DeliverInbound(ctx, "friend@gmail.com", []int64{a}, inbound("friend@gmail.com", aAddr, "Re: Hello there",
 		"Message-ID: <ans2@gmail.com>\r\nIn-Reply-To: "+header+"\r\n", "One more thing")))
 	thread = must(s.Thread(ctx, a, conv, r.MessageID))
-	if len(thread) != 3 || *thread[2].ParentID != thread[1].ID {
-		t.Fatalf("second answer should thread under the first: %+v", thread)
+	if len(thread) != 3 || *thread[2].ParentID != r.MessageID {
+		t.Fatalf("second answer should thread under the email: %+v", thread)
 	}
 	// The same email twice (e.g. one copy per recipient) is stored once.
 	must(0, s.DeliverInbound(ctx, "friend@gmail.com", []int64{a}, inbound("friend@gmail.com", aAddr, "Re: Hello there",
