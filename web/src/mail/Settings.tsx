@@ -16,6 +16,7 @@ export function Settings({ onToast }: { onToast: (s: string) => void }) {
   const t = useT();
   const [name, setName] = useState(user?.display_name || '');
   const [alias, setAlias] = useState('');
+  // Updated from the latest state: a password manager can fill several of these boxes in one go.
   const [pw, setPw] = useState({ current: '', next: '', again: '' });
   const [msg, setMsg] = useState<{ ok: boolean; text: string; where: string } | null>(null);
   if (!user) return null;
@@ -87,12 +88,12 @@ export function Settings({ onToast }: { onToast: (s: string) => void }) {
         }}>
           {user.has_password ? (
             <input type="password" autoComplete="current-password" placeholder={t('Current password')} aria-label={t('Current password')}
-              value={pw.current} onChange={(e) => setPw({ ...pw, current: e.target.value })} />
+              value={pw.current} onChange={(e) => { const v = e.target.value; setPw((p) => ({ ...p, current: v })); }} />
           ) : null}
           <input type="password" autoComplete="new-password" placeholder={t('New password (8+ characters)')} aria-label={t('New password')}
-            value={pw.next} onChange={(e) => setPw({ ...pw, next: e.target.value })} />
+            value={pw.next} onChange={(e) => { const v = e.target.value; setPw((p) => ({ ...p, next: v })); }} />
           <input type="password" autoComplete="new-password" placeholder={t('New password again')} aria-label={t('New password again')}
-            value={pw.again} onChange={(e) => setPw({ ...pw, again: e.target.value })} />
+            value={pw.again} onChange={(e) => { const v = e.target.value; setPw((p) => ({ ...p, again: v })); }} />
           <button className="btn-outline" type="submit" disabled={pw.next.length < 8}>{user.has_password ? t('Change password') : t('Set password')}</button>
         </form>
         {note('pw')}
