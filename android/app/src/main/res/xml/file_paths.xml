@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Downloaded attachments shared with the app that opens them (FileProvider, read-only, one file at a time). -->
+<paths>
+    <cache-path name="attachments" path="attachments/" />
+</paths>

@@ -24,3 +24,7 @@ web/e2e/screenshots/
 
 # Deployment to one particular server (kept locally, not published)
 deploy/
+
+# Android push config and app build outputs (signing keys live outside the repository)
+android/app/google-services.json
+android/wear/google-services.json

@@ -8,6 +8,8 @@ web, by texting `JOIN`, or by calling a number and pressing 1. Mail arrives as c
 WhatsApp on your phone and like Gmail on a big screen, and it works with every other email provider.
 
 The AlphaStack 7-day Buildathon submission of **Team Node Nexus**. Live at **https://mail.phonemail.net**.
+The code as delivered for the buildathon is tagged [`v1.0.0`](../../tree/v1.0.0) (the original release); `main`
+is the current code, including the iPhone, Apple Watch, Android and Wear OS apps.
 
 **Website:** [phonemail.net](https://phonemail.net) · **Open the app:** [mail.phonemail.net](https://mail.phonemail.net) ·
 **User guide:** [phonemail.net/docs](https://phonemail.net/docs/)
@@ -130,6 +132,20 @@ docker compose logs -f api mailsvc postfix   # watch what's happening
 - **Running without the Postfix container** (a server with its own mail server): remove
   `COMPOSE_PROFILES=postfix` and `SMTP_RELAY` from `.env`.
 
+### Phone and watch apps
+
+Native apps that talk to the same api (`/api`, with a bearer token instead of the browser cookie):
+
+- **`ios/`**: iPhone, iPad and Apple Watch, in Swift and SwiftUI. Needs a Mac with Xcode and
+  [XcodeGen](https://github.com/yonaskolb/XcodeGen): `cd ios && bash build.sh test` runs the unit tests,
+  `bash build.sh device <TEAM_ID>` installs on a connected iPhone, `bash build.sh testflight <TEAM_ID>` uploads.
+  Translations live in `ios/l10n/*.tsv`; `build.sh` turns them into the string catalogs.
+- **`android/`**: Android phone (`app/`) and Wear OS watch (`wear/`), in Kotlin and Jetpack Compose. In `android/`:
+  `gradle :app:testDebugUnitTest :app:assembleDebug`. Push needs Firebase's `app/google-services.json` (not in the
+  repository); release builds read the signing key from a local `.properties` file outside the repository.
+
+Both are in English, Hindi and Tamil, and get new-mail notifications through APNs and FCM.
+
 ---
 
 ## Tech stack
@@ -139,6 +155,7 @@ docker compose logs -f api mailsvc postfix   # watch what's happening
 | Mail service | **Go 1.22**, `pgx` (PostgreSQL), `bluemonday` (HTML cleaning) | Fast, small, built for network servers; one static binary |
 | API | **Node.js 22** (no framework), `postgres.js` | Twilio, web push and live streams have first-class Node support |
 | Web app | **React 19 + TypeScript**, built with **Vite**, served by **nginx** | App-like pages; installable on phones (web app manifest) |
+| Phone and watch apps | **Swift / SwiftUI** (iPhone, iPad, Apple Watch), **Kotlin / Jetpack Compose** (Android, Wear OS) | Native apps: system notifications, contacts and SMS code autofill |
 | Database | **PostgreSQL 16** with `ltree` and full-text search | One database for users, chats, threads, rules and search |
 | Email transport | **Postfix** (Docker, Alpine) | The standard SMTP server: mail in from and out to the internet |
 | SMS and calls | **Twilio** Verify, Messaging and Voice | One-time codes, JOIN texts, call-in sign-up, SMS alerts |

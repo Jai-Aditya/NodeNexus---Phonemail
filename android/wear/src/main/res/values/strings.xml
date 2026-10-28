@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">PhoneMail</string>
+    <string name="sign_in_on_phone">Open PhoneMail on your phone to sign in.</string>
+    <string name="inbox">Inbox</string>
+    <string name="try_again">Try again</string>
+    <string name="nothing_here">Nothing here.</string>
+    <string name="group">Group</string>
+    <string name="conversation">Conversation</string>
+    <string name="you">You</string>
+    <string name="reply">Reply</string>
+    <string name="reply_to">Reply to %1$s</string>
+    <string name="sent">Sent</string>
+    <string name="quick_ok">OK</string>
+    <string name="quick_thanks">Thanks!</string>
+    <string name="quick_on_my_way">On my way</string>
+    <string name="quick_call_later">Call you later</string>
+    <string name="error_unreachable">Cannot reach PhoneMail. Check your connection and try again.</string>
+    <string name="error_request_failed">Request failed (%1$d)</string>
+</resources>

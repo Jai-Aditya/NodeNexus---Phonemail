@@ -1,0 +1,363 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Call you later": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाद में कॉल पर बात करते हैं"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பிறகு அழைக்கிறேன்"
+          }
+        }
+      }
+    },
+    "Cannot reach PhoneMail. Check your connection and try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail से संपर्क नहीं हो पा रहा। अपना कनेक्शन जाँचें और फिर कोशिश करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-ஐ அணுக முடியவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்."
+          }
+        }
+      }
+    },
+    "Conversation": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बातचीत"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உரையாடல்"
+          }
+        }
+      }
+    },
+    "Couldn't send your reply. Open PhoneMail to try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका जवाब नहीं भेजा जा सका। फिर से कोशिश करने के लिए PhoneMail खोलें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் பதிலை அனுப்ப முடியவில்லை. மீண்டும் முயல PhoneMail-ஐத் திறக்கவும்."
+          }
+        }
+      }
+    },
+    "Group": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ग्रुप"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குழு"
+          }
+        }
+      }
+    },
+    "Inbox": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इनबॉक्स"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்பாக்ஸ்"
+          }
+        }
+      }
+    },
+    "Mark as read": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पढ़ा हुआ मार्क करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படித்ததாகக் குறி"
+          }
+        }
+      }
+    },
+    "Message": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संदेश"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "செய்தி"
+          }
+        }
+      }
+    },
+    "Nothing here.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यहाँ कुछ नहीं है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இங்கே எதுவும் இல்லை."
+          }
+        }
+      }
+    },
+    "OK": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ठीक है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சரி"
+          }
+        }
+      }
+    },
+    "On my way": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रास्ते में हूँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வந்துகொண்டிருக்கிறேன்"
+          }
+        }
+      }
+    },
+    "Open PhoneMail on your iPhone to sign in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन इन करने के लिए अपने iPhone पर PhoneMail खोलें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உள்நுழைய உங்கள் iPhone-இல் PhoneMail-ஐத் திறக்கவும்."
+          }
+        }
+      }
+    },
+    "Reply": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जवाब दें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பதில்"
+          }
+        }
+      }
+    },
+    "Reply to %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को जवाब दें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@-க்குப் பதில்"
+          }
+        }
+      }
+    },
+    "Request failed (%lld)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनुरोध विफल रहा (%lld)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோரிக்கை தோல்வியடைந்தது (%lld)"
+          }
+        }
+      }
+    },
+    "Send": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்பு"
+          }
+        }
+      }
+    },
+    "Sent": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेज दिया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்பப்பட்டது"
+          }
+        }
+      }
+    },
+    "Thanks!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "धन्यवाद!"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நன்றி!"
+          }
+        }
+      }
+    },
+    "Try again": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिर से कोशिश करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மீண்டும் முயலவும்"
+          }
+        }
+      }
+    },
+    "Unexpected reply from PhoneMail": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail से अनपेक्षित जवाब आया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-இலிருந்து எதிர்பாராத பதில்"
+          }
+        }
+      }
+    },
+    "You": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள்"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

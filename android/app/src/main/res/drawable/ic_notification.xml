@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The status-bar icon for new-mail notifications: Pip from ic_launcher_monochrome, cropped to the figure (one colour;
+     Android tints it). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="62"
+    android:viewportHeight="62">
+    <group android:translateX="-23" android:translateY="-23">
+        <group android:translateX="54" android:translateY="54">
+            <group android:scaleX="1.08" android:scaleY="1.08">
+                <group android:translateX="-32.8" android:translateY="-32.4">
+                    <path
+                        android:fillColor="#FFFFFF"
+                        android:pathData="M40.5,13.5 C46.5,13.2 50.6,17.4 50.9,22.6 L56.8,25.2 L50.6,27.3 C51.4,34.8 47,41.8 38.6,44.4 C32,46.4 24.8,45.6 19.4,42.6 L8.6,47.6 L12.4,40.8 L6.8,36.4 L18.6,35.6 C21.6,29.6 27.4,26.4 31.4,25.4 C31.2,18.8 34.6,13.8 40.5,13.5 Z" />
+                    <path
+                        android:strokeColor="#FFFFFF"
+                        android:strokeWidth="2.2"
+                        android:strokeLineCap="round"
+                        android:pathData="M31.5,45.2 L30.4,51.2 M37.8,44.9 L38.4,51.2" />
+                    <group android:rotation="-8" android:pivotX="52" android:pivotY="34">
+                        <path
+                            android:fillColor="#FFFFFF"
+                            android:pathData="M47.2,28.8 h10.2 a1.6,1.6 0 0,1 1.6,1.6 v6.4 a1.6,1.6 0 0,1 -1.6,1.6 h-10.2 a1.6,1.6 0 0,1 -1.6,-1.6 v-6.4 a1.6,1.6 0 0,1 1.6,-1.6 Z" />
+                    </group>
+                </group>
+            </group>
+        </group>
+    </group>
+</vector>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in_on_phone">உள்நுழைய உங்கள் ஃபோனில் PhoneMail-ஐத் திறக்கவும்.</string>
+    <string name="inbox">இன்பாக்ஸ்</string>
+    <string name="try_again">மீண்டும் முயலவும்</string>
+    <string name="nothing_here">இங்கே எதுவும் இல்லை.</string>
+    <string name="group">குழு</string>
+    <string name="conversation">உரையாடல்</string>
+    <string name="you">நீங்கள்</string>
+    <string name="reply">பதில்</string>
+    <string name="reply_to">%1$s-க்குப் பதில்</string>
+    <string name="sent">அனுப்பப்பட்டது</string>
+    <string name="quick_ok">சரி</string>
+    <string name="quick_thanks">நன்றி!</string>
+    <string name="quick_on_my_way">வந்துகொண்டிருக்கிறேன்</string>
+    <string name="quick_call_later">பிறகு அழைக்கிறேன்</string>
+    <string name="error_unreachable">PhoneMail-ஐ அணுக முடியவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்.</string>
+    <string name="error_request_failed">கோரிக்கை தோல்வியடைந்தது (%1$d)</string>
+</resources>

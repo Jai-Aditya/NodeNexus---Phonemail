@@ -1,0 +1,4443 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ is blocked. Their emails will go to Spam.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ब्लॉक हो गए। उनके ईमेल स्पैम में जाएँगे।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ தடுக்கப்பட்டார். அவர்களின் மின்னஞ்சல்கள் ஸ்பேமுக்குச் செல்லும்."
+          }
+        }
+      }
+    },
+    "%@ is too big: files can be up to 25 MB.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ बहुत बड़ी है: फ़ाइलें 25 MB तक हो सकती हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ மிகப் பெரியது: கோப்புகள் 25 MB வரை இருக்கலாம்."
+          }
+        }
+      }
+    },
+    "%@ is unblocked": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ अनब्लॉक हो गए"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ தடைநீக்கப்பட்டார்"
+          }
+        }
+      }
+    },
+    "%lld attachments": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld अटैचमेंट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld இணைப்புகள்"
+          }
+        }
+      }
+    },
+    "%lld selected": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld चुने गए"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld தேர்ந்தெடுக்கப்பட்டன"
+          }
+        }
+      }
+    },
+    "(no one yet)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(अभी कोई नहीं)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(இன்னும் யாரும் இல்லை)"
+          }
+        }
+      }
+    },
+    "(no subject)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(कोई विषय नहीं)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(பொருள் இல்லை)"
+          }
+        }
+      }
+    },
+    "1 attachment": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 अटैचमेंट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 இணைப்பு"
+          }
+        }
+      }
+    },
+    "6-digit code": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6 अंकों का कोड"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "6 இலக்கக் குறியீடு"
+          }
+        }
+      }
+    },
+    "Add": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जोड़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சேர்"
+          }
+        }
+      }
+    },
+    "Add at least one recipient": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कम से कम एक प्राप्तकर्ता जोड़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குறைந்தது ஒரு பெறுநரைச் சேர்க்கவும்"
+          }
+        }
+      }
+    },
+    "Add more": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "और जोड़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மேலும் சேர்"
+          }
+        }
+      }
+    },
+    "Add your name": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना नाम जोड़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் பெயரைச் சேர்க்கவும்"
+          }
+        }
+      }
+    },
+    "Agree and continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सहमत हैं, आगे बढ़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஏற்று தொடரவும்"
+          }
+        }
+      }
+    },
+    "Alias added": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उपनाम जोड़ा गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாற்றுப் பெயர் சேர்க்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Alias removed": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उपनाम हटाया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மாற்றுப் பெயர் நீக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "All": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सभी"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனைத்தும்"
+          }
+        }
+      }
+    },
+    "All mail": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सभी ईमेल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனைத்து மின்னஞ்சல்களும்"
+          }
+        }
+      }
+    },
+    "Appearance": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रूप-रंग"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தோற்றம்"
+          }
+        }
+      }
+    },
+    "Archive": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आर्काइव करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "காப்பகப்படுத்து"
+          }
+        }
+      }
+    },
+    "Archived": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आर्काइव किए गए"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "காப்பகத்தில் உள்ளவை"
+          }
+        }
+      }
+    },
+    "At most %lld files per email.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक ईमेल में ज़्यादा से ज़्यादा %lld फ़ाइलें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு மின்னஞ்சலில் அதிகபட்சம் %lld கோப்புகள்."
+          }
+        }
+      }
+    },
+    "Attach": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अटैच करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இணை"
+          }
+        }
+      }
+    },
+    "Attach photos or files (up to 25 MB)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो या फ़ाइलें अटैच करें (25 MB तक)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படங்கள் அல்லது கோப்புகளை இணைக்கவும் (25 MB வரை)"
+          }
+        }
+      }
+    },
+    "Attachments": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अटैचमेंट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இணைப்புகள்"
+          }
+        }
+      }
+    },
+    "Bad address": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गलत पता"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தவறான முகவரி"
+          }
+        }
+      }
+    },
+    "Bcc": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bcc"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bcc"
+          }
+        }
+      }
+    },
+    "Block": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉक करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தடு"
+          }
+        }
+      }
+    },
+    "Block %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को ब्लॉक करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ஐத் தடு"
+          }
+        }
+      }
+    },
+    "Block %@?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को ब्लॉक करें?"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ஐத் தடுக்கவா?"
+          }
+        }
+      }
+    },
+    "Blocked people": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉक किए गए लोग"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தடுக்கப்பட்டவர்கள்"
+          }
+        }
+      }
+    },
+    "Call you later": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाद में कॉल पर बात करते हैं"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பிறகு அழைக்கிறேன்"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रद्द करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ரத்து செய்"
+          }
+        }
+      }
+    },
+    "Cancel reply": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जवाब रद्द करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பதிலை ரத்து செய்"
+          }
+        }
+      }
+    },
+    "Cancel send": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजना रद्द करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்புவதை ரத்துசெய்"
+          }
+        }
+      }
+    },
+    "Cannot reach PhoneMail. Check your connection and try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail से संपर्क नहीं हो पा रहा। अपना कनेक्शन जाँचें और फिर कोशिश करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-ஐ அணுக முடியவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்."
+          }
+        }
+      }
+    },
+    "Cc": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cc"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cc"
+          }
+        }
+      }
+    },
+    "Change number": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नंबर बदलें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எண்ணை மாற்று"
+          }
+        }
+      }
+    },
+    "Change password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड बदलें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல்லை மாற்று"
+          }
+        }
+      }
+    },
+    "Chat with %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ से चैट करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ உடன் அரட்டை"
+          }
+        }
+      }
+    },
+    "Chats show the names saved in your contacts.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चैट में वही नाम दिखेंगे जो आपके संपर्कों में सेव हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் தொடர்புகளில் சேமித்த பெயர்களே அரட்டைகளில் தெரியும்."
+          }
+        }
+      }
+    },
+    "Choose a conversation": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई बातचीत चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு உரையாடலைத் தேர்ந்தெடுக்கவும்"
+          }
+        }
+      }
+    },
+    "Choose a password for your PhoneMail account.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपने PhoneMail खाते के लिए पासवर्ड चुनें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் PhoneMail கணக்கிற்கு ஒரு கடவுச்சொல்லைத் தேர்வுசெய்யவும்."
+          }
+        }
+      }
+    },
+    "Choose a style": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक स्टाइल चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு பாணியைத் தேர்வுசெய்"
+          }
+        }
+      }
+    },
+    "Choose your language": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपनी भाषा चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் மொழியைத் தேர்வுசெய்யவும்"
+          }
+        }
+      }
+    },
+    "Compose": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लिखें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எழுது"
+          }
+        }
+      }
+    },
+    "Compose email": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ईमेल लिखें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மின்னஞ்சல் எழுது"
+          }
+        }
+      }
+    },
+    "Confirm with a code we text you.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हमारे भेजे SMS कोड से पुष्टि करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நாங்கள் அனுப்பும் SMS குறியீட்டால் உறுதிப்படுத்துங்கள்."
+          }
+        }
+      }
+    },
+    "Confirm with your password.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपने पासवर्ड से पुष्टि करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் கடவுச்சொல்லால் உறுதிப்படுத்துங்கள்."
+          }
+        }
+      }
+    },
+    "Continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आगे बढ़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தொடரவும்"
+          }
+        }
+      }
+    },
+    "Conversation": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बातचीत"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உரையாடல்"
+          }
+        }
+      }
+    },
+    "Could not read %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ पढ़ी नहीं जा सकी।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ஐப் படிக்க முடியவில்லை."
+          }
+        }
+      }
+    },
+    "Could not read that photo.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वह फ़ोटो पढ़ी नहीं जा सकी।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அந்தப் படத்தைப் படிக்க முடியவில்லை."
+          }
+        }
+      }
+    },
+    "Couldn't send your reply. Open PhoneMail to try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका जवाब नहीं भेजा जा सका। फिर से कोशिश करने के लिए PhoneMail खोलें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் பதிலை அனுப்ப முடியவில்லை. மீண்டும் முயல PhoneMail-ஐத் திறக்கவும்."
+          }
+        }
+      }
+    },
+    "Current password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मौजूदा पासवर्ड"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தற்போதைய கடவுச்சொல்"
+          }
+        }
+      }
+    },
+    "Dark": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "डार्क"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அடர்"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீக்கு"
+          }
+        }
+      }
+    },
+    "Delete account": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाता हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கணக்கை நீக்கு"
+          }
+        }
+      }
+    },
+    "Delete folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறையை நீக்கு"
+          }
+        }
+      }
+    },
+    "Delete my account": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरा खाता हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "என் கணக்கை நீக்கு"
+          }
+        }
+      }
+    },
+    "Delete the folder “%@”?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर “%@” हटाएँ?"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” கோப்புறையை நீக்கவா?"
+          }
+        }
+      }
+    },
+    "Deleting your account erases your number, profile, aliases and your copies of mail. Mail you already sent stays with the people who received it. This can't be undone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खाता हटाने से आपका नंबर, प्रोफ़ाइल, उपनाम और आपके ईमेल की प्रतियाँ मिट जाती हैं। आपके भेजे गए ईमेल पाने वालों के पास रहते हैं। इसे वापस नहीं किया जा सकता।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கணக்கை நீக்கினால் உங்கள் எண், சுயவிவரம், மாற்றுப் பெயர்கள் மற்றும் உங்கள் மின்னஞ்சல் நகல்கள் அழிக்கப்படும். நீங்கள் ஏற்கனவே அனுப்பிய மின்னஞ்சல்கள் பெற்றவர்களிடம் இருக்கும். இதைத் திரும்பப் பெற முடியாது."
+          }
+        }
+      }
+    },
+    "Didn't get it? Verify by sending a text": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नहीं मिला? एक SMS भेजकर सत्यापित करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கிடைக்கவில்லையா? ஒரு குறுஞ்செய்தி அனுப்பிச் சரிபார்க்கவும்"
+          }
+        }
+      }
+    },
+    "Discard": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हटा दें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நிராகரி"
+          }
+        }
+      }
+    },
+    "Don't use PhoneMail for spam or to harass anyone; accounts that do are closed.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail का इस्तेमाल स्पैम या किसी को परेशान करने के लिए न करें; ऐसा करने वाले खाते बंद कर दिए जाते हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்பேம் அனுப்பவோ யாரையும் தொந்தரவு செய்யவோ PhoneMail-ஐப் பயன்படுத்த வேண்டாம்; அப்படிச் செய்யும் கணக்குகள் மூடப்படும்."
+          }
+        }
+      }
+    },
+    "Done": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हो गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முடிந்தது"
+          }
+        }
+      }
+    },
+    "Drafts": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ड्राफ़्ट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வரைவுகள்"
+          }
+        }
+      }
+    },
+    "Earlier message": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पिछला संदेश"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முந்தைய செய்தி"
+          }
+        }
+      }
+    },
+    "Enter the 6-digit code we sent by SMS. Tap it above the keyboard when it arrives.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS से भेजा गया 6 अंकों का कोड डालें। कोड आने पर कीबोर्ड के ऊपर उस पर टैप करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS மூலம் அனுப்பிய 6 இலக்கக் குறியீட்டை உள்ளிடவும். அது வந்ததும் விசைப்பலகைக்கு மேலே தட்டவும்."
+          }
+        }
+      }
+    },
+    "Enter your phone number": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना फ़ोन नंबर डालें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்"
+          }
+        }
+      }
+    },
+    "Favorites": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पसंदीदा"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பிடித்தவை"
+          }
+        }
+      }
+    },
+    "Files": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ाइलें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புகள்"
+          }
+        }
+      }
+    },
+    "Files on one email can add up to 25 MB.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक ईमेल की सभी फ़ाइलें मिलाकर 25 MB तक हो सकती हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு மின்னஞ்சலின் கோப்புகள் மொத்தம் 25 MB வரை இருக்கலாம்."
+          }
+        }
+      }
+    },
+    "Find people you know": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जान-पहचान वालों को ढूँढें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்களுக்குத் தெரிந்தவர்களைக் கண்டறியுங்கள்"
+          }
+        }
+      }
+    },
+    "Folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறை"
+          }
+        }
+      }
+    },
+    "Folder name": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर का नाम"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறையின் பெயர்"
+          }
+        }
+      }
+    },
+    "Folders": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறைகள்"
+          }
+        }
+      }
+    },
+    "Forgot it? Use “Forgot password” on the sign-in page at mail.phonemail.net to set a new one with an SMS code.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भूल गए? mail.phonemail.net के साइन-इन पेज पर “पासवर्ड भूल गए” से SMS कोड के साथ नया पासवर्ड बनाएँ।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மறந்துவிட்டீர்களா? mail.phonemail.net உள்நுழைவுப் பக்கத்தில் “கடவுச்சொல் மறந்துவிட்டதா” என்பதைப் பயன்படுத்தி, SMS குறியீட்டுடன் புதியதை அமைக்கலாம்."
+          }
+        }
+      }
+    },
+    "From your contacts · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके संपर्कों से · %@"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் தொடர்புகளிலிருந்து · %@"
+          }
+        }
+      }
+    },
+    "From: %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रेषक: %@"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்புநர்: %@"
+          }
+        }
+      }
+    },
+    "Full editor": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा एडिटर"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முழு எடிட்டர்"
+          }
+        }
+      }
+    },
+    "Group": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ग्रुप"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குழு"
+          }
+        }
+      }
+    },
+    "Group created": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ग्रुप बनाया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குழு உருவாக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Group name (optional)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ग्रुप का नाम (वैकल्पिक)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குழுவின் பெயர் (விருப்பத்தேர்வு)"
+          }
+        }
+      }
+    },
+    "Help (user manual)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मदद (उपयोगकर्ता पुस्तिका)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உதவி (பயனர் கையேடு)"
+          }
+        }
+      }
+    },
+    "How would you like to verify this number?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप यह नंबर कैसे सत्यापित करना चाहेंगे?"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்த எண்ணை எப்படிச் சரிபார்க்க விரும்புகிறீர்கள்?"
+          }
+        }
+      }
+    },
+    "Inbox": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इनबॉक्स"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்பாக்ஸ்"
+          }
+        }
+      }
+    },
+    "Its conversations stay in All mail.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इसकी बातचीत “सभी ईमेल” में बनी रहेंगी।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இதிலுள்ள உரையாடல்கள் “அனைத்து மின்னஞ்சல்களும்” பகுதியில் இருக்கும்."
+          }
+        }
+      }
+    },
+    "Language": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भाषा"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மொழி"
+          }
+        }
+      }
+    },
+    "Language saved": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भाषा सेव हो गई"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மொழி சேமிக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Later today": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आज बाद में"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்று பின்னர்"
+          }
+        }
+      }
+    },
+    "Light": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लाइट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வெளிர்"
+          }
+        }
+      }
+    },
+    "Mail": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அஞ்சல்"
+          }
+        }
+      }
+    },
+    "Mail from people you block goes to Spam.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जिन्हें आप ब्लॉक करते हैं, उनके ईमेल स्पैम में जाते हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள் தடுத்தவர்களின் மின்னஞ்சல்கள் ஸ்பேமுக்குச் செல்லும்."
+          }
+        }
+      }
+    },
+    "Mark as read": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पढ़ा हुआ मार्क करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படித்ததாகக் குறி"
+          }
+        }
+      }
+    },
+    "Mark as unread": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपठित मार्क करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படிக்காததாகக் குறி"
+          }
+        }
+      }
+    },
+    "Marked as read": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पढ़ा हुआ मार्क किया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படித்ததாகக் குறிக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Marked as unread": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपठित मार्क किया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படிக்காததாகக் குறிக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Menu": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेन्यू"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மெனு"
+          }
+        }
+      }
+    },
+    "Message": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संदेश"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "செய்தி"
+          }
+        }
+      }
+    },
+    "More": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "और"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மேலும்"
+          }
+        }
+      }
+    },
+    "Move to Home": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "होम पर ले जाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முகப்புக்கு நகர்த்து"
+          }
+        }
+      }
+    },
+    "Move to Inbox": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इनबॉक्स में ले जाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்பாக்ஸுக்கு நகர்த்து"
+          }
+        }
+      }
+    },
+    "Move to folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर में ले जाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறைக்கு நகர்த்து"
+          }
+        }
+      }
+    },
+    "Move to folder…": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर में ले जाएँ…"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறைக்கு நகர்த்து…"
+          }
+        }
+      }
+    },
+    "Moved to %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ में भेजा गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ க்கு நகர்த்தப்பட்டது"
+          }
+        }
+      }
+    },
+    "Moved to Inbox": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इनबॉक्स में भेजा गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்பாக்ஸுக்கு நகர்த்தப்பட்டது"
+          }
+        }
+      }
+    },
+    "Moved to Trash": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ट्रैश में भेजा गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குப்பைக்கு நகர்த்தப்பட்டது"
+          }
+        }
+      }
+    },
+    "Mute": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "म्यूट करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒலியடக்கு"
+          }
+        }
+      }
+    },
+    "Muted": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "म्यूट किया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒலியடக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Name saved": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नाम सेव हो गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பெயர் சேமிக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Name shown to others": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दूसरों को दिखने वाला नाम"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மற்றவர்களுக்குத் தெரியும் பெயர்"
+          }
+        }
+      }
+    },
+    "New email": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया ईमेल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய மின்னஞ்சல்"
+          }
+        }
+      }
+    },
+    "New emails show on this device and on your Apple Watch. Reply or mark them read from the notification.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नए ईमेल इस डिवाइस और आपकी Apple Watch पर दिखते हैं। सूचना से ही जवाब दें या उन्हें पढ़ा हुआ चिह्नित करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய மின்னஞ்சல்கள் இந்தச் சாதனத்திலும் உங்கள் Apple Watch-இலும் தோன்றும். அறிவிப்பிலிருந்தே பதிலளிக்கலாம் அல்லது படித்ததாகக் குறிக்கலாம்."
+          }
+        }
+      }
+    },
+    "New folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया फ़ोल्डर"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய கோப்புறை"
+          }
+        }
+      }
+    },
+    "New number? This creates your account. Already registered? It signs you in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया नंबर? इससे आपका खाता बन जाएगा। पहले से रजिस्टर हैं? इससे आप साइन इन हो जाएँगे।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய எண்ணா? இது உங்கள் கணக்கை உருவாக்கும். ஏற்கெனவே பதிவுசெய்தவரா? இது உங்களை உள்நுழையச் செய்யும்."
+          }
+        }
+      }
+    },
+    "New password (8+ characters)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पासवर्ड (8+ अक्षर)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய கடவுச்சொல் (8+ எழுத்துகள்)"
+          }
+        }
+      }
+    },
+    "New password again": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पासवर्ड दोबारा"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய கடவுச்சொல் மீண்டும்"
+          }
+        }
+      }
+    },
+    "Next": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आगे"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அடுத்து"
+          }
+        }
+      }
+    },
+    "Next week": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अगले हफ़्ते"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அடுத்த வாரம்"
+          }
+        }
+      }
+    },
+    "No chats yet. Tap the pencil to write your first email.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी कोई चैट नहीं। पहला ईमेल लिखने के लिए पेंसिल पर टैप करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்னும் அரட்டைகள் இல்லை. உங்கள் முதல் மின்னஞ்சலை எழுத பென்சிலைத் தட்டவும்."
+          }
+        }
+      }
+    },
+    "No messages yet.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी कोई संदेश नहीं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இன்னும் செய்திகள் இல்லை."
+          }
+        }
+      }
+    },
+    "No one is blocked.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई ब्लॉक नहीं है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "யாரும் தடுக்கப்படவில்லை."
+          }
+        }
+      }
+    },
+    "Nothing here.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यहाँ कुछ नहीं है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இங்கே எதுவும் இல்லை."
+          }
+        }
+      }
+    },
+    "Notifications": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सूचनाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அறிவிப்புகள்"
+          }
+        }
+      }
+    },
+    "Notifications are off for PhoneMail. Turn them on in iOS Settings to hear about new emails.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail के लिए सूचनाएँ बंद हैं। नए ईमेल की ख़बर पाने के लिए उन्हें iOS सेटिंग्स में चालू करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-க்கான அறிவிப்புகள் முடக்கத்தில் உள்ளன. புதிய மின்னஞ்சல்களைப் பற்றி அறிய iOS அமைப்புகளில் அவற்றை இயக்கவும்."
+          }
+        }
+      }
+    },
+    "OK": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ठीक है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சரி"
+          }
+        }
+      }
+    },
+    "Off": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முடக்கத்தில்"
+          }
+        }
+      }
+    },
+    "Oil painting": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऑयल पेंटिंग"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எண்ணெய் ஓவியம்"
+          }
+        }
+      }
+    },
+    "On": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चालू"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இயக்கத்தில்"
+          }
+        }
+      }
+    },
+    "On my way": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रास्ते में हूँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வந்துகொண்டிருக்கிறேன்"
+          }
+        }
+      }
+    },
+    "Open Messages": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages खोलें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages-ஐத் திற"
+          }
+        }
+      }
+    },
+    "Open PhoneMail on your iPhone to sign in.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन इन करने के लिए अपने iPhone पर PhoneMail खोलें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உள்நுழைய உங்கள் iPhone-இல் PhoneMail-ஐத் திறக்கவும்."
+          }
+        }
+      }
+    },
+    "Open iOS Settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS सेटिंग्स खोलें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS அமைப்புகளைத் திற"
+          }
+        }
+      }
+    },
+    "Or verify by sending a text": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "या एक SMS भेजकर सत्यापित करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அல்லது ஒரு குறுஞ்செய்தி அனுப்பிச் சரிபார்க்கவும்"
+          }
+        }
+      }
+    },
+    "Original": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मूल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அசல்"
+          }
+        }
+      }
+    },
+    "Other addresses (aliases)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दूसरे पते (उपनाम)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பிற முகவரிகள் (மாற்றுப் பெயர்கள்)"
+          }
+        }
+      }
+    },
+    "Outline": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रेखाचित्र"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோட்டோவியம்"
+          }
+        }
+      }
+    },
+    "Password (8 or more characters)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड (8 या अधिक अक्षर)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல் (8 அல்லது அதிக எழுத்துகள்)"
+          }
+        }
+      }
+    },
+    "Password changed": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड बदल गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல் மாற்றப்பட்டது"
+          }
+        }
+      }
+    },
+    "Password set": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड सेट हो गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல் அமைக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Pencil sketch": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेंसिल स्केच"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பென்சில் ஓவியம்"
+          }
+        }
+      }
+    },
+    "People can also email you at an alias. Mail to it arrives in your chats.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लोग आपको उपनाम पर भी ईमेल कर सकते हैं। उस पर आई मेल आपकी चैट में आएगी।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மக்கள் உங்கள் மாற்றுப் பெயருக்கும் மின்னஞ்சல் அனுப்பலாம். அது உங்கள் அரட்டைகளிலேயே வரும்."
+          }
+        }
+      }
+    },
+    "People who don't have the app may get a text when you email them.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जिनके पास ऐप नहीं है, उन्हें आपका ईमेल आने पर SMS मिल सकता है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "செயலி இல்லாதவர்களுக்கு நீங்கள் மின்னஞ்சல் அனுப்பும்போது குறுஞ்செய்தி வரலாம்."
+          }
+        }
+      }
+    },
+    "Phone number": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोन नंबर"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தொலைபேசி எண்"
+          }
+        }
+      }
+    },
+    "PhoneMail": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail"
+          }
+        }
+      }
+    },
+    "PhoneMail can use your contacts to suggest people when you write, and to show their names on your chats.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail आपके संपर्कों से लिखते समय लोगों के सुझाव दे सकता है और चैट में उनके नाम दिखा सकता है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள் எழுதும்போது நபர்களைப் பரிந்துரைக்கவும் அரட்டைகளில் அவர்களின் பெயர்களைக் காட்டவும் PhoneMail உங்கள் தொடர்புகளைப் பயன்படுத்தலாம்."
+          }
+        }
+      }
+    },
+    "Photo saved": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो सेव हो गई"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படம் சேமிக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Photos": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படங்கள்"
+          }
+        }
+      }
+    },
+    "Pick a glyph": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक ग्लिफ़ चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு சின்னத்தைத் தேர்வுசெய்"
+          }
+        }
+      }
+    },
+    "Pick from contacts": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संपर्कों से चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தொடர்புகளிலிருந்து தேர்வுசெய்"
+          }
+        }
+      }
+    },
+    "Pixel": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पिक्सल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பிக்சல்"
+          }
+        }
+      }
+    },
+    "Please read and accept to continue.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आगे बढ़ने के लिए कृपया पढ़ें और स्वीकार करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தொடர, படித்து ஏற்றுக்கொள்ளவும்."
+          }
+        }
+      }
+    },
+    "Profile and settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रोफ़ाइल और सेटिंग्स"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சுயவிவரமும் அமைப்புகளும்"
+          }
+        }
+      }
+    },
+    "Profile picture": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रोफ़ाइल फ़ोटो"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சுயவிவரப் படம்"
+          }
+        }
+      }
+    },
+    "Read more": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "और पढ़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மேலும் படிக்க"
+          }
+        }
+      }
+    },
+    "Read the full terms": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरी शर्तें पढ़ें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முழு விதிமுறைகளைப் படிக்க"
+          }
+        }
+      }
+    },
+    "Remove": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீக்கு"
+          }
+        }
+      }
+    },
+    "Remove %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ஐ நீக்கு"
+          }
+        }
+      }
+    },
+    "Remove from folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर से हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறையிலிருந்து நீக்கு"
+          }
+        }
+      }
+    },
+    "Removed from folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर से हटाया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறையிலிருந்து நீக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Rename folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोल्डर का नाम बदलें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோப்புறையின் பெயரை மாற்று"
+          }
+        }
+      }
+    },
+    "Reply": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जवाब दें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பதில்"
+          }
+        }
+      }
+    },
+    "Reply to %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को जवाब दें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@-க்குப் பதில்"
+          }
+        }
+      }
+    },
+    "Replying to %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को जवाब"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ க்குப் பதில்"
+          }
+        }
+      }
+    },
+    "Replying to yourself": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "खुद को जवाब"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்களுக்கே பதில்"
+          }
+        }
+      }
+    },
+    "Report spam": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्पैम की रिपोर्ट करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்பேம் எனப் புகாரளி"
+          }
+        }
+      }
+    },
+    "Request failed (%lld)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनुरोध विफल रहा (%lld)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கோரிக்கை தோல்வியடைந்தது (%lld)"
+          }
+        }
+      }
+    },
+    "Save": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेव करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சேமி"
+          }
+        }
+      }
+    },
+    "Scheduled": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शेड्यूल किए गए"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "திட்டமிடப்பட்டவை"
+          }
+        }
+      }
+    },
+    "Search chats": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चैट खोजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அரட்டைகளைத் தேடுங்கள்"
+          }
+        }
+      }
+    },
+    "Search chats, contacts or a phone number": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चैट, संपर्क या फ़ोन नंबर खोजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அரட்டைகள், தொடர்புகள் அல்லது தொலைபேசி எண்ணைத் தேடுங்கள்"
+          }
+        }
+      }
+    },
+    "Select": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தேர்வுசெய்"
+          }
+        }
+      }
+    },
+    "Select all": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सभी चुनें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனைத்தையும் தேர்வுசெய்"
+          }
+        }
+      }
+    },
+    "Select none": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चयन हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தேர்வை நீக்கு"
+          }
+        }
+      }
+    },
+    "Send": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்பு"
+          }
+        }
+      }
+    },
+    "Send a new code": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया कोड भेजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய குறியீட்டை அனுப்பு"
+          }
+        }
+      }
+    },
+    "Send a new code in %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ में नया कोड भेज सकते हैं"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ இல் புதிய குறியீட்டைக் கேட்கலாம்"
+          }
+        }
+      }
+    },
+    "Send cancelled. It's in Drafts now.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजना रद्द हुआ। यह अब ड्राफ़्ट में है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்புதல் ரத்துசெய்யப்பட்டது. இது இப்போது வரைவுகளில் உள்ளது."
+          }
+        }
+      }
+    },
+    "Send me a code by SMS": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मुझे SMS से कोड भेजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS மூலம் குறியீட்டை அனுப்பு"
+          }
+        }
+      }
+    },
+    "Send me a code by SMS instead": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इसके बजाय मुझे SMS से कोड भेजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பதிலாக SMS மூலம் குறியீட்டை அனுப்பு"
+          }
+        }
+      }
+    },
+    "Send the text below from this iPhone. Standard SMS charges may apply.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नीचे दिया गया SMS इसी iPhone से भेजें। सामान्य SMS शुल्क लग सकता है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கீழே உள்ள குறுஞ்செய்தியை இந்த iPhone-இலிருந்து அனுப்பவும். வழக்கமான SMS கட்டணம் பொருந்தலாம்."
+          }
+        }
+      }
+    },
+    "Send this text": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह SMS भेजें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்தக் குறுஞ்செய்தியை அனுப்பவும்"
+          }
+        }
+      }
+    },
+    "Sending to %lld people starts a group chat. Later emails to one of them stay in your one-to-one chat.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld लोगों को भेजने से ग्रुप चैट शुरू होगी। बाद में उनमें से किसी एक को भेजे ईमेल आपकी अलग चैट में ही रहेंगे।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld பேருக்கு அனுப்பினால் ஒரு குழு அரட்டை தொடங்கும். பின்னர் அவர்களில் ஒருவருக்கு அனுப்பும் மின்னஞ்சல்கள் தனி அரட்டையிலேயே இருக்கும்."
+          }
+        }
+      }
+    },
+    "Sends %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजने का समय: %@"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்பப்படும் நேரம்: %@"
+          }
+        }
+      }
+    },
+    "Sent": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेज दिया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அனுப்பப்பட்டது"
+          }
+        }
+      }
+    },
+    "Set a password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड सेट करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல்லை அமைக்கவும்"
+          }
+        }
+      }
+    },
+    "Set password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड सेट करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல் அமை"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेटिंग्स"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அமைப்புகள்"
+          }
+        }
+      }
+    },
+    "Sign out": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "साइन आउट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "வெளியேறு"
+          }
+        }
+      }
+    },
+    "Signing in by text isn't available in the app. Use the code we text you, or a password.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऐप में टेक्स्ट भेजकर साइन इन उपलब्ध नहीं है। हमारा भेजा SMS कोड या पासवर्ड इस्तेमाल करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஆப்பில் குறுஞ்செய்தி அனுப்பி உள்நுழைய முடியாது. நாங்கள் அனுப்பும் SMS குறியீட்டையோ கடவுச்சொல்லையோ பயன்படுத்துங்கள்."
+          }
+        }
+      }
+    },
+    "Snooze": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्नूज़ करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தள்ளிவை"
+          }
+        }
+      }
+    },
+    "Snooze until": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कब तक स्नूज़ करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எதுவரை தள்ளிவைப்பது"
+          }
+        }
+      }
+    },
+    "Snoozed": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्नूज़ किए गए"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தள்ளிவைத்தவை"
+          }
+        }
+      }
+    },
+    "Snoozed until %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ तक स्नूज़ किया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ வரை தள்ளிவைக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Snooze…": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्नूज़ करें…"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தள்ளிவை…"
+          }
+        }
+      }
+    },
+    "Spam": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्पैम"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்பேம்"
+          }
+        }
+      }
+    },
+    "Star": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्टार करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நட்சத்திரமிடு"
+          }
+        }
+      }
+    },
+    "Starred": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्टार किए गए"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நட்சத்திரமிட்டவை"
+          }
+        }
+      }
+    },
+    "Start your first email to %@. Add a subject, type your message and send.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को अपना पहला ईमेल लिखें। विषय जोड़ें, संदेश लिखें और भेजें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ க்கு உங்கள் முதல் மின்னஞ்சலைத் தொடங்குங்கள். பொருளைச் சேர்த்து, செய்தியைத் தட்டச்சு செய்து அனுப்புங்கள்."
+          }
+        }
+      }
+    },
+    "Styles are applied on your device — only the picture you choose is uploaded.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्टाइल आपके डिवाइस पर ही लगते हैं — सिर्फ़ आपकी चुनी हुई तस्वीर अपलोड होती है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பாணிகள் உங்கள் சாதனத்திலேயே பயன்படுத்தப்படுகின்றன — நீங்கள் தேர்ந்தெடுக்கும் படம் மட்டுமே பதிவேற்றப்படும்."
+          }
+        }
+      }
+    },
+    "Subject": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "विषय"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பொருள்"
+          }
+        }
+      }
+    },
+    "System": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सिस्टम"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சாதன அமைப்பு"
+          }
+        }
+      }
+    },
+    "System follows your iPhone's light or dark setting.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“सिस्टम” चुनने पर ऐप आपके iPhone की लाइट या डार्क सेटिंग के अनुसार चलेगा।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“சாதன அமைப்பு” உங்கள் iPhone-இன் வெளிர் அல்லது அடர் அமைப்பைப் பின்பற்றும்."
+          }
+        }
+      }
+    },
+    "Terms of Service": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेवा की शर्तें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சேவை விதிமுறைகள்"
+          }
+        }
+      }
+    },
+    "Thanks!": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "धन्यवाद!"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நன்றி!"
+          }
+        }
+      }
+    },
+    "That file is too big.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वह फ़ाइल बहुत बड़ी है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அந்தக் கோப்பு மிகப் பெரியது."
+          }
+        }
+      }
+    },
+    "The code expired. Start again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोड की समय-सीमा खत्म हो गई। फिर से शुरू करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குறியீடு காலாவதியானது. மீண்டும் தொடங்குங்கள்."
+          }
+        }
+      }
+    },
+    "The new passwords don't match": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नए पासवर्ड मेल नहीं खाते"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய கடவுச்சொற்கள் பொருந்தவில்லை"
+          }
+        }
+      }
+    },
+    "Their emails will go to Spam. You can unblock them in Settings.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उनके ईमेल स्पैम में जाएँगे। आप उन्हें सेटिंग्स में अनब्लॉक कर सकते हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அவர்களின் மின்னஞ்சல்கள் ஸ்பேமுக்குச் செல்லும். அமைப்புகளில் அவர்களைத் தடைநீக்கலாம்."
+          }
+        }
+      }
+    },
+    "This chat": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह चैट"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்த அரட்டை"
+          }
+        }
+      }
+    },
+    "This weekend": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस वीकेंड"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்த வார இறுதி"
+          }
+        }
+      }
+    },
+    "To": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பெறுநர்"
+          }
+        }
+      }
+    },
+    "To: names, phone numbers or addresses": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति: नाम, फ़ोन नंबर या पते"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பெறுநர்: பெயர்கள், தொலைபேசி எண்கள் அல்லது முகவரிகள்"
+          }
+        }
+      }
+    },
+    "Tomorrow": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நாளை"
+          }
+        }
+      }
+    },
+    "Trash": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ट्रैश"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குப்பை"
+          }
+        }
+      }
+    },
+    "Trash is empty.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ट्रैश खाली है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குப்பை காலியாக உள்ளது."
+          }
+        }
+      }
+    },
+    "Try again": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिर से कोशिश करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "மீண்டும் முயலவும்"
+          }
+        }
+      }
+    },
+    "Turn on notifications": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सूचनाएँ चालू करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அறிவிப்புகளை இயக்கு"
+          }
+        }
+      }
+    },
+    "Type a name to email someone; no need to remember numbers.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "किसी को ईमेल करने के लिए बस नाम लिखें; नंबर याद रखने की ज़रूरत नहीं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒருவருக்கு மின்னஞ்சல் அனுப்ப பெயரைத் தட்டச்சு செய்தால் போதும்; எண்களை நினைவில் வைக்கத் தேவையில்லை."
+          }
+        }
+      }
+    },
+    "Unblock": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनब्लॉक करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தடைநீக்கு"
+          }
+        }
+      }
+    },
+    "Unblock %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को अनब्लॉक करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ஐத் தடைநீக்கு"
+          }
+        }
+      }
+    },
+    "Undo": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूर्ववत करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "செயல்தவிர்"
+          }
+        }
+      }
+    },
+    "Unexpected reply from PhoneMail": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail से अनपेक्षित जवाब आया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-இலிருந்து எதிர்பாராத பதில்"
+          }
+        }
+      }
+    },
+    "Unmute": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "म्यूट हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒலியடக்கத்தை நீக்கு"
+          }
+        }
+      }
+    },
+    "Unmuted": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "म्यूट हटाया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒலியடக்கம் நீக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Unread": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपठित"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படிக்காதவை"
+          }
+        }
+      }
+    },
+    "Unsnooze": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्नूज़ हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தள்ளிவைப்பை நீக்கு"
+          }
+        }
+      }
+    },
+    "Unsnoozed": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्नूज़ हटाया गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "தள்ளிவைப்பு நீக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "Unstar": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्टार हटाएँ"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நட்சத்திரத்தை நீக்கு"
+          }
+        }
+      }
+    },
+    "Until %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ तक"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ வரை"
+          }
+        }
+      }
+    },
+    "Up to 40 characters.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम 40 अक्षर।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அதிகபட்சம் 40 எழுத்துகள்."
+          }
+        }
+      }
+    },
+    "Upload photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ोटो अपलोड करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "படத்தைப் பதிவேற்று"
+          }
+        }
+      }
+    },
+    "Use a password instead": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इसके बजाय पासवर्ड इस्तेमाल करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பதிலாகக் கடவுச்சொல்லைப் பயன்படுத்து"
+          }
+        }
+      }
+    },
+    "Use my number bloom": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेरा नंबर ब्लूम इस्तेमाल करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "என் எண் மலரைப் பயன்படுத்து"
+          }
+        }
+      }
+    },
+    "Use this picture": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह तस्वीर इस्तेमाल करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்தப் படத்தைப் பயன்படுத்து"
+          }
+        }
+      }
+    },
+    "Verify": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सत्यापित करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சரிபார்"
+          }
+        }
+      }
+    },
+    "Verify +91 %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+91 %@ सत्यापित करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+91 %@ ஐச் சரிபார்க்கவும்"
+          }
+        }
+      }
+    },
+    "Verify by sending a text": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक SMS भेजकर सत्यापित करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஒரு குறுஞ்செய்தி அனுப்பிச் சரிபார்க்கவும்"
+          }
+        }
+      }
+    },
+    "Verify by sending a text instead": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इसके बजाय SMS भेजकर सत्यापित करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "பதிலாகக் குறுஞ்செய்தி அனுப்பிச் சரிபார்க்கவும்"
+          }
+        }
+      }
+    },
+    "Waiting for your text… this continues by itself.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके SMS का इंतज़ार है… यह अपने आप आगे बढ़ेगा।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் குறுஞ்செய்திக்காகக் காத்திருக்கிறோம்… இது தானாகவே தொடரும்."
+          }
+        }
+      }
+    },
+    "We verify the number with a text message. PhoneMail never calls you.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हम नंबर को SMS से सत्यापित करते हैं। PhoneMail आपको कभी कॉल नहीं करता।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "எண்ணைக் குறுஞ்செய்தி மூலம் சரிபார்க்கிறோம். PhoneMail உங்களை ஒருபோதும் அழைக்காது."
+          }
+        }
+      }
+    },
+    "Welcome to PhoneMail": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail में आपका स्वागत है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-க்கு வரவேற்கிறோம்"
+          }
+        }
+      }
+    },
+    "With attachments": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अटैचमेंट वाले"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இணைப்புகள் உள்ளவை"
+          }
+        }
+      }
+    },
+    "Write in full editor": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरे एडिटर में लिखें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "முழு எடிட்டரில் எழுது"
+          }
+        }
+      }
+    },
+    "Write your reply": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना जवाब लिखें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் பதிலை எழுதுங்கள்"
+          }
+        }
+      }
+    },
+    "Wrong password for this number": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस नंबर के लिए पासवर्ड गलत है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இந்த எண்ணுக்கான கடவுச்சொல் தவறு"
+          }
+        }
+      }
+    },
+    "Wrong password, or this number has no password yet. Use a code by SMS instead.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड गलत है, या इस नंबर का अभी कोई पासवर्ड नहीं है। इसके बजाय SMS कोड इस्तेमाल करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல் தவறு, அல்லது இந்த எண்ணுக்கு இன்னும் கடவுச்சொல் இல்லை. பதிலாக SMS குறியீட்டைப் பயன்படுத்தவும்."
+          }
+        }
+      }
+    },
+    "Yesterday": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कल"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நேற்று"
+          }
+        }
+      }
+    },
+    "You": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள்"
+          }
+        }
+      }
+    },
+    "You sign in with an SMS code. A password lets you sign in without one.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप SMS कोड से साइन इन करते हैं। पासवर्ड हो तो कोड के बिना भी साइन इन कर सकते हैं।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள் SMS குறியீட்டுடன் உள்நுழைகிறீர்கள். கடவுச்சொல் இருந்தால் குறியீடு இல்லாமலும் உள்நுழையலாம்."
+          }
+        }
+      }
+    },
+    "Your PhoneMail address is your mobile number, like 9884690127@PhoneMail.Net.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका PhoneMail पता आपका मोबाइल नंबर है, जैसे 9884690127@PhoneMail.Net।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் PhoneMail முகவரி உங்கள் கைபேசி எண்தான், உதாரணமாக 9884690127@PhoneMail.Net."
+          }
+        }
+      }
+    },
+    "Your address: %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका पता: %@"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் முகவரி: %@"
+          }
+        }
+      }
+    },
+    "Your contacts stay on this device. They are never uploaded.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके संपर्क इसी डिवाइस पर रहते हैं। वे कभी अपलोड नहीं होते।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் தொடர்புகள் இந்தச் சாதனத்திலேயே இருக்கும். அவை ஒருபோதும் பதிவேற்றப்படாது."
+          }
+        }
+      }
+    },
+    "Your default picture is drawn from your phone number — no two numbers bloom alike.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी डिफ़ॉल्ट तस्वीर आपके फ़ोन नंबर से बनती है — कोई भी दो नंबर एक जैसे नहीं खिलते।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் இயல்புப் படம் உங்கள் தொலைபேசி எண்ணிலிருந்து வரையப்படுகிறது — எந்த இரண்டு எண்களும் ஒரே மாதிரி மலர்வதில்லை."
+          }
+        }
+      }
+    },
+    "Your email address will be your number. We'll verify it with a text message.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका ईमेल पता आपका नंबर होगा। हम इसे SMS से सत्यापित करेंगे।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் மின்னஞ்சல் முகவரி உங்கள் எண்ணாகவே இருக்கும். அதைக் குறுஞ்செய்தி மூலம் சரிபார்ப்போம்."
+          }
+        }
+      }
+    },
+    "Your emails are stored on PhoneMail's server in India and are never sold or shared.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपके ईमेल भारत में PhoneMail के सर्वर पर रखे जाते हैं और कभी बेचे या साझा नहीं किए जाते।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் மின்னஞ்சல்கள் இந்தியாவில் உள்ள PhoneMail சேவையகத்தில் சேமிக்கப்படுகின்றன; ஒருபோதும் விற்கப்படுவதோ பகிரப்படுவதோ இல்லை."
+          }
+        }
+      }
+    },
+    "Your name": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका नाम"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் பெயர்"
+          }
+        }
+      }
+    },
+    "Your number bloom is back": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका नंबर ब्लूम वापस आ गया"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் எண் மலர் திரும்ப வந்துவிட்டது"
+          }
+        }
+      }
+    },
+    "Your password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपका पासवर्ड"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் கடவுச்சொல்"
+          }
+        }
+      }
+    },
+    "to %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ पर"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ க்கு"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

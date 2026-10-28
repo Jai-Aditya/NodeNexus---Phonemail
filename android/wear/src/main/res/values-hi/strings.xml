@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_in_on_phone">साइन इन करने के लिए अपने फ़ोन पर PhoneMail खोलें।</string>
+    <string name="inbox">इनबॉक्स</string>
+    <string name="try_again">फिर से कोशिश करें</string>
+    <string name="nothing_here">यहाँ कुछ नहीं है।</string>
+    <string name="group">ग्रुप</string>
+    <string name="conversation">बातचीत</string>
+    <string name="you">आप</string>
+    <string name="reply">जवाब दें</string>
+    <string name="reply_to">%1$s को जवाब दें</string>
+    <string name="sent">भेज दिया</string>
+    <string name="quick_ok">ठीक है</string>
+    <string name="quick_thanks">धन्यवाद!</string>
+    <string name="quick_on_my_way">रास्ते में हूँ</string>
+    <string name="quick_call_later">बाद में कॉल पर बात करते हैं</string>
+    <string name="error_unreachable">PhoneMail से संपर्क नहीं हो पा रहा। अपना कनेक्शन जाँचें और फिर कोशिश करें।</string>
+    <string name="error_request_failed">अनुरोध विफल रहा (%1$d)</string>
+</resources>

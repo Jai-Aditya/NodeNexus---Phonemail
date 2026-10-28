@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PhoneMail</string>
+
+    <!-- Errors written by the app (the server's own messages arrive as they are) -->
+    <string name="error_unreachable">Cannot reach PhoneMail. Check your connection and try again.</string>
+    <string name="error_request_failed">Request failed (%1$d)</string>
+    <string name="error_generic">Something went wrong</string>
+    <string name="could_not_load">Could not load</string>
+    <string name="could_not_save">Could not save</string>
+    <string name="could_not_send">Could not send</string>
+    <string name="could_not_update">Could not update</string>
+    <string name="could_not_open">Could not open</string>
+
+    <!-- Onboarding -->
+    <string name="welcome_title">Welcome to PhoneMail</string>
+    <string name="choose_language">Choose your language</string>
+    <string name="next">Next</string>
+    <string name="terms_title">Terms of Service</string>
+    <string name="terms_subtitle">Please read and accept to continue.</string>
+    <string name="terms_agree">Agree and continue</string>
+    <string name="terms_read_full">Read the full terms</string>
+    <string name="terms_1">Your PhoneMail address is your mobile number, like 9884690127@PhoneMail.Net.</string>
+    <string name="terms_2">We verify the number with a text message. PhoneMail never calls you.</string>
+    <string name="terms_3">People who don\'t have the app may get a text when you email them.</string>
+    <string name="terms_4">Your emails are stored on PhoneMail\'s server in India and are never sold or shared.</string>
+    <string name="terms_5">Don\'t use PhoneMail for spam or to harass anyone; accounts that do are closed.</string>
+    <string name="phone_title">Enter your phone number</string>
+    <string name="phone_subtitle">Your email address will be your number. We\'ll verify it with a text message.</string>
+    <string name="phone_placeholder">Phone number</string>
+    <string name="phone_use_sim">Use the number on this phone\'s SIM</string>
+    <string name="phone_your_address">Your address: %1$s</string>
+    <string name="verify_title">Verify +91 %1$s</string>
+    <string name="verify_sub_otp">Enter the 6-digit code we sent by SMS. It fills in by itself when it arrives.</string>
+    <string name="verify_sub_join">Your messages app is open with the text filled in. Tap Send; standard SMS charges may apply.</string>
+    <string name="verify_sub_password">Choose a password for your PhoneMail account.</string>
+    <string name="verify_sub_choose">How would you like to verify this number?</string>
+    <string name="change_number">Change number</string>
+    <string name="no_messages_app">No messages app found. Send \"%1$s\" to %2$s.</string>
+    <string name="code_expired">The code expired. Start again.</string>
+    <string name="send_code_sms">Send me a code by SMS</string>
+    <string name="or_verify_text">Or verify by sending a text</string>
+    <string name="verify_text">Verify by sending a text</string>
+    <string name="use_password">Use a password instead</string>
+    <string name="code_placeholder">6-digit code</string>
+    <string name="verify">Verify</string>
+    <string name="didnt_get_code">Didn\'t get it? Verify by sending a text</string>
+    <string name="send_this_text">Send this text</string>
+    <string name="to_number">to %1$s</string>
+    <string name="waiting_text">Waiting for your text… this continues by itself.</string>
+    <string name="open_messages_again">Open messages again</string>
+    <string name="password_placeholder">Password (8 or more characters)</string>
+    <string name="continue_">Continue</string>
+    <string name="password_hint">New number? This creates your account. Already registered? It signs you in.</string>
+    <string name="verify_text_instead">Verify by sending a text instead</string>
+    <string name="wrong_password">Wrong password for this number</string>
+    <string name="wrong_password_or_none">Wrong password, or this number has no password yet. Use a code by SMS instead.</string>
+    <string name="send_code_sms_instead">Send me a code by SMS instead</string>
+    <string name="new_code_in">Send a new code in %1$s</string>
+    <string name="new_code">Send a new code</string>
+    <string name="contacts_title">Find people you know</string>
+    <string name="contacts_body">PhoneMail reads the names and phone numbers in your contacts to suggest people as you type (for example, type “Asha” to email Asha at her PhoneMail address) and to show their names in your chats.</string>
+    <string name="contacts_private">Your contacts stay on this phone. PhoneMail never uploads them.</string>
+    <string name="not_now">Not now</string>
+
+    <!-- Home -->
+    <string name="chip_all">All</string>
+    <string name="chip_unread">Unread</string>
+    <string name="chip_attachments">Attachments</string>
+    <string name="chip_favorites">Favorites</string>
+    <string name="menu">Menu</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_drafts">Drafts</string>
+    <string name="menu_spam">Spam</string>
+    <string name="menu_trash">Trash</string>
+    <string name="menu_settings">Profile and settings</string>
+    <string name="compose">Compose</string>
+    <string name="search_hint">Search chats, contacts or type a phone number</string>
+    <string name="chat_with">Chat with %1$s</string>
+    <string name="no_chats">No chats yet. Tap ✎ to write your first email.</string>
+    <string name="nothing_here">Nothing here.</string>
+    <string name="group_created">Group created</string>
+    <string name="group">Group</string>
+    <string name="conversation">Conversation</string>
+    <string name="yesterday">Yesterday</string>
+
+    <!-- Chat -->
+    <string name="back">Back</string>
+    <string name="write_full_editor">Write in full editor</string>
+    <string name="start_first_email">Start your first email to %1$s. Add a subject, type your message and send.</string>
+    <string name="no_messages_yet">No messages yet.</string>
+    <string name="you">You</string>
+    <string name="earlier_message">Earlier message</string>
+    <string name="read_more">Read more</string>
+    <string name="replying_to">Replying to %1$s</string>
+    <string name="yourself">yourself</string>
+    <string name="full_editor">Full editor</string>
+    <string name="cancel_reply">Cancel reply</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+
+    <!-- Attachments -->
+    <string name="attach">Attach files</string>
+    <string name="remove">Remove</string>
+    <string name="uploading">Uploading %1$d%%</string>
+    <string name="upload_failed">Upload failed. Tap to remove.</string>
+    <string name="file_too_big">%1$s is larger than 25 MB</string>
+    <string name="files_total_too_big">Files may total at most 25 MB per email</string>
+    <string name="too_many_files">At most 20 files per email</string>
+    <string name="opening">Opening…</string>
+    <string name="no_app_to_open">No app on this phone can open this file</string>
+    <string name="wait_uploads">Wait for the files to finish uploading</string>
+    <string name="attachments">Attachments</string>
+    <string name="size_bytes">%1$d B</string>
+    <string name="size_kb">%1$s KB</string>
+    <string name="size_mb">%1$s MB</string>
+
+    <!-- Compose -->
+    <string name="reply">Reply</string>
+    <string name="compose_title">Compose</string>
+    <string name="close">Close</string>
+    <string name="to">To</string>
+    <string name="cc">Cc</string>
+    <string name="bcc">Bcc</string>
+    <string name="this_chat">This chat</string>
+    <string name="to_placeholder">Phone numbers or addresses</string>
+    <string name="pick_contact">Pick from contacts</string>
+    <string name="group_note">Sending to %1$d people starts a group chat. Later emails to one of them stay in your one-to-one chat.</string>
+    <string name="group_name">Group name (optional)</string>
+    <string name="write_reply">Write your reply</string>
+    <string name="compose_email">Compose email</string>
+    <string name="add_recipient">Add at least one recipient</string>
+
+    <!-- Message view -->
+    <string name="star">Star</string>
+    <string name="unstar">Unstar</string>
+    <string name="move_home">Move to Home</string>
+    <string name="spam">Spam</string>
+    <string name="delete">Delete</string>
+    <string name="no_subject">(no subject)</string>
+    <string name="from_line">From: %1$s</string>
+    <string name="to_line">To: %1$s</string>
+    <string name="cc_line">Cc: %1$s</string>
+    <string name="bcc_line">Bcc: %1$s</string>
+
+    <!-- Folders -->
+    <string name="trash_empty">Trash is empty.</string>
+    <string name="draft_to">To: %1$s</string>
+    <string name="no_one_yet">(no one yet)</string>
+    <string name="discard_draft">Discard draft</string>
+
+    <!-- Settings -->
+    <string name="add_your_name">Add your name</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="upload_photo">Upload photo</string>
+    <string name="pick_glyph">Pick a glyph</string>
+    <string name="use_bloom">Use my number bloom</string>
+    <string name="bloom_line">Your default picture is drawn from your phone number — no two numbers bloom alike.</string>
+    <string name="photo_saved">Photo saved</string>
+    <string name="picture_saved">Picture saved</string>
+    <string name="bloom_restored">Back to your number bloom</string>
+    <string name="glyph_colour">Colour</string>
+    <string name="cancel">Cancel</string>
+    <string name="your_name">Your name</string>
+    <string name="name_placeholder">Name shown to others</string>
+    <string name="save">Save</string>
+    <string name="name_saved">Name saved</string>
+    <string name="language">Language</string>
+    <string name="change">Change</string>
+    <string name="language_saved">Language saved</string>
+    <string name="change_password">Change password</string>
+    <string name="set_a_password">Set a password</string>
+    <string name="pw_forgot_hint">Forgot it? Use “Forgot password” on the sign-in page at mail.phonemail.net to set a new one with an SMS code.</string>
+    <string name="pw_sms_hint">You sign in with an SMS code. A password lets you sign in without one.</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password (8+ characters)</string>
+    <string name="new_password_again">New password again</string>
+    <string name="pw_mismatch">The new passwords don\'t match</string>
+    <string name="password_changed">Password changed</string>
+    <string name="password_set">Password set</string>
+    <string name="set_password">Set password</string>
+    <string name="aliases_title">Other addresses (aliases)</string>
+    <string name="aliases_hint">People can also email you at an alias. Mail to it arrives in your chats.</string>
+    <string name="remove_alias">Remove %1$s</string>
+    <string name="alias_removed">Alias removed</string>
+    <string name="alias_added">Alias added</string>
+    <string name="add">Add</string>
+    <string name="terms_link">Terms of Service</string>
+    <string name="help">Help (user manual)</string>
+    <string name="sign_out">Sign out</string>
+    <string name="version">PhoneMail %1$s</string>
+    <string name="choose_style">Choose a style</string>
+    <string name="style_original">Original</string>
+    <string name="style_oil">Oil painting</string>
+    <string name="style_pixel">Pixel</string>
+    <string name="style_outline">Outline</string>
+    <string name="style_pencil">Pencil sketch</string>
+    <string name="use_this_picture">Use this picture</string>
+    <string name="styles_private">Styles are applied on your device — only the picture you choose is uploaded.</string>
+    <!-- Blocking, reporting and deleting the account (App Store and Google Play rules) -->
+    <string name="more">More</string>
+    <string name="block">Block</string>
+    <string name="unblock">Unblock</string>
+    <string name="block_name">Block %1$s</string>
+    <string name="unblock_name">Unblock %1$s</string>
+    <string name="block_question">Block %1$s?</string>
+    <string name="block_explain">Their emails will go to Spam. You can unblock them in Settings.</string>
+    <string name="blocked_done">%1$s is blocked. Their emails will go to Spam.</string>
+    <string name="unblocked_done">%1$s is unblocked</string>
+    <string name="report_spam">Report spam</string>
+    <string name="blocked_people">Blocked people</string>
+    <string name="no_one_blocked">No one is blocked.</string>
+    <string name="blocked_hint">Mail from people you block goes to Spam.</string>
+    <string name="delete_account">Delete account</string>
+    <string name="delete_my_account">Delete my account</string>
+    <string name="delete_warning">Deleting your account erases your number, profile, aliases and your copies of mail. Mail you already sent stays with the people who received it. This can\'t be undone.</string>
+    <string name="your_password">Your password</string>
+    <string name="confirm_with_password">Confirm with your password.</string>
+    <string name="confirm_with_code">Confirm with a code we text you.</string>
+
+    <!-- Chat lists in the menu (the same as the web app) -->
+    <string name="menu_inbox">Inbox</string>
+    <string name="menu_unread">Unread</string>
+    <string name="menu_attachments">With attachments</string>
+    <string name="menu_starred">Starred</string>
+    <string name="menu_snoozed">Snoozed</string>
+    <string name="menu_all_mail">All mail</string>
+    <string name="menu_archived">Archived</string>
+    <string name="menu_scheduled">Scheduled</string>
+    <string name="menu_folders">Folders</string>
+    <string name="folder">Folder</string>
+    <string name="until_time">Until %1$s</string>
+    <string name="archived_label">Archived</string>
+    <string name="muted">Muted</string>
+
+    <!-- Acting on chats (picked in a list, or from a chat's menu) -->
+    <string name="select">Select</string>
+    <string name="select_all">Select all</string>
+    <string name="selected_count">%1$d selected</string>
+    <string name="archive">Archive</string>
+    <string name="move_to_inbox">Move to Inbox</string>
+    <string name="mark_read">Mark as read</string>
+    <string name="mark_unread">Mark as unread</string>
+    <string name="snooze">Snooze</string>
+    <string name="snooze_ellipsis">Snooze…</string>
+    <string name="unsnooze">Unsnooze</string>
+    <string name="mute">Mute</string>
+    <string name="unmute">Unmute</string>
+    <string name="move_to_folder">Move to folder</string>
+    <string name="move_to_folder_ellipsis">Move to folder…</string>
+    <string name="remove_from_folder">Remove from folder</string>
+    <string name="snooze_title">Snooze until…</string>
+    <string name="snooze_later_today">Later today</string>
+    <string name="snooze_tomorrow">Tomorrow</string>
+    <string name="snooze_weekend">This weekend</string>
+    <string name="snooze_next_week">Next week</string>
+    <string name="undo">Undo</string>
+    <string name="done_archived">Archived</string>
+    <string name="done_unarchived">Moved to Inbox</string>
+    <string name="done_trashed">Moved to Trash</string>
+    <string name="done_read">Marked as read</string>
+    <string name="done_unread">Marked as unread</string>
+    <string name="done_snoozed">Snoozed until %1$s</string>
+    <string name="done_unsnoozed">Back in your Inbox</string>
+    <string name="done_muted">Chat muted</string>
+    <string name="done_unmuted">Chat unmuted</string>
+    <string name="done_moved">Moved to %1$s</string>
+    <string name="done_unfiled">Removed from the folder</string>
+
+    <!-- The user's own folders -->
+    <string name="new_folder">New folder</string>
+    <string name="folder_name">Folder name</string>
+    <string name="folder_name_hint">Up to %1$d characters</string>
+    <string name="create">Create</string>
+    <string name="rename">Rename</string>
+    <string name="rename_folder">Rename folder</string>
+    <string name="delete_folder">Delete folder</string>
+    <string name="delete_folder_question">Delete the folder “%1$s”?</string>
+    <string name="delete_folder_explain">Its conversations stay in All mail.</string>
+    <string name="folder_created">Folder “%1$s” created</string>
+    <string name="folder_renamed">Folder renamed</string>
+    <string name="folder_deleted">Folder deleted</string>
+    <string name="no_folders_yet">No folders yet.</string>
+
+    <!-- Scheduled emails -->
+    <string name="scheduled_for">Sends %1$s</string>
+    <string name="cancel_send">Cancel send</string>
+    <string name="send_cancelled">It won\'t be sent. It\'s back in Drafts.</string>
+    <string name="nothing_scheduled">Nothing scheduled.</string>
+
+    <!-- Appearance (light or dark) -->
+    <string name="appearance">Appearance</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <!-- New-mail notifications (push) -->
+    <string name="channel_new_mail">New mail</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_on">New mail notifications are on.</string>
+    <string name="notifications_off">Notifications are off. Turn them on in your phone\'s settings to hear about new mail.</string>
+    <string name="open_settings">Open settings</string>
+    <string name="notifications_title">Know when mail arrives</string>
+    <string name="notifications_body">Let PhoneMail notify you about new mail. Reply or mark it as read right from the notification.</string>
+    <string name="notifications_allow">Allow notifications</string>
+    <string name="notifications_watch">Notifications show on your smartwatch too, with Reply.</string>
+    <string name="could_not_mark_read">Couldn\'t mark it as read. Try again.</string>
+</resources>
