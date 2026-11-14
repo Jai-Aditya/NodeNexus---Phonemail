@@ -197,7 +197,7 @@ final class API {
     func checkPassword(phone: String, password: String) async throws {
         let probe = API(base: base)
         probe.token = try await probe.passwordLogin(phone: phone, password: password).token
-        try? await probe.raw("POST", "/auth/logout")
+        _ = try? await probe.raw("POST", "/auth/logout")
     }
 
     private func auth(_ a: WAuth) -> AuthResponse { AuthResponse(token: a.token ?? "", user: user(a.user)) }
