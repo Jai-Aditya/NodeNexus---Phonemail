@@ -29,7 +29,7 @@ android {
         minSdk = 26
         targetSdk = 36 // Google Play: new apps and updates must target Android 16 (API 36) since 31 Aug 2026
         versionCode = 14 // 9 is the Wear OS app (wear/); phone and watch codes must never clash
-        versionName = "1.1.1"
+        versionName = "1.1.2"
         // Production api (nginx on the shankars Pi). Debug builds can point elsewhere, see below.
         buildConfigField("String", "API_BASE", "\"https://mail.phonemail.net/api\"")
         buildConfigField("String", "MAIL_DOMAIN", "\"phonemail.net\"")

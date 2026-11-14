@@ -10,7 +10,7 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "1.1.1"
+    MARKETING_VERSION: "1.1.2"
     CURRENT_PROJECT_VERSION: "14"
     DEVELOPMENT_TEAM: ""          # set once the Apple Developer account is active
     CODE_SIGN_STYLE: Automatic
