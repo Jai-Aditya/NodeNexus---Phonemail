@@ -150,6 +150,39 @@ func TestBlock(t *testing.T) {
 	}
 }
 
+// Not spam: a first email that went straight to Spam moves to the inbox and its chat
+// appears on Home, unread; moving it back to Spam takes it off the inbox counts again.
+func TestNotSpam(t *testing.T) {
+	s, ctx := setup(t)
+	a, aAddr := user(t, s, ctx, 1)
+	b, bAddr := user(t, s, ctx, 2)
+	must(s.Block(ctx, b, aAddr))
+	conv := must(s.Send(ctx, a, SendRequest{Recipients: Recipients{To: to(bAddr)}, BodyText: "hello"})).Conversations[0]
+	for _, c := range must(s.Home(ctx, b, "all", Cursor{})) {
+		if c.ConversationID == conv {
+			t.Fatal("mail that went to Spam must not be on Home")
+		}
+	}
+	spam := must(s.Folder(ctx, b, "spam", Cursor{}))
+	if len(spam) != 1 {
+		t.Fatalf("want 1 in Spam, got %d", len(spam))
+	}
+	inbox := "inbox"
+	must(0, s.UpdatePointer(ctx, b, spam[0].ID, &conv, PointerPatch{Folder: &inbox}))
+	row := homeRow(t, s, ctx, b, conv)
+	if row.UnreadCount != 1 || row.Snippet == "" {
+		t.Fatalf("after Not spam the chat shows on Home, unread, with a preview: %+v", row)
+	}
+	if n := len(must(s.Folder(ctx, b, "spam", Cursor{}))); n != 0 {
+		t.Fatalf("Spam should be empty, has %d", n)
+	}
+	back := "spam"
+	must(0, s.UpdatePointer(ctx, b, spam[0].ID, &conv, PointerPatch{Folder: &back}))
+	if homeRow(t, s, ctx, b, conv).UnreadCount != 0 {
+		t.Fatal("reported again: nothing unread left in the inbox")
+	}
+}
+
 // Reactions: one per person, replaced by a new one, removed with ""; Bcc'd people can't.
 func TestReactions(t *testing.T) {
 	s, ctx := setup(t)

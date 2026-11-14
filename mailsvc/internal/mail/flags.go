@@ -71,6 +71,16 @@ func (s *Service) UpdatePointer(ctx context.Context, userID, msgID int64, convID
 		}
 		for _, c := range changes {
 			if c.oldFolder != c.newFolder {
+				// "Not spam" (or restoring from Trash): mail that went straight to Spam never got a
+				// Home row, so make one, and show the chat again like new mail does.
+				if c.newFolder == "inbox" {
+					if _, err := tx.Exec(ctx, `
+						INSERT INTO user_conversations (user_id, conversation_id) VALUES ($1, $2)
+						ON CONFLICT (user_id, conversation_id) DO UPDATE SET hidden = false, snoozed_until = NULL`,
+						userID, c.conv); err != nil {
+						return err
+					}
+				}
 				// Moving in or out of the inbox changes the preview and flags: recompute.
 				if err := refreshChat(ctx, tx, userID, c.conv); err != nil {
 					return err

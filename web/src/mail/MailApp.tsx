@@ -420,7 +420,7 @@ function MessageDetail({ id, conversationId, onCompose }: { id: number; conversa
           <AttachmentList attachments={m.attachments} />
           <div className="mail-actions">
             {m.folder !== 'inbox' ? (
-              <button className="btn-outline" onClick={async () => { await mail.flag(m.id, m.conversation_id, { folder: 'inbox' }); navigate(`/c/${m.conversation_id}`); }}>{t('Move to Inbox')}</button>
+              <button className="btn-outline" onClick={async () => { await mail.flag(m.id, m.conversation_id, { folder: 'inbox' }); navigate(`/c/${m.conversation_id}`); }}>{t(m.folder === 'spam' ? 'Not spam' : 'Move to Inbox')}</button>
             ) : (
               <button className="btn-outline" onClick={() => navigate(`/c/${m.conversation_id}`)}>{t('Open conversation')}</button>
             )}
