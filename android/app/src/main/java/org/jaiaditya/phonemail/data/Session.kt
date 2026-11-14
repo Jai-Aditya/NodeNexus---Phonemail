@@ -112,6 +112,7 @@ class Session(context: Context) {
     init {
         loadContacts()
         if (token != null) {
+            Biometric.offered = true // opened signed in: signing out later shouldn't pop up the fingerprint sheet
             connectLive()
             scope.launch { runCatching { refreshUser() } } // a 401 signs out via onUnauthorized
             registerPush()
@@ -139,6 +140,7 @@ class Session(context: Context) {
     }
 
     fun signIn(auth: AuthResponse) {
+        Biometric.offered = true // signing out later shouldn't pop up the fingerprint sheet
         token = auth.token
         prefs.edit().putString(KEY_TOKEN, auth.token).apply()
         setUser(auth.user)

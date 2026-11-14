@@ -23,6 +23,29 @@
           }
         }
       }
+    },
+    "NSFaceIDUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail uses Face ID to sign you in without a code or typing your password, only if you turn it on."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail Face ID से आपको कोड या पासवर्ड टाइप किए बिना साइन इन कराता है, केवल तब जब आप इसे चालू करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "நீங்கள் இயக்கினால் மட்டும், குறியீடு அல்லது கடவுச்சொல்லைத் தட்டச்சு செய்யாமல் Face ID மூலம் PhoneMail உங்களை உள்நுழைய வைக்கும்."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

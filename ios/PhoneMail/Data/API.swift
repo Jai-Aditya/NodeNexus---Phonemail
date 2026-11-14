@@ -165,7 +165,7 @@ final class API {
     func authMode() async throws -> AuthMode {
         let c: WAuthConfig = try await call("GET", "/auth/config")
         // Texting JOIN still creates an account, but the api can't link that text to this phone's sign-in.
-        return AuthMode(mode: c.mode, smsJoin: false, smsTo: c.signupNumber)
+        return AuthMode(mode: c.mode, smsJoin: false, smsTo: c.signupNumber, passwordReset: c.passwordReset ?? false)
     }
     func otpStart(phone: String) async throws { try await raw("POST", "/auth/otp/start", body: ["phone": phone]) }
     func otpVerify(phone: String, code: String) async throws -> AuthResponse {
@@ -181,6 +181,23 @@ final class API {
     /// Works only when the server is in password mode; otherwise the api asks for a code instead (its message is shown).
     func passwordRegister(phone: String, password: String) async throws -> AuthResponse {
         auth(try await call("POST", "/auth/register", body: ["phone": phone, "password": password, "client": "mobile"]))
+    }
+
+    /// Forgot password, step 1: a code by SMS. The api answers the same whether or not the number has an account
+    /// (it only texts numbers that have one).
+    func passwordResetStart(phone: String) async throws {
+        try await raw("POST", "/auth/password/reset/start", body: ["phone": phone])
+    }
+    /// Step 2: the code and the new password. Signs in here and out everywhere else.
+    func passwordReset(phone: String, code: String, newPassword: String) async throws -> AuthResponse {
+        auth(try await call("POST", "/auth/password/reset",
+                            body: ["phone": phone, "code": code, "new_password": newPassword, "client": "mobile"]))
+    }
+    /// Throws unless this is the account's password. Signs in on a separate session and ends it straight away.
+    func checkPassword(phone: String, password: String) async throws {
+        let probe = API(base: base)
+        probe.token = try await probe.passwordLogin(phone: phone, password: password).token
+        try? await probe.raw("POST", "/auth/logout")
     }
 
     private func auth(_ a: WAuth) -> AuthResponse { AuthResponse(token: a.token ?? "", user: user(a.user)) }

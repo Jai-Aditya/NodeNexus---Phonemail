@@ -34,11 +34,22 @@ struct ErrorText: View {
 struct OnboardingPage<Content: View, Footer: View>: View {
     let title: String
     var subtitle: String?
+    /// A "‹ label" button at the top left, e.g. back to the phone number.
+    var back: (label: String, action: () -> Void)? = nil
     @ViewBuilder var content: Content
     @ViewBuilder var footer: Footer
 
     var body: some View {
         VStack(spacing: 0) {
+            if let back {
+                Button(action: back.action) {
+                    Label(back.label, systemImage: "chevron.backward").font(.body.weight(.medium))
+                }
+                .foregroundStyle(Palette.header)
+                .accessibilityIdentifier("back")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16).padding(.top, 8)
+            }
             ScrollView {
                 VStack(spacing: 14) {
                     Text(title).font(.title2.weight(.semibold)).foregroundStyle(Palette.header).multilineTextAlignment(.center)

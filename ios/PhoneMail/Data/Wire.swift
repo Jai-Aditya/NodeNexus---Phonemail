@@ -25,6 +25,7 @@ struct WAuth: Decodable {
 struct WAuthConfig: Decodable {
     let mode: String
     let signupNumber: String?
+    let passwordReset: Bool?
 }
 
 struct WPerson: Decodable {

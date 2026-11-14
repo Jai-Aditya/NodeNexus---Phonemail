@@ -29,7 +29,8 @@ data class BlockedPerson(val userId: Long, val address: String, val name: String
 data class AuthResponse(val token: String, val user: User)
 
 @Serializable
-data class AuthMode(val mode: String, val smsJoin: Boolean = false, val smsTo: String? = null)
+/** [passwordReset]: "Forgot password?" works (the api can text a code to set a new one). */
+data class AuthMode(val mode: String, val smsJoin: Boolean = false, val smsTo: String? = null, val passwordReset: Boolean = false)
 
 @Serializable
 data class JoinStart(

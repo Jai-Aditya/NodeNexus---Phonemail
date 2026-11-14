@@ -116,7 +116,9 @@ fun MessageScreen(session: Session, id: Long, back: () -> Unit, reply: (Message)
                     HorizontalDivider(color = Palette.Divider)
                     Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
                         if (msg.folder != "inbox") {
-                            TextButton(onClick = { change("folder" to "inbox", leave = true) }) { Text(stringResource(R.string.move_home), color = Palette.Header) }
+                            TextButton(onClick = { change("folder" to "inbox", leave = true) }) {
+                                Text(stringResource(if (msg.folder == "spam") R.string.not_spam else R.string.move_home), color = Palette.Header)
+                            }
                         } else {
                             TextButton(onClick = { reply(msg) }) { Text(stringResource(R.string.reply), color = Palette.Header) }
                             if (!msg.isMine) {

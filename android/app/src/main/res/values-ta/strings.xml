@@ -127,6 +127,7 @@
     <string name="star">நட்சத்திரமிடு</string>
     <string name="unstar">நட்சத்திரத்தை நீக்கு</string>
     <string name="move_home">முகப்புக்கு நகர்த்து</string>
+    <string name="not_spam">ஸ்பேம் அல்ல</string>
     <string name="spam">ஸ்பேம்</string>
     <string name="delete">நீக்கு</string>
     <string name="no_subject">(தலைப்பு இல்லை)</string>
@@ -288,4 +289,22 @@
     <string name="notifications_allow">அறிவிப்புகளை அனுமதி</string>
     <string name="notifications_watch">அறிவிப்புகள் உங்கள் ஸ்மார்ட்வாட்சிலும் தோன்றும்; அங்கிருந்தும் பதில் அனுப்பலாம்.</string>
     <string name="could_not_mark_read">படித்ததாகக் குறிக்க முடியவில்லை. மீண்டும் முயலவும்.</string>
+    <string name="forgot_password">கடவுச்சொல் மறந்துவிட்டதா?</string>
+    <string name="verify_sub_password_existing">உங்கள் கடவுச்சொல்லை உள்ளிடவும்.</string>
+    <string name="verify_sub_reset">SMS மூலம் அனுப்பிய குறியீட்டை உள்ளிட்டு, புதிய கடவுச்சொல்லைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="new_password_placeholder">புதிய கடவுச்சொல் (8 அல்லது அதற்கு மேற்பட்ட எழுத்துகள்)</string>
+    <string name="set_new_password">புதிய கடவுச்சொல்லை அமை</string>
+    <string name="bio_next_time">அடுத்த முறை கைரேகை அல்லது முகம் மூலம் உள்நுழைக</string>
+    <string name="bio_sign_in">கைரேகை அல்லது முகம் மூலம் உள்நுழைக</string>
+    <string name="bio_prompt_title">PhoneMail-இல் உள்நுழைக</string>
+    <string name="or_other_number">அல்லது வேறு எண்ணைப் பயன்படுத்தவும்</string>
+    <string name="bio_stopped">சேமித்த உள்நுழைவு இனி வேலை செய்யாது. உங்கள் கடவுச்சொல் அல்லது குறியீட்டைக் கொண்டு உள்நுழையவும்.</string>
+    <string name="bio_settings_title">கைரேகை அல்லது முகம் மூலம் உள்நுழைவு</string>
+    <string name="bio_settings_hint">குறியீடு அல்லது கடவுச்சொல்லைத் தட்டச்சு செய்யாமல் உள்நுழையலாம். கடவுச்சொல் இந்தத் தொலைபேசியிலேயே உங்கள் கைரேகை அல்லது முகத்தால் பூட்டப்பட்டிருக்கும்.</string>
+    <string name="bio_need_password">கைரேகை அல்லது முக உள்நுழைவைப் பயன்படுத்த முதலில் கடவுச்சொல்லை அமைக்கவும்.</string>
+    <string name="bio_enter_password">கைரேகை அல்லது முக உள்நுழைவை இயக்க உங்கள் PhoneMail கடவுச்சொல்லை உள்ளிடவும்.</string>
+    <string name="bio_on">கைரேகை அல்லது முக உள்நுழைவு இயக்கப்பட்டது</string>
+    <string name="bio_off">கைரேகை அல்லது முக உள்நுழைவு முடக்கப்பட்டது</string>
+    <string name="password_label">கடவுச்சொல்</string>
+    <string name="turn_on">இயக்கு</string>
 </resources>

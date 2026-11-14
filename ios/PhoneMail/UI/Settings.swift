@@ -19,6 +19,9 @@ struct SettingsView: View {
     @State private var styling: StylingPhoto?
     @State private var blocked: [BlockedPerson] = []
     @State private var showDelete = false
+    @State private var askBiometricPassword = false
+    @State private var biometricPassword = ""
+    @State private var biometricTick = 0
 
     var body: some View {
         Form {
@@ -79,6 +82,8 @@ struct SettingsView: View {
                         act(u.hasPassword == true ? L("Password changed") : L("Password set")) {
                             try await session.api.changePassword(current: cur, new: new)
                             currentPassword = ""; newPassword = ""; newPassword2 = ""
+                            // Face ID sign-in keeps working with the new password (one more face or finger).
+                            if biometricOn(u), !(await Biometric.save(phone: myNumber(u), password: new)) { Biometric.forget() }
                         }
                     }
                     .disabled(newPassword.count < 8)
@@ -89,6 +94,7 @@ struct SettingsView: View {
                          ? L("Forgot it? Use “Forgot password” on the sign-in page at mail.phonemail.net to set a new one with an SMS code.")
                          : L("You sign in with an SMS code. A password lets you sign in without one."))
                 }
+                biometricSection(u)
                 Section {
                     ForEach(u.aliases ?? [], id: \.self) { a in
                         Text(a).swipeActions {
@@ -176,6 +182,66 @@ struct SettingsView: View {
             guard let item else { return }
             photoItem = nil
             Task { await uploadPhoto(item) }
+        }
+    }
+
+    /// Sign in with Face ID / Touch ID (Biometric): needs a password, which is checked with the api before it is kept.
+    @ViewBuilder private func biometricSection(_ u: User) -> some View {
+        if let name = Biometric.name {
+            Section {
+                if u.hasPassword == true || biometricOn(u) {
+                    Toggle(L("Sign in with %@", name), isOn: Binding(
+                        get: { biometricOn(u) },
+                        set: { on in
+                            message = ""; error = ""
+                            if on {
+                                askBiometricPassword = true
+                            } else {
+                                Biometric.forget()
+                                biometricTick += 1
+                                message = L("%@ is off", name)
+                            }
+                        }
+                    ))
+                    .accessibilityIdentifier("biometricToggle")
+                } else {
+                    Text(L("Set a password first to use %@.", name)).foregroundStyle(Palette.muted)
+                }
+            } header: {
+                Text(name)
+            } footer: {
+                Text(L("Sign in without a code or typing your password. The password stays on this iPhone, locked by %@.", name))
+            }
+            .alert(L("Your password"), isPresented: $askBiometricPassword) {
+                SecureField(L("Password"), text: $biometricPassword)
+                Button(L("Cancel"), role: .cancel) { biometricPassword = "" }
+                Button(L("Turn on")) { turnOnBiometric(u, name: name) }
+            } message: {
+                Text(L("Enter your PhoneMail password to turn on %@.", name))
+            }
+        }
+    }
+
+    private func myNumber(_ u: User) -> String { String(u.phone.filter(\.isNumber).suffix(10)) }
+
+    private func biometricOn(_ u: User) -> Bool {
+        _ = biometricTick // redraw after turning it on or off
+        return Biometric.phone == myNumber(u)
+    }
+
+    private func turnOnBiometric(_ u: User, name: String) {
+        let password = biometricPassword
+        biometricPassword = ""
+        Task {
+            do {
+                try await session.api.checkPassword(phone: myNumber(u), password: password)
+                if await Biometric.save(phone: myNumber(u), password: password) { message = L("%@ is on", name) }
+            } catch let e as APIError where e.status == 401 {
+                error = L("Wrong password for this number")
+            } catch {
+                self.error = error.localizedDescription
+            }
+            biometricTick += 1
         }
     }
 

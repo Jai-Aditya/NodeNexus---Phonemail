@@ -6,7 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -46,7 +46,8 @@ import org.jaiaditya.phonemail.ui.SettingsScreen
 import org.jaiaditya.phonemail.ui.TermsScreen
 import org.jaiaditya.phonemail.ui.VerifyScreen
 
-class MainActivity : ComponentActivity() {
+// A FragmentActivity (still a ComponentActivity) because the fingerprint/face sheet needs one (data/Biometric.kt).
+class MainActivity : FragmentActivity() {
     /** A chat to open, from a tapped new-mail notification (PhoneMailNav opens it once signed in). */
     private val opening = MutableStateFlow<NewMail?>(null)
 
@@ -132,6 +133,11 @@ private fun PhoneMailNav(session: Session, opening: MutableStateFlow<NewMail?>) 
     }
     // After sign-in: contacts, then notifications (each asked once, each skippable), then Home.
     fun afterContacts() = if (Push.shouldAsk(context, session)) "notifications" else "home"
+    fun afterSignIn() {
+        // Contacts access is asked once, right after sign-in (brief: permissions at the right stage).
+        val ask = !session.contactsAsked && !Contacts.granted(context)
+        nav.navigate(if (ask) "contacts" else afterContacts()) { popUpTo(0) }
+    }
 
     NavHost(navController = nav, startDestination = start) {
         composable("language") {
@@ -146,15 +152,14 @@ private fun PhoneMailNav(session: Session, opening: MutableStateFlow<NewMail?>) 
                 nav.navigate("phone")
             }
         }
-        composable("phone") { PhoneScreen { digits -> nav.navigate("verify/$digits") } }
-        composable("verify/{phone}") { e ->
+        composable("phone") {
+            PhoneScreen(session, onSignedIn = ::afterSignIn, onNext = { nav.navigate("verify/$it") }, onForgot = { nav.navigate("verify/$it?forgot=true") })
+        }
+        // forgot: "Forgot password?" on the phone screen; starts with a code to set a new password.
+        composable("verify/{phone}?forgot={forgot}", arguments = listOf(navArgument("forgot") { type = NavType.BoolType; defaultValue = false })) { e ->
             VerifyScreen(
-                session, e.arguments?.getString("phone").orEmpty(),
-                onSignedIn = {
-                    // Contacts access is asked once, right after sign-in (brief: permissions at the right stage).
-                    val ask = !session.contactsAsked && !Contacts.granted(context)
-                    nav.navigate(if (ask) "contacts" else afterContacts()) { popUpTo(0) }
-                },
+                session, e.arguments?.getString("phone").orEmpty(), e.arguments?.getBoolean("forgot") ?: false,
+                onSignedIn = ::afterSignIn,
                 onChangeNumber = { nav.popBackStack() },
             )
         }

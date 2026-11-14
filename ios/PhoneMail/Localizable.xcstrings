@@ -18,6 +18,40 @@
         }
       }
     },
+    "%@ is off": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ बंद है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ முடக்கப்பட்டது"
+          }
+        }
+      }
+    },
+    "%@ is on": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ चालू है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ இயக்கப்பட்டது"
+          }
+        }
+      }
+    },
     "%@ is too big: files can be up to 25 MB.": {
       "extractionState": "manual",
       "localizations": {
@@ -1174,6 +1208,57 @@
         }
       }
     },
+    "Enter the code we sent by SMS and choose a new password.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS से भेजा गया कोड डालें और नया पासवर्ड चुनें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SMS மூலம் அனுப்பிய குறியீட்டை உள்ளிட்டு, புதிய கடவுச்சொல்லைத் தேர்ந்தெடுக்கவும்."
+          }
+        }
+      }
+    },
+    "Enter your PhoneMail password to turn on %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ चालू करने के लिए अपना PhoneMail पासवर्ड डालें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ இயக்க உங்கள் PhoneMail கடவுச்சொல்லை உள்ளிடவும்."
+          }
+        }
+      }
+    },
+    "Enter your password.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना पासवर्ड डालें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "உங்கள் கடவுச்சொல்லை உள்ளிடவும்."
+          }
+        }
+      }
+    },
     "Enter your phone number": {
       "extractionState": "manual",
       "localizations": {
@@ -1323,6 +1408,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "மறந்துவிட்டீர்களா? mail.phonemail.net உள்நுழைவுப் பக்கத்தில் “கடவுச்சொல் மறந்துவிட்டதா” என்பதைப் பயன்படுத்தி, SMS குறியீட்டுடன் புதியதை அமைக்கலாம்."
+          }
+        }
+      }
+    },
+    "Forgot password?": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड भूल गए?"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல் மறந்துவிட்டதா?"
           }
         }
       }
@@ -1973,6 +2075,23 @@
         }
       }
     },
+    "New password (8 or more characters)": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पासवर्ड (8 या अधिक अक्षर)"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய கடவுச்சொல் (8 அல்லது அதற்கு மேற்பட்ட எழுத்துகள்)"
+          }
+        }
+      }
+    },
     "New password (8+ characters)": {
       "extractionState": "manual",
       "localizations": {
@@ -2088,6 +2207,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "யாரும் தடுக்கப்படவில்லை."
+          }
+        }
+      }
+    },
+    "Not spam": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्पैम नहीं है"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ஸ்பேம் அல்ல"
           }
         }
       }
@@ -2279,6 +2415,23 @@
         }
       }
     },
+    "Or use another number": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "या कोई दूसरा नंबर इस्तेमाल करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அல்லது வேறு எண்ணைப் பயன்படுத்தவும்"
+          }
+        }
+      }
+    },
     "Or verify by sending a text": {
       "extractionState": "manual",
       "localizations": {
@@ -2343,6 +2496,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "கோட்டோவியம்"
+          }
+        }
+      }
+    },
+    "Password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पासवर्ड"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "கடவுச்சொல்"
           }
         }
       }
@@ -3180,6 +3350,40 @@
         }
       }
     },
+    "Set a password first to use %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ इस्तेमाल करने के लिए पहले पासवर्ड सेट करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ பயன்படுத்த முதலில் கடவுச்சொல்லை அமைக்கவும்."
+          }
+        }
+      }
+    },
+    "Set new password": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पासवर्ड सेट करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "புதிய கடவுச்சொல்லை அமை"
+          }
+        }
+      }
+    },
     "Set password": {
       "extractionState": "manual",
       "localizations": {
@@ -3210,6 +3414,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "அமைப்புகள்"
+          }
+        }
+      }
+    },
+    "Sign in to PhoneMail as +91 %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail में +91 %@ के रूप में साइन इन करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PhoneMail-இல் +91 %@ ஆக உள்நுழைக"
+          }
+        }
+      }
+    },
+    "Sign in with %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ से साइन इन करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ மூலம் உள்நுழைக"
+          }
+        }
+      }
+    },
+    "Sign in with %@ next time": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अगली बार %@ से साइन इन करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "அடுத்த முறை %@ மூலம் உள்நுழைக"
+          }
+        }
+      }
+    },
+    "Sign in without a code or typing your password. The password stays on this iPhone, locked by %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोड या पासवर्ड टाइप किए बिना साइन इन करें। पासवर्ड इसी iPhone पर %@ से सुरक्षित रहता है।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "குறியீடு அல்லது கடவுச்சொல்லைத் தட்டச்சு செய்யாமல் உள்நுழையலாம். கடவுச்சொல் இந்த iPhone-இலேயே %@ மூலம் பூட்டப்பட்டிருக்கும்."
           }
         }
       }
@@ -3703,6 +3975,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "மீண்டும் முயலவும்"
+          }
+        }
+      }
+    },
+    "Turn on": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चालू करें"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "இயக்கு"
           }
         }
       }
@@ -4417,6 +4706,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "உங்கள் கடவுச்சொல்"
+          }
+        }
+      }
+    },
+    "Your saved sign-in no longer works. Sign in with your password or a code.": {
+      "extractionState": "manual",
+      "localizations": {
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सहेजा गया साइन-इन अब काम नहीं करता। अपने पासवर्ड या कोड से साइन इन करें।"
+          }
+        },
+        "ta": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "சேமித்த உள்நுழைவு இனி வேலை செய்யாது. உங்கள் கடவுச்சொல் அல்லது குறியீட்டைக் கொண்டு உள்நுழையவும்."
           }
         }
       }

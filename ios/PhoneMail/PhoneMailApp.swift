@@ -66,7 +66,8 @@ private struct Localized<Content: View>: View {
     }
 }
 
-private enum Step: Hashable { case terms, phone, verify(String) }
+/// `verify(number, forgot)`: forgot starts with a code to set a new password.
+private enum Step: Hashable { case terms, phone, verify(String, Bool) }
 
 private struct OnboardingFlow: View {
     @Environment(Session.self) private var session
@@ -78,8 +79,8 @@ private struct OnboardingFlow: View {
                 .navigationDestination(for: Step.self) { step in
                     switch step {
                     case .terms: TermsView { path.append(.phone) }
-                    case .phone: PhoneView { path.append(.verify($0)) }
-                    case .verify(let phone): VerifyView(phone: phone) { path.removeLast() }
+                    case .phone: phoneView
+                    case .verify(let phone, let forgot): VerifyView(phone: phone, forgot: forgot) { path.removeLast() }
                     }
                 }
         }
@@ -92,8 +93,12 @@ private struct OnboardingFlow: View {
         } else if !session.termsAccepted {
             TermsView { path.append(.phone) }
         } else {
-            PhoneView { path.append(.verify($0)) }
+            phoneView
         }
+    }
+
+    private var phoneView: some View {
+        PhoneView(next: { path.append(.verify($0, false)) }, forgot: { path.append(.verify($0, true)) })
     }
 }
 

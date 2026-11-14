@@ -38,6 +38,8 @@ struct AuthMode: Codable {
     let mode: String // "otp" or "password"
     let smsJoin: Bool
     let smsTo: String?
+    /// "Forgot password?" works (the api can text a code to set a new one).
+    var passwordReset = false
 }
 
 struct JoinStart: Codable {

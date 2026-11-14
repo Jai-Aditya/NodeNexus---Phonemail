@@ -37,6 +37,8 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.EmojiEmotions
 import androidx.compose.material.icons.filled.LocalFlorist
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -81,6 +83,8 @@ import kotlinx.coroutines.withContext
 import org.jaiaditya.phonemail.BuildConfig
 import org.jaiaditya.phonemail.push.Push
 import org.jaiaditya.phonemail.R
+import org.jaiaditya.phonemail.data.ApiException
+import org.jaiaditya.phonemail.data.Biometric
 import org.jaiaditya.phonemail.data.BlockedPerson
 import org.jaiaditya.phonemail.data.Session
 import org.jaiaditya.phonemail.data.StockAvatars
@@ -108,6 +112,10 @@ fun SettingsScreen(session: Session, back: () -> Unit, onLanguage: (String) -> U
     var newPw by remember { mutableStateOf("") }
     var newPw2 by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
+    // Fingerprint or face sign-in (data/Biometric.kt) for this account; askBio shows the password dialog that turns it on.
+    val myNumber = user?.phone.orEmpty().filter { it.isDigit() }.takeLast(10)
+    var bioOn by remember(myNumber) { mutableStateOf(Biometric.phone(context) == myNumber) }
+    var askBio by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf("") }
     var pickLanguage by remember { mutableStateOf(false) }
     var glyphSheet by remember { mutableStateOf(false) }
@@ -266,10 +274,39 @@ fun SettingsScreen(session: Session, back: () -> Unit, onLanguage: (String) -> U
                         act(if (u.hasPassword) R.string.password_changed else R.string.password_set) {
                             session.api.changePassword(cur, next)
                             currentPw = ""; newPw = ""; newPw2 = ""
+                            // Fingerprint or face sign-in keeps working with the new password (one more touch or look).
+                            if (bioOn && !Biometric.save(context, myNumber, next, context.getString(R.string.bio_prompt_title), context.getString(R.string.cancel))) {
+                                Biometric.forget(context); bioOn = false
+                            }
                         }
                     }
                 },
             ) { Text(stringResource(if (u.hasPassword) R.string.change_password else R.string.set_password), color = Palette.Header) }
+
+            if (Biometric.available(context)) {
+                Section(stringResource(R.string.bio_settings_title))
+                Text(stringResource(R.string.bio_settings_hint), color = Palette.Muted, fontSize = 14.sp)
+                if (u.hasPassword || bioOn) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(stringResource(R.string.bio_sign_in), color = Palette.Text, modifier = Modifier.weight(1f))
+                        Switch(
+                            checked = bioOn,
+                            onCheckedChange = { on ->
+                                message = ""; error = ""
+                                if (on) {
+                                    askBio = true
+                                } else {
+                                    Biometric.forget(context); bioOn = false
+                                    message = context.getString(R.string.bio_off)
+                                }
+                            },
+                            colors = SwitchDefaults.colors(checkedTrackColor = Palette.Header),
+                        )
+                    }
+                } else {
+                    Text(stringResource(R.string.bio_need_password), color = Palette.Muted, fontSize = 14.sp)
+                }
+            }
 
             Section(stringResource(R.string.aliases_title))
             Text(stringResource(R.string.aliases_hint), color = Palette.Muted, fontSize = 14.sp)
@@ -325,6 +362,47 @@ fun SettingsScreen(session: Session, back: () -> Unit, onLanguage: (String) -> U
         }
     }
 
+    if (askBio) {
+        var pw by remember { mutableStateOf("") }
+        var busy by remember { mutableStateOf(false) }
+        AlertDialog(
+            onDismissRequest = { if (!busy) askBio = false },
+            title = { Text(stringResource(R.string.bio_settings_title)) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text(stringResource(R.string.bio_enter_password), color = Palette.Text, fontSize = 14.sp)
+                    OutlinedTextField(
+                        pw, { pw = it }, singleLine = true, placeholder = { Text(stringResource(R.string.password_label)) },
+                        visualTransformation = PasswordVisualTransformation(), colors = fieldColors(), modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(enabled = pw.length >= 8 && !busy, onClick = {
+                    scope.launch {
+                        busy = true
+                        try {
+                            session.api.checkPassword(myNumber, pw)
+                            askBio = false
+                            if (Biometric.save(context, myNumber, pw, context.getString(R.string.bio_prompt_title), context.getString(R.string.cancel))) {
+                                bioOn = true
+                                message = context.getString(R.string.bio_on)
+                            }
+                        } catch (e: ApiException) {
+                            askBio = false
+                            error = if (e.status == 401) context.getString(R.string.wrong_password) else e.message.orEmpty()
+                        } catch (e: Exception) {
+                            askBio = false
+                            error = e.message ?: context.getString(R.string.could_not_save)
+                        } finally {
+                            busy = false
+                        }
+                    }
+                }) { Text(stringResource(R.string.turn_on), color = Palette.Header) }
+            },
+            dismissButton = { TextButton(enabled = !busy, onClick = { askBio = false }) { Text(stringResource(R.string.cancel), color = Palette.Muted) } },
+        )
+    }
     if (deleting) user?.let { DeleteAccountDialog(session, it, onDismiss = { deleting = false }) }
 
     if (pickLanguage) {

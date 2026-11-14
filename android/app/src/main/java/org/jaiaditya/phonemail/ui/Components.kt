@@ -16,6 +16,10 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.TextButton
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -194,11 +198,20 @@ fun ErrorText(text: String) {
 fun OnboardingPage(
     title: String,
     subtitle: String? = null,
+    /** A "‹ label" button at the top left, e.g. back to the phone number. */
+    back: Pair<String, () -> Unit>? = null,
     footer: @Composable ColumnScope.() -> Unit = {},
     content: @Composable ColumnScope.() -> Unit,
 ) {
     StatusBarIcons(darkIcons = true)
     Column(Modifier.fillMaxSize().background(Palette.Bg).safeDrawingPadding().imePadding()) {
+        if (back != null) {
+            TextButton(onClick = back.second, modifier = Modifier.padding(start = 8.dp, top = 4.dp)) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = Palette.Header, modifier = Modifier.size(20.dp))
+                Spacer(Modifier.width(6.dp))
+                Text(back.first, color = Palette.Header, fontSize = 16.sp)
+            }
+        }
         Column(
             Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 28.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),

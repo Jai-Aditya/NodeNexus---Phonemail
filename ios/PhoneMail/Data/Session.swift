@@ -46,6 +46,7 @@ final class Session {
         api.onUnauthorized = { [weak self] in Task { @MainActor in self?.signOut() } }
         contacts.load()
         if token != nil {
+            Biometric.offered = true // opened signed in: signing out later shouldn't pop up Face ID
             connectLive()
             Task { try? await refreshUser() } // a 401 signs out via onUnauthorized
         } else {
@@ -110,6 +111,7 @@ final class Session {
     }
 
     func signIn(_ auth: AuthResponse) {
+        Biometric.offered = true // signing out later shouldn't pop up Face ID
         Push.shared.dropPendingUnregister() // this sign-in registers the device again
         token = auth.token
         Keychain.set("token", auth.token)

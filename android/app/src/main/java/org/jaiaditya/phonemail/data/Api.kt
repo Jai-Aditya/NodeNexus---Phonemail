@@ -93,7 +93,7 @@ class Api(
         val c = getW<WAuthConfig>("/auth/config")
         // Texting JOIN still creates an account, but the api can't link that text to this phone's sign-in, so the app
         // verifies with a code or a password; the number is kept for the "text or call to sign up" hint.
-        return AuthMode(mode = c.mode, smsJoin = false, smsTo = c.signupNumber)
+        return AuthMode(mode = c.mode, smsJoin = false, smsTo = c.signupNumber, passwordReset = c.passwordReset)
     }
 
     /** [appHash] was for Android's SMS Retriever; the api's texts don't carry it, so the code is typed (or autofilled). */
@@ -114,6 +114,20 @@ class Api(
     /** Works only when the server is in password mode; otherwise the api asks for a code instead (its message is shown). */
     suspend fun passwordRegister(phone: String, password: String) =
         auth(sendW("POST", "/auth/register", obj("phone" to phone, "password" to password, "client" to "mobile")))
+
+    /** Forgot password, step 1: a code by SMS. The api answers the same whether or not the number has an account. */
+    suspend fun passwordResetStart(phone: String) = call("POST", "/auth/password/reset/start", obj("phone" to phone))
+
+    /** Step 2: the code and the new password. Signs in here and out everywhere else. */
+    suspend fun passwordReset(phone: String, code: String, newPassword: String) =
+        auth(sendW("POST", "/auth/password/reset", obj("phone" to phone, "code" to code, "new_password" to newPassword, "client" to "mobile")))
+
+    /** Throws unless this is the account's password. Signs in on a separate session and ends it straight away. */
+    suspend fun checkPassword(phone: String, password: String) {
+        val signedIn = passwordLogin(phone, password)
+        val probe = Api(base, { signedIn.token }, {}, unreachable, failed)
+        runCatching { probe.call("POST", "/auth/logout") }
+    }
 
     private fun auth(a: WAuth): AuthResponse =
         AuthResponse(a.token ?: throw ApiException(500, failed(500)), a.user.toUser())

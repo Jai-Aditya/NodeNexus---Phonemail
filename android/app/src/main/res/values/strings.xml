@@ -136,6 +136,7 @@
     <string name="star">Star</string>
     <string name="unstar">Unstar</string>
     <string name="move_home">Move to Home</string>
+    <string name="not_spam">Not spam</string>
     <string name="spam">Spam</string>
     <string name="delete">Delete</string>
     <string name="no_subject">(no subject)</string>
@@ -306,4 +307,23 @@
     <string name="notifications_allow">Allow notifications</string>
     <string name="notifications_watch">Notifications show on your smartwatch too, with Reply.</string>
     <string name="could_not_mark_read">Couldn\'t mark it as read. Try again.</string>
+    <!-- Forgot password and fingerprint/face sign-in (1.1.2) -->
+    <string name="forgot_password">Forgot password?</string>
+    <string name="verify_sub_password_existing">Enter your password.</string>
+    <string name="verify_sub_reset">Enter the code we sent by SMS and choose a new password.</string>
+    <string name="new_password_placeholder">New password (8 or more characters)</string>
+    <string name="set_new_password">Set new password</string>
+    <string name="bio_next_time">Sign in with fingerprint or face next time</string>
+    <string name="bio_sign_in">Sign in with fingerprint or face</string>
+    <string name="bio_prompt_title">Sign in to PhoneMail</string>
+    <string name="or_other_number">Or use another number</string>
+    <string name="bio_stopped">Your saved sign-in no longer works. Sign in with your password or a code.</string>
+    <string name="bio_settings_title">Fingerprint or face sign-in</string>
+    <string name="bio_settings_hint">Sign in without a code or typing your password. The password stays on this phone, locked by your fingerprint or face.</string>
+    <string name="bio_need_password">Set a password first to use fingerprint or face sign-in.</string>
+    <string name="bio_enter_password">Enter your PhoneMail password to turn on fingerprint or face sign-in.</string>
+    <string name="bio_on">Fingerprint or face sign-in is on</string>
+    <string name="bio_off">Fingerprint or face sign-in is off</string>
+    <string name="password_label">Password</string>
+    <string name="turn_on">Turn on</string>
 </resources>

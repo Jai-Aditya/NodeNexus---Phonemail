@@ -86,17 +86,35 @@ struct TermsView: View {
 }
 
 /// Screen 3: phone number. iOS does not let apps read the SIM's number, so the person types it;
-/// the keyboard offers the number from their contact card.
+/// the keyboard offers the number from their contact card. With Face ID sign-in turned on (Biometric), a button
+/// signs that number straight in, and is pressed once by itself when the app opens here.
 struct PhoneView: View {
+    @Environment(Session.self) private var session
     let next: (String) -> Void
+    /// "Forgot password?": the verify screen for this number, starting with a code to set a new password.
+    let forgot: (String) -> Void
     @State private var digits = ""
     @FocusState private var focused: Bool
+    @State private var saved = Biometric.phone
+    @State private var bioBusy = false
+    @State private var bioError = ""
+    @State private var failed = ""
 
     /// A 10-digit Indian mobile number, or one of the server's test numbers (55555…, used by app reviewers).
     private var valid: Bool { digits.range(of: #"^([6-9]\d{9}|55555\d{5})$"#, options: .regularExpression) != nil }
 
     var body: some View {
         OnboardingPage(title: L("Enter your phone number"), subtitle: L("Your email address will be your number. We'll verify it with a text message.")) {
+            if let saved, let name = Biometric.name {
+                VStack(spacing: 6) {
+                    PrimaryButton(title: L("Sign in with %@", name), busy: bioBusy) { biometricSignIn(saved) }
+                        .accessibilityIdentifier("biometricSignIn")
+                    Text("+91 \(saved)").font(.footnote).foregroundStyle(Palette.muted)
+                    ErrorText(text: bioError)
+                    Text(L("Or use another number")).font(.footnote).foregroundStyle(Palette.muted).padding(.top, 10)
+                }
+                .padding(.top, 8)
+            }
             HStack(spacing: 12) {
                 Text("+91").font(.title3).frame(width: 64, height: 52)
                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(Palette.divider))
@@ -117,10 +135,51 @@ struct PhoneView: View {
             if digits.count == 10 {
                 Text(L("Your address: %@", "\(digits)@\(Config.mailDomain)")).foregroundStyle(Palette.muted)
             }
+            ErrorText(text: failed)
         } footer: {
             PrimaryButton(title: L("Next"), enabled: valid) { next(digits) }
+            Button(L("Forgot password?")) { forgot(digits) }
+                .foregroundStyle(valid ? Palette.header : Palette.muted)
+                .disabled(!valid)
+                .accessibilityIdentifier("forgotPassword")
         }
-        .onAppear { focused = true }
+        .onAppear {
+            saved = Biometric.phone
+            if let saved, Biometric.name != nil, !Biometric.offered {
+                Biometric.offered = true
+                biometricSignIn(saved)
+            } else {
+                focused = true
+            }
+        }
+    }
+
+    /// Face ID (or Touch ID), then the saved password signs in. A saved password that stopped working (changed
+    /// elsewhere, or reset) is forgotten, and the person signs in another way.
+    private func biometricSignIn(_ phone: String) {
+        Task {
+            bioError = ""
+            guard let password = await Biometric.password() else {
+                if Biometric.phone == nil { stopped(phone) } // iOS dropped it: a face or finger was added
+                return
+            }
+            bioBusy = true
+            defer { bioBusy = false }
+            do {
+                session.signIn(try await session.api.passwordLogin(phone: phone, password: password))
+            } catch let e as APIError where e.status == 401 {
+                Biometric.forget()
+                stopped(phone)
+            } catch {
+                bioError = error.localizedDescription
+            }
+        }
+    }
+
+    private func stopped(_ phone: String) {
+        saved = nil
+        digits = phone
+        failed = L("Your saved sign-in no longer works. Sign in with your password or a code.")
     }
 }
 
@@ -131,13 +190,18 @@ struct PhoneView: View {
 struct VerifyView: View {
     @Environment(Session.self) private var session
     let phone: String
+    /// Opened from "Forgot password?" on the phone screen: starts by texting a reset code.
+    var forgot = false
     let changeNumber: () -> Void
 
-    enum Step { case choose, otp, join, password }
+    /// `reset`: forgot password, a code by SMS and a new password (the api signs in and ends other sign-ins).
+    enum Step { case choose, otp, join, password, reset }
     @State private var mode: AuthMode?
     @State private var step = Step.choose
     @State private var code = ""
     @State private var password = ""
+    /// Save the password behind Face ID / Touch ID after signing in with it (Biometric). On unless turned off.
+    @State private var useBiometric = true
     @State private var join: JoinStart?
     @State private var busy = false
     @State private var error = ""
@@ -147,7 +211,7 @@ struct VerifyView: View {
     private let tick = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
-        OnboardingPage(title: L("Verify +91 %@", phone), subtitle: subtitle) {
+        OnboardingPage(title: L("Verify +91 %@", phone), subtitle: subtitle, back: (L("Change number"), changeNumber)) {
             VStack(spacing: 14) {
                 if mode == nil && error.isEmpty { ProgressView().tint(Palette.header).padding() }
                 switch step {
@@ -155,15 +219,19 @@ struct VerifyView: View {
                 case .otp: otpStep
                 case .join: joinStep
                 case .password: passwordStep
+                case .reset: resetStep
                 }
                 ErrorText(text: error)
             }
             .padding(.top, 12)
         } footer: {
-            Button(L("Change number"), action: changeNumber).foregroundStyle(Palette.muted)
+            EmptyView()
         }
         .onReceive(tick) { _ in if resendIn > 0 { resendIn -= 1 } }
-        .task { await loadMode() }
+        .task {
+            await loadMode()
+            if forgot && mode != nil { run { try await startReset() } }
+        }
         .task(id: join?.code) { await pollJoin() }
         .sheet(isPresented: $showMessages) {
             if let j = join { MessageComposer(recipient: j.smsTo, body: j.text).ignoresSafeArea() }
@@ -174,7 +242,8 @@ struct VerifyView: View {
         switch step {
         case .otp: L("Enter the 6-digit code we sent by SMS. Tap it above the keyboard when it arrives.")
         case .join: L("Send the text below from this iPhone. Standard SMS charges may apply.")
-        case .password: L("Choose a password for your PhoneMail account.")
+        case .password: mode?.mode == "otp" ? L("Enter your password.") : L("Choose a password for your PhoneMail account.")
+        case .reset: L("Enter the code we sent by SMS and choose a new password.")
         case .choose: L("How would you like to verify this number?")
         }
     }
@@ -238,18 +307,67 @@ struct VerifyView: View {
 
     @ViewBuilder private var passwordStep: some View {
         SecureField(L("Password (8 or more characters)"), text: $password)
-            .textContentType(.newPassword)
+            .textContentType(mode?.mode == "otp" ? .password : .newPassword)
             .accessibilityIdentifier("password")
             .padding(12)
             .overlay(RoundedRectangle(cornerRadius: 8).stroke(Palette.divider))
+        biometricToggle
         PrimaryButton(title: L("Continue"), enabled: password.count >= 8, busy: busy) { run { try await passwordSignIn() } }
-        Text(L("New number? This creates your account. Already registered? It signs you in."))
-            .font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+        if mode?.mode != "otp" {
+            Text(L("New number? This creates your account. Already registered? It signs you in."))
+                .font(.footnote).foregroundStyle(Palette.muted).multilineTextAlignment(.center)
+        }
+        if mode?.passwordReset == true {
+            Button(L("Forgot password?")) { run { try await startReset() } }
+                .foregroundStyle(Palette.header).accessibilityIdentifier("forgotPassword")
+        }
         if mode?.mode == "otp" {
             Button(L("Send me a code by SMS instead")) { run { try await startOtp() } }.foregroundStyle(Palette.header)
         }
         if mode?.smsJoin == true {
             Button(L("Verify by sending a text instead")) { run { try await startJoin() } }.foregroundStyle(Palette.header)
+        }
+    }
+
+    @ViewBuilder private var resetStep: some View {
+        TextField(L("6-digit code"), text: $code)
+            .keyboardType(.numberPad)
+            .textContentType(.oneTimeCode)
+            .font(.title2.monospacedDigit())
+            .multilineTextAlignment(.center)
+            .accessibilityIdentifier("resetCode")
+            .padding(12)
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Palette.header))
+            .onChange(of: code) { _, v in
+                let d = String(v.filter(\.isNumber).prefix(6))
+                if d != v { code = d }
+            }
+        SecureField(L("New password (8 or more characters)"), text: $password)
+            .textContentType(.newPassword)
+            .accessibilityIdentifier("newPassword")
+            .padding(12)
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Palette.divider))
+        biometricToggle
+        PrimaryButton(title: L("Set new password"), enabled: code.count >= 4 && password.count >= 8, busy: busy) {
+            run { try await resetPassword() }
+        }
+        if resendIn > 0 {
+            Text(L("Send a new code in %@", String(format: "%d:%02d", resendIn / 60, resendIn % 60)))
+                .font(.footnote.monospacedDigit()).foregroundStyle(Palette.muted)
+        } else {
+            Button(L("Send a new code")) { code = ""; run { try await startReset() } }.foregroundStyle(Palette.header)
+        }
+        Button(L("Use a password instead")) { error = ""; code = ""; step = .password }.foregroundStyle(Palette.header)
+    }
+
+    /// "Sign in with Face ID next time", where the device has Face ID or Touch ID set up.
+    @ViewBuilder private var biometricToggle: some View {
+        if let name = Biometric.name {
+            Toggle(isOn: $useBiometric) {
+                Label(L("Sign in with %@ next time", name), systemImage: Biometric.symbol).foregroundStyle(Palette.text)
+            }
+            .tint(Palette.header)
+            .accessibilityIdentifier("useBiometric")
         }
     }
 
@@ -312,6 +430,29 @@ struct VerifyView: View {
             } catch let e2 as APIError where e2.status == 409 {
                 throw APIError(status: 401, message: L("Wrong password for this number"))
             }
+        }
+        await signIn(auth, password: password)
+    }
+
+    private func startReset() async throws {
+        try await session.api.passwordResetStart(phone: phone)
+        error = ""
+        code = ""
+        password = ""
+        step = .reset
+        resendIn = 90
+    }
+
+    private func resetPassword() async throws {
+        await signIn(try await session.api.passwordReset(phone: phone, code: code, newPassword: password), password: password)
+    }
+
+    /// Signed in with a password: first, if asked, keep it behind Face ID for next time (cancelling only skips that).
+    private func signIn(_ auth: AuthResponse, password: String) async {
+        if useBiometric && Biometric.name != nil {
+            _ = await Biometric.save(phone: phone, password: password)
+        } else if Biometric.phone == phone {
+            Biometric.forget() // turned off here, and after a reset the saved password is the old one
         }
         session.signIn(auth)
     }

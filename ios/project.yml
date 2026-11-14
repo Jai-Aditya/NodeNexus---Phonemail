@@ -11,7 +11,7 @@ settings:
   base:
     SWIFT_VERSION: "5.0"
     MARKETING_VERSION: "1.1.1"
-    CURRENT_PROJECT_VERSION: "12"
+    CURRENT_PROJECT_VERSION: "14"
     DEVELOPMENT_TEAM: ""          # set once the Apple Developer account is active
     CODE_SIGN_STYLE: Automatic
     # Strings are looked up by their English text (L("...")), never by generated symbols. Xcode 27.1 generates them by

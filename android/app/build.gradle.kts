@@ -28,7 +28,7 @@ android {
         applicationId = "org.jaiaditya.phonemail"
         minSdk = 26
         targetSdk = 36 // Google Play: new apps and updates must target Android 16 (API 36) since 31 Aug 2026
-        versionCode = 12 // 9 is the Wear OS app (wear/); phone and watch codes must never clash
+        versionCode = 14 // 9 is the Wear OS app (wear/); phone and watch codes must never clash
         versionName = "1.1.1"
         // Production api (nginx on the shankars Pi). Debug builds can point elsewhere, see below.
         buildConfigField("String", "API_BASE", "\"https://mail.phonemail.net/api\"")
@@ -99,6 +99,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.biometric:biometric:1.1.0") // sign in with a fingerprint or face (data/Biometric.kt)
+    // biometric pulls fragment 1.2.5, whose FragmentActivity rejects the Activity Result API's request codes.
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")

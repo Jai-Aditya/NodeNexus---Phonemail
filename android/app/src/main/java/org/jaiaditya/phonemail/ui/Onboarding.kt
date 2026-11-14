@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Contacts
+import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.SimCard
@@ -35,6 +36,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -65,6 +68,7 @@ import org.jaiaditya.phonemail.R
 import org.jaiaditya.phonemail.data.ApiException
 import org.jaiaditya.phonemail.data.AuthMode
 import org.jaiaditya.phonemail.data.AuthResponse
+import org.jaiaditya.phonemail.data.Biometric
 import org.jaiaditya.phonemail.data.JoinStart
 import org.jaiaditya.phonemail.data.Session
 import org.jaiaditya.phonemail.sms.SmsCode
@@ -128,14 +132,56 @@ fun TermsScreen(onAccept: () -> Unit) {
     }
 }
 
-/** Screen 3: phone number, suggested from the SIM and always editable. */
+/**
+ * Screen 3: phone number, suggested from the SIM and always editable. With fingerprint/face sign-in turned on
+ * (data/Biometric.kt), a button signs that number straight in, and is pressed once by itself when the app opens here.
+ */
 @Composable
-fun PhoneScreen(onNext: (String) -> Unit) {
+fun PhoneScreen(session: Session, onSignedIn: () -> Unit, onNext: (String) -> Unit, onForgot: (String) -> Unit) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     var digits by rememberSaveable { mutableStateOf("") }
+    var saved by remember { mutableStateOf(if (Biometric.available(context)) Biometric.phone(context) else null) }
+    var bioBusy by remember { mutableStateOf(false) }
+    var bioError by remember { mutableStateOf("") }
+    var failed by rememberSaveable { mutableStateOf("") }
     val askSim = rememberPhoneHint { digits = it }
     var asked by rememberSaveable { mutableStateOf(false) }
+
+    // A saved password that stopped working (changed elsewhere, reset, or a new fingerprint/face) is forgotten.
+    fun stopped(phone: String) {
+        Biometric.forget(context)
+        saved = null
+        digits = phone
+        failed = context.getString(R.string.bio_stopped)
+    }
+
+    fun biometricSignIn(phone: String) = scope.launch {
+        bioError = ""
+        val password = Biometric.password(context, context.getString(R.string.bio_prompt_title), context.getString(R.string.cancel))
+        if (password == null) {
+            if (Biometric.phone(context) == null) stopped(phone)
+            return@launch
+        }
+        bioBusy = true
+        try {
+            session.signIn(session.api.passwordLogin(phone, password))
+            onSignedIn()
+        } catch (e: ApiException) {
+            if (e.status == 401) stopped(phone) else bioError = e.message ?: context.getString(R.string.error_generic)
+        } catch (e: Exception) {
+            bioError = e.message ?: context.getString(R.string.error_generic)
+        } finally {
+            bioBusy = false
+        }
+    }
+
     LaunchedEffect(Unit) {
-        if (!asked) {
+        val s = saved
+        if (s != null && !Biometric.offered) {
+            Biometric.offered = true
+            biometricSignIn(s)
+        } else if (!asked && s == null) {
             asked = true
             askSim()
         }
@@ -145,8 +191,23 @@ fun PhoneScreen(onNext: (String) -> Unit) {
     OnboardingPage(
         title = stringResource(R.string.phone_title),
         subtitle = stringResource(R.string.phone_subtitle),
-        footer = { PrimaryButton(stringResource(R.string.next), onClick = { onNext(digits) }, enabled = valid) },
+        footer = {
+            PrimaryButton(stringResource(R.string.next), onClick = { onNext(digits) }, enabled = valid)
+            TextButton(onClick = { onForgot(digits) }, enabled = valid, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.forgot_password), color = if (valid) Palette.Header else Palette.Muted)
+            }
+        },
     ) {
+        saved?.let { s ->
+            Spacer(Modifier.height(8.dp))
+            PrimaryButton(stringResource(R.string.bio_sign_in), onClick = { biometricSignIn(s) }, busy = bioBusy)
+            Text("+91 $s", color = Palette.Muted, fontSize = 13.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+            ErrorText(bioError)
+            Text(
+                stringResource(R.string.or_other_number),
+                color = Palette.Muted, fontSize = 13.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            )
+        }
         Spacer(Modifier.height(16.dp))
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Box(
@@ -174,10 +235,12 @@ fun PhoneScreen(onNext: (String) -> Unit) {
                 color = Palette.Muted, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
             )
         }
+        ErrorText(failed)
     }
 }
 
-private enum class VerifyView { Choose, Otp, Join, Password }
+/** [Reset]: forgot password, a code by SMS and a new password (the api signs in and ends other sign-ins). */
+private enum class VerifyView { Choose, Otp, Join, Password, Reset }
 
 /**
  * Screen 4: verification, with no phone calls anywhere.
@@ -186,13 +249,16 @@ private enum class VerifyView { Choose, Otp, Join, Password }
  *  3. A password, the brief's own fallback.
  */
 @Composable
-fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChangeNumber: () -> Unit) {
+fun VerifyScreen(session: Session, phone: String, forgot: Boolean, onSignedIn: () -> Unit, onChangeNumber: () -> Unit) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var mode by remember { mutableStateOf<AuthMode?>(null) }
     var view by rememberSaveable { mutableStateOf(VerifyView.Choose) }
     var code by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    // Save the password behind a fingerprint or face after signing in with it (data/Biometric.kt). On unless turned off.
+    val canBiometric = remember { Biometric.available(context) }
+    var useBiometric by rememberSaveable { mutableStateOf(true) }
     var join by remember { mutableStateOf<JoinStart?>(null) }
     var busy by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf("") }
@@ -214,6 +280,16 @@ fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChan
         smsJob?.cancel()
         session.signIn(auth)
         onSignedIn()
+    }
+
+    // Signed in with a password: first, if asked, keep it behind a fingerprint or face (cancelling only skips that).
+    suspend fun signedIn(auth: AuthResponse, password: String) {
+        if (useBiometric && canBiometric) {
+            Biometric.save(context, phone, password, context.getString(R.string.bio_prompt_title), context.getString(R.string.cancel))
+        } else if (Biometric.phone(context) == phone) {
+            Biometric.forget(context) // turned off here, and after a reset the saved password is the old one
+        }
+        done(auth)
     }
 
     fun run(block: suspend () -> Unit) {
@@ -247,6 +323,18 @@ fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChan
     }
 
     fun verifyCode(c: String) = run { done(session.api.otpVerify(phone, c)) }
+
+    suspend fun startReset() {
+        session.api.passwordResetStart(phone)
+        error = ""
+        code = ""
+        password = ""
+        view = VerifyView.Reset
+        resendIn = 90
+    }
+    LaunchedEffect(mode) {
+        if (forgot && mode != null && view == VerifyView.Choose) run { startReset() }
+    }
 
     fun startOtp() = run {
         try {
@@ -292,11 +380,12 @@ fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChan
             when (view) {
                 VerifyView.Otp -> R.string.verify_sub_otp
                 VerifyView.Join -> R.string.verify_sub_join
-                VerifyView.Password -> R.string.verify_sub_password
+                VerifyView.Password -> if (m?.mode == "otp") R.string.verify_sub_password_existing else R.string.verify_sub_password
+                VerifyView.Reset -> R.string.verify_sub_reset
                 VerifyView.Choose -> R.string.verify_sub_choose
             },
         ),
-        footer = { TextButton(onClick = onChangeNumber, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.change_number), color = Palette.Muted) } },
+        back = stringResource(R.string.change_number) to onChangeNumber,
     ) {
         Spacer(Modifier.height(12.dp))
         if (m == null && error.isEmpty()) {
@@ -380,6 +469,7 @@ fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChan
                     colors = fieldColors(),
                     modifier = Modifier.fillMaxWidth(),
                 )
+                if (canBiometric) BiometricToggle(useBiometric) { useBiometric = it }
                 PrimaryButton(stringResource(R.string.continue_), enabled = password.length >= 8, busy = busy, onClick = {
                     run {
                         val auth = try {
@@ -396,13 +486,20 @@ fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChan
                                 throw if (e2.status == 409) ApiException(401, context.getString(R.string.wrong_password)) else e2
                             }
                         }
-                        done(auth)
+                        signedIn(auth, password)
                     }
                 })
-                Text(
-                    stringResource(R.string.password_hint),
-                    color = Palette.Muted, fontSize = 13.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
-                )
+                if (m?.mode != "otp") {
+                    Text(
+                        stringResource(R.string.password_hint),
+                        color = Palette.Muted, fontSize = 13.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+                if (m?.passwordReset == true) {
+                    TextButton(onClick = { run { startReset() } }, modifier = Modifier.fillMaxWidth()) {
+                        Text(stringResource(R.string.forgot_password), color = Palette.Header)
+                    }
+                }
                 if (m?.mode == "otp") {
                     TextButton(onClick = { startOtp() }, modifier = Modifier.fillMaxWidth()) {
                         Text(stringResource(R.string.send_code_sms_instead), color = Palette.Header)
@@ -414,8 +511,62 @@ fun VerifyScreen(session: Session, phone: String, onSignedIn: () -> Unit, onChan
                     }
                 }
             }
+
+            VerifyView.Reset -> {
+                OutlinedTextField(
+                    value = code,
+                    onValueChange = { v -> code = v.filter { it.isDigit() }.take(6) },
+                    placeholder = { Text(stringResource(R.string.code_placeholder)) },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+                    textStyle = androidx.compose.ui.text.TextStyle(fontSize = 22.sp, letterSpacing = 8.sp, textAlign = TextAlign.Center),
+                    colors = fieldColors(),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    placeholder = { Text(stringResource(R.string.new_password_placeholder)) },
+                    singleLine = true,
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    colors = fieldColors(),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                if (canBiometric) BiometricToggle(useBiometric) { useBiometric = it }
+                PrimaryButton(stringResource(R.string.set_new_password), enabled = code.length >= 4 && password.length >= 8, busy = busy, onClick = {
+                    run { signedIn(session.api.passwordReset(phone, code, password), password) }
+                })
+                if (resendIn > 0) {
+                    Text(
+                        stringResource(R.string.new_code_in, "%d:%02d".format(resendIn / 60, resendIn % 60)),
+                        color = Palette.Muted, fontSize = 13.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
+                    )
+                } else {
+                    TextButton(onClick = { run { startReset() } }, modifier = Modifier.fillMaxWidth()) {
+                        Text(stringResource(R.string.new_code), color = Palette.Header)
+                    }
+                }
+                TextButton(onClick = { error = ""; code = ""; view = VerifyView.Password }, modifier = Modifier.fillMaxWidth()) {
+                    Text(stringResource(R.string.use_password), color = Palette.Header)
+                }
+            }
         }
         ErrorText(error)
+    }
+}
+
+/** "Sign in with fingerprint or face next time", where the phone has a strong one set up. */
+@Composable
+private fun BiometricToggle(checked: Boolean, onChange: (Boolean) -> Unit) {
+    Row(
+        Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).clickable { onChange(!checked) }.padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(Icons.Filled.Fingerprint, null, tint = Palette.Header, modifier = Modifier.size(22.dp))
+        Spacer(Modifier.width(10.dp))
+        Text(stringResource(R.string.bio_next_time), color = Palette.Text, fontSize = 15.sp, modifier = Modifier.weight(1f))
+        Switch(checked = checked, onCheckedChange = onChange, colors = SwitchDefaults.colors(checkedTrackColor = Palette.Header))
     }
 }
 

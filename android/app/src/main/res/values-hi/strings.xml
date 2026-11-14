@@ -127,6 +127,7 @@
     <string name="star">स्टार करें</string>
     <string name="unstar">स्टार हटाएँ</string>
     <string name="move_home">होम में ले जाएँ</string>
+    <string name="not_spam">स्पैम नहीं है</string>
     <string name="spam">स्पैम</string>
     <string name="delete">हटाएँ</string>
     <string name="no_subject">(कोई विषय नहीं)</string>
@@ -288,4 +289,22 @@
     <string name="notifications_allow">सूचनाओं की अनुमति दें</string>
     <string name="notifications_watch">सूचनाएँ आपकी स्मार्टवॉच पर भी दिखती हैं, जवाब देने के विकल्प के साथ।</string>
     <string name="could_not_mark_read">पढ़ा हुआ मार्क नहीं हो सका। फिर कोशिश करें।</string>
+    <string name="forgot_password">पासवर्ड भूल गए?</string>
+    <string name="verify_sub_password_existing">अपना पासवर्ड डालें।</string>
+    <string name="verify_sub_reset">SMS से भेजा गया कोड डालें और नया पासवर्ड चुनें।</string>
+    <string name="new_password_placeholder">नया पासवर्ड (8 या अधिक अक्षर)</string>
+    <string name="set_new_password">नया पासवर्ड सेट करें</string>
+    <string name="bio_next_time">अगली बार फ़िंगरप्रिंट या चेहरे से साइन इन करें</string>
+    <string name="bio_sign_in">फ़िंगरप्रिंट या चेहरे से साइन इन करें</string>
+    <string name="bio_prompt_title">PhoneMail में साइन इन करें</string>
+    <string name="or_other_number">या कोई दूसरा नंबर इस्तेमाल करें</string>
+    <string name="bio_stopped">सहेजा गया साइन-इन अब काम नहीं करता। अपने पासवर्ड या कोड से साइन इन करें।</string>
+    <string name="bio_settings_title">फ़िंगरप्रिंट या चेहरे से साइन इन</string>
+    <string name="bio_settings_hint">कोड या पासवर्ड टाइप किए बिना साइन इन करें। पासवर्ड इसी फ़ोन पर आपके फ़िंगरप्रिंट या चेहरे से सुरक्षित रहता है।</string>
+    <string name="bio_need_password">फ़िंगरप्रिंट या चेहरे से साइन इन के लिए पहले पासवर्ड सेट करें।</string>
+    <string name="bio_enter_password">फ़िंगरप्रिंट या चेहरे से साइन इन चालू करने के लिए अपना PhoneMail पासवर्ड डालें।</string>
+    <string name="bio_on">फ़िंगरप्रिंट या चेहरे से साइन इन चालू है</string>
+    <string name="bio_off">फ़िंगरप्रिंट या चेहरे से साइन इन बंद है</string>
+    <string name="password_label">पासवर्ड</string>
+    <string name="turn_on">चालू करें</string>
 </resources>

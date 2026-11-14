@@ -96,7 +96,8 @@ struct MessageDetailView: View {
     private func actions(_ m: Message) -> some View {
         HStack {
             if m.folder != "inbox" {
-                Button(L("Move to Home")) { change(["folder": "inbox"], leave: true) }.frame(maxWidth: .infinity)
+                Button(m.folder == "spam" ? L("Not spam") : L("Move to Home")) { change(["folder": "inbox"], leave: true) }
+                    .frame(maxWidth: .infinity).accessibilityIdentifier("notSpam")
             } else {
                 Button(L("Reply")) {
                     path.append(.compose(ComposeArgs(conversationId: m.conversationId, replyTo: m.id, title: m.senderLabel)))
